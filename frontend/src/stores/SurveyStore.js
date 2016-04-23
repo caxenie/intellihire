@@ -7,6 +7,7 @@ import sendSurvey from '../utils/sendSurvey'
 const SurveyStore = module.exports = {}
 
 var status = 0
+var results = null
 
 
 // // Accessors
@@ -31,6 +32,10 @@ SurveyStore.getAnswers = function(){
   return questions.map((question) => question.answer )
 }
 
+SurveyStore.getResults = function(){
+  return results
+}
+
 
 // // Emitting Change Events
 
@@ -42,11 +47,11 @@ function emitChangeEvent(){
 }
 
 SurveyStore.addChangeListener = function(callback){
-  eventEmitter.on(CHANGE_EVENT, callback)
+  return eventEmitter.on(CHANGE_EVENT, callback)
 }
 
 SurveyStore.removeChangeListener = function(callback){
-  eventEmitter.removeListener(CHANGE_EVENT, callback)
+  return eventEmitter.removeListener(CHANGE_EVENT, callback)
 }
 
 
@@ -62,7 +67,12 @@ Dispatcher.register(function(action){
       })
       if (!SurveyStore.getCurrentQuestion()){
         status = 1
-        //sendSurvey(questions)
+
+        sendSurvey(SurveyStore.getAnswers()).then(function(response){
+          results = response
+          status = 2
+          emitChangeEvent()
+        })
       }
       emitChangeEvent()
       break

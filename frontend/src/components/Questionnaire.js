@@ -20,10 +20,11 @@ export default class Hello extends Component {
     this.state = getState()
   }
   componentDidMount() {
-    this._hndl = SurveyStore.addChangeListener(this.onChange.bind(this))
+    this._surveyStoreListener = (e) => this.setState(getState())
+    SurveyStore.addChangeListener(this._surveyStoreListener)
   }
   componentWillUnmount() {
-    //this._hndl()
+    SurveyStore.removeChangeListener(this._surveyStoreListener)
   }
   render() {
     return (
@@ -42,8 +43,5 @@ export default class Hello extends Component {
         <div>Question {current} of {total}</div>
       </div>
     )
-  }
-  onChange() {
-    this.setState(getState())
   }
 }
