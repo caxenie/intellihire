@@ -1,3 +1,30 @@
 Burda Hackaday v4, April 2016
 
 Intellihire team development sourcetree :)
+
+
+How can companies find the right people to hire - and how can potential employees find the right company?
+
+Problem
+HR talent management and recruiting for efficient candidate - job matching.
+
+State-of-the-art
+Psychometric tests and interviews are both complementary and competitive as techniques for job selection.
+Classical psychometric tests function by summing the scores from pre-designated items within a test to form scales that represent particular traits of ability or personality. 
+The subtle underlying interactions between these items and the patterns they form are ignored. 
+It is still the insight of human interviewers into the complexities of interviewees' responses that has always provided the verdict.
+
+Proposed solution
+Using expert systems and neural programming to learn the complex patterns that exist among and between the responses to items in questionnaires. 
+These could represent crucial aspects of human personality if only they could be made available to human resource professionals.
+In a more extended context, such a learning system will be able to recognise patterns that lie within the inherent complexity of the human character, beyond the level of the simple trait.
+
+Tools
+
+ANFIS - adaptive neuro-fuzzy inference system
+
+Using a given input/output data set, the system constructs a fuzzy inference system whose membership function parameters are tuned using back propagation and a least squares optimization. This adjustment allows the fuzzy system to learn from the data it is modeling.
+
+
+Link to online tests:
+http://personality-testing.info/tests/IPIP-BFFM/
