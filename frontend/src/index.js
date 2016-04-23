@@ -3,54 +3,39 @@ import React, {
 } from 'react'
 import ReactDOM from 'react-dom'
 import SurveyStore from './stores/SurveyStore'
-import answerQuestion from './actions/answerQuestion'
-import sendSurvey from './actions/sendSurvey'
-import Question from './components/Question'
+import Landing from './components/Landing'
+import Questionnaire from './components/Questionnaire'
 
+const INTRODUCTION_STEP = 0
+const QUESTIONNAIRE_STEP = 1
+const COMPUTING_STEP = 2
+const RESULTS_STEP = 3
 
-function getState(){
-  return {
-    question: SurveyStore.getCurrentQuestion(),
-    hasUnansweredQuestions: SurveyStore.hasUnansweredQuestions()
-  }
-}
 
 class Hello extends Component {
   constructor(props){
     super(props)
-    this.state = getState()
-  }
-  componentDidMount() {
-    this._hndl = SurveyStore.addChangeListener(this.onChange.bind(this))
-  }
-  componentWillUnmount() {
-    this._hndl()
+    this.state = {
+      step: INTRODUCTION_STEP
+    }
   }
   render() {
-    if (!this.state.question){
-      return (
-        <div>
-          Loading...
-        </div>
+    switch(this.state.step){
+      case INTRODUCTION_STEP: return(
+        <Landing onStart={() =>
+          this.setState({ step: QUESTIONNAIRE_STEP })
+        } />
+      )
+      case QUESTIONNAIRE_STEP: return (
+        <Questionnaire onSubmit={() =>
+          this.setState({ step: COMPUTING_STEP })
+        } />
+      )
+      case RESULTS_STEP: return (
+        <div>Results</div>
       )
     }
-    return (
-      <div className="container">
-        <div className="">
-          <Question text={this.state.question.text} answers={[1,2,3]} onSelect={(answer) => {
-            if (this.state.hasUnansweredQuestions){
-              answerQuestion(answer)
-            } else {
-              sendSurvey()
-            }
-          }} />
-        </div>
-      </div>
-    )
   }
-  onChange() {
-    this.setState(getState())
-  }
 }
 
 ReactDOM.render(<Hello/>, document.getElementById('content'))

@@ -1,9 +1,10 @@
 import Dispatcher from '../Dispatcher'
 
 
-module.exports = function(answer){
+module.exports = function(question, answer){
   Dispatcher.dispatch({
     type: 'ANSWER_QUESTION',
-    answer: answer
+    questionId: question.id,
+    answerId: answer.id
   })
 }

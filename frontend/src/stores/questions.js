@@ -49,4 +49,11 @@ module.exports = [
   {id: 48, text: "I am exacting in my work."},
   {id: 49, text: "I often feel blue."},
   {id: 50, text: "I am full of ideas."}*/
-]
+].map(function(q){
+  q.answers = [
+    {id: 1, text: "Nope"},
+    {id: 2, text: "Kinda"},
+    {id: 3, text: "Yep"}
+  ]
+  return q
+})

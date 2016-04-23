@@ -6,27 +6,28 @@ import ReactDOM from 'react-dom'
 import Card from './Card'
 
 
-const Question = ({text, answers, onSelect}) => {
+const Question = ({question, onSelect}) => {
   return (
-    <Card title={text}>
-      {answers.map((answer, idx) =>
-        <Answer key={idx} answer={answer} onSelect={() => onSelect(answer) } />
+    <Card title={question.text}>
+      {question.answers.map((answer, idx) =>
+        <Answer key={idx} answer={answer} isSelected={!!question.answer && answer.id == question.answer.id} onSelect={() => onSelect(answer) } />
       )}
     </Card>
   )
  }
 
 Question.propTypes = {
-  text: PropTypes.string.isRequired,
-  answers: PropTypes.array.isRequired,
+  question: PropTypes.object.isRequired, // TODO: shape
   onSelect: PropTypes.func
 }
 
 
-const Answer = (props) => {
+const Answer = ({answer, isSelected, onSelect}) => {
+  var className = 'waves-effect waves-light btn'
+  if (isSelected) className += ' red'
   return (
-    <a className="waves-effect waves-light btn" onClick={props.onSelect}>
-      {props.answer}
+    <a className={className} onClick={onSelect}>
+      {answer.text}
     </a>
   )
 }

@@ -7,10 +7,13 @@ module.exports = function(answers) {
     answers: SurveyStore.getAnswers()
   }
 
+  console.log('Sending...', data)
+
   request
-    .post('./')
-    .send(data)
-    .set('Accept', 'application/json')
+    .get('http://intellihireapp.azurewebsites.net/api/v1/compute/mock')
+    //.post('http://intellihireapp.azurewebsites.net/api/v1/compute/mock')
+    //.send(data)
+    //.set('Accept', 'application/json')
     .end(function(error, result){
       console.log(error, result)
     })
