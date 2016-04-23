@@ -68,7 +68,8 @@ Dispatcher.register(function(action){
       if (!SurveyStore.getCurrentQuestion()){
         status = 1
 
-        sendSurvey(SurveyStore.getAnswers()).then(function(response){
+        let answers = SurveyStore.getAnswers().map(a => a.id)
+        sendSurvey({ input: answers }).then(function(response){
           results = response
           status = 2
           emitChangeEvent()

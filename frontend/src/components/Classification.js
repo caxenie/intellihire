@@ -26,9 +26,7 @@ export default class Classification extends Component {
   render() {
     switch (this.state.surveyStatus){
       case 0: return (
-        <Questionnaire onSubmit={() =>
-          this.setState({ step: COMPUTING_STEP })
-        } />
+        <Questionnaire />
       )
       case 1: return (
         <div>Loading...</div>

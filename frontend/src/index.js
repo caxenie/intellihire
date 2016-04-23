@@ -5,11 +5,14 @@ import Home from './components/Home'
 import Demo from './components/Demo'
 import Classification from './components/Classification'
 
+import './styles/main'
+
+
 class App extends Component {
   render(){
     return (
-      <div>
-        <div>IntelliHiRe</div>
+      <div className="container">
+        <h1>IntelliHiRe</h1>
         {this.props.children}
       </div>
     )
