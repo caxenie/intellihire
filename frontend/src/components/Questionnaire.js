@@ -23,7 +23,7 @@ export default class Hello extends Component {
     this._hndl = SurveyStore.addChangeListener(this.onChange.bind(this))
   }
   componentWillUnmount() {
-    this._hndl()
+    //this._hndl()
   }
   render() {
     return (
