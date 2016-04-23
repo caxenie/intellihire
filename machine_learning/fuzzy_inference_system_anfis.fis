@@ -1,0 +1,64 @@
+[System]
+Name='fuzzy_inference_system_anfis'
+Type='mamdani'
+Version=2.0
+NumInputs=5
+NumOutputs=1
+NumRules=0
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='O'
+Range=[1 3]
+NumMFs=3
+MF1='D':'trimf',[0 1 2]
+MF2='N':'trimf',[1 2 3]
+MF3='A':'trimf',[2 3 4]
+
+[Input2]
+Name='C'
+Range=[1 3]
+NumMFs=3
+MF1='D':'trimf',[0 1 2]
+MF2='N':'trimf',[1 2 3]
+MF3='A':'trimf',[2 3 4]
+
+[Input3]
+Name='E'
+Range=[1 3]
+NumMFs=3
+MF1='D':'trimf',[0 1 2]
+MF2='N':'trimf',[1 2 3]
+MF3='A':'trimf',[2 3 4]
+
+[Input4]
+Name='A'
+Range=[1 3]
+NumMFs=3
+MF1='D':'trimf',[0 1 2]
+MF2='N':'trimf',[1 2 3]
+MF3='A':'trimf',[2 3 4]
+
+[Input5]
+Name='N'
+Range=[1 3]
+NumMFs=3
+MF1='D':'trimf',[0 1 2]
+MF2='N':'trimf',[1 2 3]
+MF3='A':'trimf',[2 3 4]
+
+[Output1]
+Name='R'
+Range=[1 5]
+NumMFs=5
+MF1='S':'trimf',[0 1 2]
+MF2='T':'trimf',[1 2 3]
+MF3='AL':'trimf',[2 3 4]
+MF4='D':'trimf',[3 4 5]
+MF5='AR':'trimf',[4 5 6]
+
+[Rules]

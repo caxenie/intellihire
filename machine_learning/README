@@ -1,0 +1,18 @@
+Neurofuzzy system for learning psychometric data for role assignment in software engineering teams.
+
+Training data
+
+Role:
+Sales
+Tester
+Algorithmics
+Developer
+Architect
+
+Psychometric data:
+OCEAN questions (one per item)
+O - openness
+C - Consciousness
+E - Extrovertion
+A - Agreablness
+N - Neuroticism

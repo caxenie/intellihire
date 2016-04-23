@@ -12,5 +12,7 @@ switch in
         out=3;
     case 5
         out=3;
+    otherwise
+        out=0;
 end
 
