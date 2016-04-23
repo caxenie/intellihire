@@ -24,6 +24,8 @@ export default class Classification extends Component {
     SurveyStore.removeChangeListener(this._surveyStoreListener)
   }
   render() {
+    return this.props.children
+
     switch (this.state.surveyStatus){
       case 0: return (
         <Questionnaire />

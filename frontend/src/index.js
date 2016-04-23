@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import Home from './components/Home'
 import Demo from './components/Demo'
-import Classification from './components/Classification'
+import Questionnaire from './components/Questionnaire'
+import Question from './components/Question'
+import Submission from './components/Submission'
 
 import './styles/main'
 
@@ -11,8 +13,7 @@ import './styles/main'
 class App extends Component {
   render(){
     return (
-      <div className="container">
-        <h1>IntelliHiRe</h1>
+      <div>
         {this.props.children}
       </div>
     )
@@ -20,10 +21,13 @@ class App extends Component {
 }
 
 render((
-  <Router history={browserHistory}>
+  <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
-      <Route path="classification" component={Classification} />
+      <Route path="questions" component={Questionnaire}>
+        <Route path="submit" component={Submission}/>
+        <Route path=":questionId" component={Question}/>
+      </Route>
       <Route path="demo" component={Demo} />
     </Route>
   </Router>

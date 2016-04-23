@@ -6,26 +6,17 @@ import sendSurvey from '../utils/sendSurvey'
 
 const SurveyStore = module.exports = {}
 
-var status = 0
 var results = null
 
 
 // // Accessors
 
-SurveyStore.getStatus = function(){
-  return status
+SurveyStore.getQuestion = function(id){
+  return questions.find(q => q.id == id)
 }
 
-SurveyStore.getCurrentQuestion = function(){
-  return questions.find((question) => !question.answer)
-}
-
-SurveyStore.getQuestionsPaginationInfo = function(){
-  let currentQuestion = SurveyStore.getCurrentQuestion()
-  return {
-    current: questions.findIndex((question) => !question.answer) + 1,
-    total: questions.length
-  }
+SurveyStore.getQuestions = function(){
+  return questions
 }
 
 SurveyStore.getAnswers = function(){
@@ -34,6 +25,10 @@ SurveyStore.getAnswers = function(){
 
 SurveyStore.getResults = function(){
   return results
+}
+
+SurveyStore.isFinalQuestion = function(id){
+  return questions[questions.lenght - 1].id == id
 }
 
 
@@ -65,16 +60,13 @@ Dispatcher.register(function(action){
           question.answer = question.answers.find((answer) => answer.id == action.answerId)
         }
       })
-      if (!SurveyStore.getCurrentQuestion()){
-        status = 1
-
+      /*if (!SurveyStore.getCurrentQuestion()){
         let answers = SurveyStore.getAnswers().map(a => a.id)
-        sendSurvey({ input: answers }).then(function(response){
+        sendSurvey(answers).then(function(response){
           results = response
-          status = 2
           emitChangeEvent()
         })
-      }
+      }*/
       emitChangeEvent()
       break
     default:
