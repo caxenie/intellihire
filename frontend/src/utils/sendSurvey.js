@@ -3,11 +3,7 @@ import SurveyStore from '../stores/SurveyStore'
 
 
 module.exports = function(answers) {
-  let data = {
-    answers: SurveyStore.getAnswers()
-  }
-
-  console.log('Sending...', data)
+  console.log('Sending...', answers)
 
   request
     .get('http://intellihireapp.azurewebsites.net/api/v1/compute/mock')

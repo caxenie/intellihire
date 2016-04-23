@@ -2,11 +2,18 @@ import Dispatcher from '../Dispatcher'
 //import AppConstants = from '../constants/AppConstants'
 const EventEmitter = require('events').EventEmitter
 import questions from './questions'
+import sendSurvey from '../utils/sendSurvey'
 
 const SurveyStore = module.exports = {}
 
+var status = 0
+
 
 // // Accessors
+
+SurveyStore.getStatus = function(){
+  return status
+}
 
 SurveyStore.getCurrentQuestion = function(){
   return questions.find((question) => !question.answer)
@@ -53,6 +60,10 @@ Dispatcher.register(function(action){
           question.answer = question.answers.find((answer) => answer.id == action.answerId)
         }
       })
+      if (!SurveyStore.getCurrentQuestion()){
+        status = 1
+        //sendSurvey(questions)
+      }
       emitChangeEvent()
       break
     default:
