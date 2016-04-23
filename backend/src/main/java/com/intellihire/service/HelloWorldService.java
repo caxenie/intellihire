@@ -15,7 +15,7 @@ public class HelloWorldService {
     @Path("/{name}")
     public Response helloName(@PathParam("name") String name) {
 
-        String output = "Hello " + name;
+        String output = "Hello " + name + "!";
 
         return Response.status(200).entity(output).build();
 
