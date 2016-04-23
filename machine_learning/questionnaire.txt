@@ -1,5 +1,5 @@
-O9	I spend time reflecting on things.
-C3	I pay attention to details.
-E9	I don't mind being the center of attention.
-A8	I take time out for others.
-N1	I get stressed out easily.
+O	I spend time reflecting on things.
+C	I pay attention to details.
+E	I don't mind being the center of attention.
+A	I take time out for others.
+N	I get stressed out easily.
