@@ -15,25 +15,16 @@ The subtle underlying interactions between these items and the patterns they for
 It is still the insight of human interviewers into the complexities of interviewees' responses that has always provided the verdict.
 
 Proposed solution
-Using expert systems and neural programming to learn the complex patterns that exist among and between the responses to items in questionnaires. 
+Using neural programming to learn the complex patterns that exist among and between the responses to items in questionnaires. 
 These could represent crucial aspects of human personality if only they could be made available to human resource professionals.
 In a more extended context, such a learning system will be able to recognise patterns that lie within the inherent complexity of the human character, beyond the level of the simple trait.
 
 Tools
 
-ANFIS - adaptive neuro-fuzzy inference system
-
-Using a given input/output data set, the system constructs a fuzzy inference system whose membership function parameters are tuned using back propagation and a least squares optimization. This adjustment allows the fuzzy system to learn from the data it is modeling.
-
-
 Link to online tests:
 http://personality-testing.info/tests/IPIP-BFFM/
 
-
-
-
 intelliHiRe machine learning backend
-
     
 training and analysis
 http://gallery.azureml.net/Details/8af46fae8f6147269dd9bcfb966ce1c3
