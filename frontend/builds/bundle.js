@@ -28476,6 +28476,10 @@
 	var BAR_CHART_TYPE = 'bar';
 	var RADAR_CHART_TYPE = 'radar';
 
+	function getViewportWidth() {
+	  return Math.max(document.documentElement.clientWidth, window.innerWidth || 400);
+	}
+
 	var SurveyResults = function (_Component) {
 	  _inherits(SurveyResults, _Component);
 
@@ -28484,11 +28488,29 @@
 
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SurveyResults).call(this, props));
 
-	    _this.state = { chartType: RADAR_CHART_TYPE };
+	    _this.state = {
+	      chartType: RADAR_CHART_TYPE,
+	      viewportWidth: getViewportWidth()
+	    };
 	    return _this;
 	  }
 
 	  _createClass(SurveyResults, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      this._resizeListener = function (e) {
+	        return _this2.setState({ viewportWidth: getViewportWidth() });
+	      };
+	      window.addEventListener('resize', this._resizeListener);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      window.removeEventListener('resize', this._resizeListener);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -28505,9 +28527,9 @@
 	  }, {
 	    key: 'renderChart',
 	    value: function renderChart() {
-	      var _this2 = this;
+	      var _this3 = this;
 
-	      var width = window.innerWidth * 0.6,
+	      var width = this.state.viewportWidth * 0.6,
 	          height = width * 0.8;
 	      switch (this.state.chartType) {
 	        case BAR_CHART_TYPE:
@@ -28521,7 +28543,7 @@
 	              _react2.default.createElement(
 	                'a',
 	                { className: 'waves-effect waves-dark btn-flat white-text', onClick: function onClick() {
-	                    return _this2.setState({ chartType: RADAR_CHART_TYPE });
+	                    return _this3.setState({ chartType: RADAR_CHART_TYPE });
 	                  } },
 	                'Show as Radar-Chart'
 	              )
@@ -28538,7 +28560,7 @@
 	              _react2.default.createElement(
 	                'a',
 	                { className: 'waves-effect waves-dark btn-flat white-text', onClick: function onClick() {
-	                    return _this2.setState({ chartType: BAR_CHART_TYPE });
+	                    return _this3.setState({ chartType: BAR_CHART_TYPE });
 	                  } },
 	                'Show as Bar-Chart'
 	              )
