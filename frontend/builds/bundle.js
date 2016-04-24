@@ -28579,7 +28579,9 @@
 	        scaleStartValue: 0,
 	        scaleLabel: "<%=value%>%",
 	        scaleFontColor: 'rgba(255,255,255,1.0)',
-	        angleLineColor: 'rgba(255,255,255,0.6)'
+	        angleLineColor: 'rgba(255,255,255,0.6)',
+	        pointLabelFontSize: 18,
+	        pointLabelFontColor: 'rgba(255,255,255,1.0)'
 	      };
 	    }
 	  }]);
