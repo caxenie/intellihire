@@ -28,3 +28,15 @@ Using a given input/output data set, the system constructs a fuzzy inference sys
 
 Link to online tests:
 http://personality-testing.info/tests/IPIP-BFFM/
+
+
+
+
+intelliHiRe machine learning backend
+
+    
+training and analysis
+http://gallery.azureml.net/Details/8af46fae8f6147269dd9bcfb966ce1c3
+
+testing and webservice for final application
+http://gallery.azureml.net/Details/157a88dcc0b3416982c8f1af9b9b7df0
