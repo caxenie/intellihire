@@ -8,11 +8,24 @@ const RADAR_CHART_TYPE = 'radar'
 
 import '../styles/survey-results'
 
+function getViewportWidth() {
+  return Math.max(document.documentElement.clientWidth, window.innerWidth || 400)
+}
 
 export default class SurveyResults extends Component {
   constructor(props){
     super(props)
-    this.state = { chartType: RADAR_CHART_TYPE }
+    this.state = {
+      chartType: RADAR_CHART_TYPE,
+      viewportWidth: getViewportWidth()
+    }
+  }
+  componentDidMount() {
+    this._resizeListener = (e) => this.setState({ viewportWidth: getViewportWidth() })
+    window.addEventListener('resize', this._resizeListener)
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._resizeListener)
   }
   render() {
     return (
@@ -23,7 +36,7 @@ export default class SurveyResults extends Component {
     )
   }
   renderChart() {
-    let width = window.innerWidth * 0.6, height = width * 0.8
+    let width = this.state.viewportWidth * 0.6, height = width * 0.8
     switch(this.state.chartType){
       case BAR_CHART_TYPE: return (
         <div>
