@@ -3,10 +3,8 @@ len=length(ocean);
 for i=1:1:len
     result=net(ocean(i,1:5)');
     index=0;
-    archdist=0;
-    devdist=0;
-    testdist=0;
-    for j=1:1:100
+    dists=zeros(5,1);
+    for j=1:1:49
         if(result(j)==1)
             index=j;
             break;
@@ -14,19 +12,15 @@ for i=1:1:len
     end
     
     if(index>0)
-        archdist=distances(index,29);
-        devdist=distances(index,52);
-        testdist=distances(index,91);
+        dist(1)=distances(index,5); %arch
+        dist(2)=distances(index,22); %dev
+        dist(3)=distances(index,37); %test
+        dist(4)=distances(index,19); %alg
+        dist(5)=distances(index,47); %sale
     end
     
     user_roles(i,1:5)=ocean(i,1:5);
-    if(archdist<=devdist && archdist<=testdist)
-        
-        user_roles(i,6)=1;
-    elseif(devdist<archdist && devdist<testdist)
-            user_roles(i,6)=2;
-    else
-            user_roles(i,6)=3;
-    end
+    [val,idx]=min(dist);
+    user_roles(i,6)=idx;
         
 end
