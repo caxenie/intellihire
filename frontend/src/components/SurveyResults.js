@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Bar as BarChart } from 'react-chartjs'
 import { Radar as RadarChart } from 'react-chartjs'
+import { Link } from 'react-router'
 
 const BAR_CHART_TYPE = 'bar'
 const RADAR_CHART_TYPE = 'radar'
@@ -32,6 +33,7 @@ export default class SurveyResults extends Component {
       <div className="survey-results amber lighten-2 z-depth-1">
         <h2 className="white-text">Results</h2>
         {this.renderChart()}
+        <Link className="restart btn-floating btn-large waves-effect waves-dark white black-text" to="/">Restart</Link>
       </div>
     )
   }

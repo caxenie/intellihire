@@ -9,6 +9,7 @@ import '../styles/home.styl'
 const Home = ({onStart, onDemo}) => {
   return (
     <div className="home amber lighten-2 white-text">
+      <img src="http://intellihirewebapp.azurewebsites.net/logo_intellihire.png" />
       <h1>Take the<br />Survey</h1>
       <p>This questionaire... supports you to find the right spot at work...</p>
       <Link className="demo waves-effect waves-light btn-flat" to="demo">View Demo Results</Link>

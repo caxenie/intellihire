@@ -18,6 +18,14 @@
   right: -20px;
   top: 50vh;
 }
+.home img {
+  position: absolute;
+  right: -33vw;
+  top: 40vh;
+  width: 97px;
+  height: 110px;
+  opacity: 0.3;
+}
 .questionnaire {
   position: relative;
   top: 20vh;
@@ -92,6 +100,7 @@
   line-height: 20vw;
 }
 .survey-results {
+  position: relative;
   width: 80vh;
   height: 100vh;
   margin: 0;
@@ -104,4 +113,10 @@
   text-transform: none;
   text-decoration: underline;
   text-align: center;
+}
+.survey-results .restart {
+  position: absolute;
+  right: -20px;
+  top: 70vh;
+  text-decoration: none;
 }

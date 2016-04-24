@@ -25528,6 +25528,7 @@
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'home amber lighten-2 white-text' },
+	    _react2.default.createElement('img', { src: 'http://intellihirewebapp.azurewebsites.net/logo_intellihire.png' }),
 	    _react2.default.createElement(
 	      'h1',
 	      null,
@@ -28464,6 +28465,8 @@
 
 	var _reactChartjs = __webpack_require__(255);
 
+	var _reactRouter = __webpack_require__(166);
+
 	__webpack_require__(265);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -28522,7 +28525,12 @@
 	          { className: 'white-text' },
 	          'Results'
 	        ),
-	        this.renderChart()
+	        this.renderChart(),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { className: 'restart btn-floating btn-large waves-effect waves-dark white black-text', to: '/' },
+	          'Restart'
+	        )
 	      );
 	    }
 	  }, {
