@@ -1,0 +1,101 @@
+.home {
+  position: relative;
+  width: 300px;
+  height: 100vh;
+  margin-top: -30px;
+  padding: 0 30px 0 30px;
+}
+.home h1 {
+  padding-top: 15vh;
+}
+.home .demo {
+  text-transform: none !important;
+  text-decoration: underline;
+  color: rgba(255,255,255,0.8);
+}
+.home .start {
+  position: absolute;
+  right: -20px;
+  top: 50vh;
+}
+.questionnaire {
+  position: relative;
+  top: 20vh;
+}
+.questionnaire .navigation {
+  margin-top: 40px;
+}
+.question {
+  position: relative;
+  height: 55vh;
+  min-height: 320px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: left;
+  -webkit-justify-content: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+}
+.question h2 {
+  position: absolute;
+  left: 40px;
+  bottom: 90px;
+  line-height: 65px;
+}
+.question .answers {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: left;
+  -webkit-justify-content: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+}
+.question .answers .answer {
+  margin-left: 20px;
+}
+.question .answers .answer a {
+  min-width: 14vw;
+}
+.submission {
+  position: relative;
+  height: 55vh;
+  min-height: 320px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.survey-results {
+  width: 80vh;
+  height: 100vh;
+  margin: 0;
+  padding: 10vh 3.3vh 0 3.3vh;
+}
+.survey-results h2 {
+  margin-bottom: 20px;
+}
+.survey-results a {
+  text-transform: none;
+  text-decoration: underline;
+  text-align: center;
+}
