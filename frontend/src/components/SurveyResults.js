@@ -36,7 +36,7 @@ export default class SurveyResults extends Component {
     )
   }
   renderChart() {
-    let width = this.state.viewportWidth * 0.6, height = width * 0.8
+    let width = 400/*this.state.viewportWidth * 0.6*/, height = width * 0.8
     switch(this.state.chartType){
       case BAR_CHART_TYPE: return (
         <div>

@@ -29,12 +29,12 @@ module.exports = function(){
     let answerIds = SurveyStore.getAnswers().map(a => a.id)
     console.log('Sending...', answerIds)
     request
-      .post('https://ussouthcentral.services.azureml.net/workspaces/4f5cd4796bcc49fc919ebb6fde724e0a/services/c9747cdea43a474cb77c27c129788263/execute?api-version=2.0&details=true')
+      .post('https://6q261v49fe.execute-api.us-east-1.amazonaws.com/prod')
       .send(getBody(answerIds))
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .set('Authorization', 'Bearer GFywvyXm+xfF//kvB5qkXVTJevXpBWaM8Xj3WnxzZTGBpETuIR+3q5nyUjSIGA1VHIzbnaLI0/yzRBD97E5ekw==')
       .end(function(error, result){
+        console.log(result.text)
         if (!error && !!result){
           try {
             let json = JSON.parse(result.text)

@@ -33,8 +33,8 @@ export default class Question extends Component {
     return (
       <div className="question amber lighten-2 z-depth-1">
         <h2 className="white-text">
-        {question.text.split('\n').map( substring =>
-            <span>
+        {question.text.split('\n').map( (substring, idx) =>
+            <span key={idx}>
               {substring}
               <br/>
             </span>
