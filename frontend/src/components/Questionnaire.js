@@ -3,47 +3,54 @@ import React, {
 } from 'react'
 import ReactDOM from 'react-dom'
 import SurveyStore from '../stores/SurveyStore'
-import answerQuestion from '../actions/answerQuestion'
-import Question from './Question'
+import { Link } from 'react-router'
 
-function getState(){
-  return {
-    question: SurveyStore.getCurrentQuestion(),
-    pagination: SurveyStore.getQuestionsPaginationInfo()
-  }
-}
+import '../styles/questionnaire'
 
 
-export default class Hello extends Component {
+export default class Questionnaire extends Component {
   constructor(props){
     super(props)
-    this.state = getState()
-  }
-  componentDidMount() {
-    this._hndl = SurveyStore.addChangeListener(this.onChange.bind(this))
-  }
-  componentWillUnmount() {
-    //this._hndl()
+    this.state = {
+      questions: SurveyStore.getQuestions()
+    }
   }
   render() {
+    let { question, pagination } = this.state
     return (
-      <div>
-        <Question question={this.state.question} onSelect={(answer) => {
-            answerQuestion(this.state.question, answer)
-        }} />
-        {this.renderNavigation()}
+      <div className="questionnaire">
+        {this.props.children}
+        <ul className="pagination center">
+          {this.state.questions.map(this.renderPage, this)}
+          {this.renderSubmitPage()}
+        </ul>
       </div>
     )
   }
-  renderNavigation() {
-    let {current, total} = this.state.pagination
+  renderPage(question) {
+    var liClassName = "waves-effect", linkClassName = ""
+    if (question.id == this.props.params.questionId){
+      liClassName = "active"
+    } else if (!question.answer) {
+      linkClassName = "grey-text text-lighten-1"
+    }
     return (
-      <div>
-        <div>Question {current} of {total}</div>
-      </div>
+      <li key={question.id} className={liClassName}>
+        <Link className={linkClassName} to={'questions/'+question.id}>{question.id}</Link>
+      </li>
     )
   }
-  onChange() {
-    this.setState(getState())
+  renderSubmitPage() {
+    var liClassName = "waves-effect", linkClassName = ""
+    if (this.props.location.pathname == '/questions/submit'){
+      liClassName = "active"
+    } else {
+      linkClassName = "grey-text text-lighten-1"
+    }
+    return (
+      <li className={liClassName}>
+        <Link className={linkClassName} to="questions/submit">Results</Link>
+      </li>
+    )
   }
 }

@@ -1,34 +1,36 @@
 import Dispatcher from '../Dispatcher'
-//import AppConstants = from '../constants/AppConstants'
 const EventEmitter = require('events').EventEmitter
 import questions from './questions'
-import sendSurvey from '../utils/sendSurvey'
 
 const SurveyStore = module.exports = {}
 
-var status = 0
+var results = null
 
 
 // // Accessors
 
-SurveyStore.getStatus = function(){
-  return status
+SurveyStore.getQuestion = function(id){
+  return questions.find(q => q.id == id)
 }
 
-SurveyStore.getCurrentQuestion = function(){
-  return questions.find((question) => !question.answer)
-}
-
-SurveyStore.getQuestionsPaginationInfo = function(){
-  let currentQuestion = SurveyStore.getCurrentQuestion()
-  return {
-    current: questions.findIndex((question) => !question.answer) + 1,
-    total: questions.length
-  }
+SurveyStore.getQuestions = function(){
+  return questions
 }
 
 SurveyStore.getAnswers = function(){
-  return questions.map((question) => question.answer )
+  return questions.map(q => q.answer).filter(a => !!a)
+}
+
+SurveyStore.isFilledOut = function(){
+  return SurveyStore.getAnswers().length == questions.length
+}
+
+SurveyStore.getResults = function(){
+  return results
+}
+
+SurveyStore.isFinalQuestion = function(id){
+  return questions[questions.length - 1].id == id
 }
 
 
@@ -42,11 +44,11 @@ function emitChangeEvent(){
 }
 
 SurveyStore.addChangeListener = function(callback){
-  eventEmitter.on(CHANGE_EVENT, callback)
+  return eventEmitter.on(CHANGE_EVENT, callback)
 }
 
 SurveyStore.removeChangeListener = function(callback){
-  eventEmitter.removeListener(CHANGE_EVENT, callback)
+  return eventEmitter.removeListener(CHANGE_EVENT, callback)
 }
 
 
@@ -60,10 +62,10 @@ Dispatcher.register(function(action){
           question.answer = question.answers.find((answer) => answer.id == action.answerId)
         }
       })
-      if (!SurveyStore.getCurrentQuestion()){
-        status = 1
-        //sendSurvey(questions)
-      }
+      emitChangeEvent()
+      break
+    case 'RETRIEVE_RESULTS':
+      results = action.results
       emitChangeEvent()
       break
     default:

@@ -54,19 +54,33 @@
 
 	var _reactDom = __webpack_require__(32);
 
-	var _reactDom2 = _interopRequireDefault(_reactDom);
+	var _reactRouter = __webpack_require__(166);
 
-	var _SurveyStore = __webpack_require__(166);
+	var _Home = __webpack_require__(225);
 
-	var _SurveyStore2 = _interopRequireDefault(_SurveyStore);
+	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Landing = __webpack_require__(173);
-
-	var _Landing2 = _interopRequireDefault(_Landing);
-
-	var _Questionnaire = __webpack_require__(174);
+	var _Questionnaire = __webpack_require__(231);
 
 	var _Questionnaire2 = _interopRequireDefault(_Questionnaire);
+
+	var _Question = __webpack_require__(241);
+
+	var _Question2 = _interopRequireDefault(_Question);
+
+	var _Submission = __webpack_require__(243);
+
+	var _Submission2 = _interopRequireDefault(_Submission);
+
+	var _Results = __webpack_require__(253);
+
+	var _Results2 = _interopRequireDefault(_Results);
+
+	var _Demo = __webpack_require__(267);
+
+	var _Demo2 = _interopRequireDefault(_Demo);
+
+	__webpack_require__(268);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76,53 +90,46 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var INTRODUCTION_STEP = 0;
-	var QUESTIONNAIRE_STEP = 1;
-	var COMPUTING_STEP = 2;
-	var RESULTS_STEP = 3;
+	var App = function (_Component) {
+	  _inherits(App, _Component);
 
-	var Hello = function (_Component) {
-	  _inherits(Hello, _Component);
+	  function App() {
+	    _classCallCheck(this, App);
 
-	  function Hello(props) {
-	    _classCallCheck(this, Hello);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Hello).call(this, props));
-
-	    _this.state = {
-	      step: INTRODUCTION_STEP
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
 	  }
 
-	  _createClass(Hello, [{
+	  _createClass(App, [{
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-
-	      switch (this.state.step) {
-	        case INTRODUCTION_STEP:
-	          return _react2.default.createElement(_Landing2.default, { onStart: function onStart() {
-	              return _this2.setState({ step: QUESTIONNAIRE_STEP });
-	            } });
-	        case QUESTIONNAIRE_STEP:
-	          return _react2.default.createElement(_Questionnaire2.default, { onSubmit: function onSubmit() {
-	              return _this2.setState({ step: COMPUTING_STEP });
-	            } });
-	        case RESULTS_STEP:
-	          return _react2.default.createElement(
-	            'div',
-	            null,
-	            'Results'
-	          );
-	      }
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.props.children
+	      );
 	    }
 	  }]);
 
-	  return Hello;
+	  return App;
 	}(_react.Component);
 
-	_reactDom2.default.render(_react2.default.createElement(Hello, null), document.getElementById('content'));
+	(0, _reactDom.render)(_react2.default.createElement(
+	  _reactRouter.Router,
+	  { history: _reactRouter.hashHistory },
+	  _react2.default.createElement(
+	    _reactRouter.Route,
+	    { path: '/', component: App },
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+	    _react2.default.createElement(
+	      _reactRouter.Route,
+	      { path: 'questions', component: _Questionnaire2.default },
+	      _react2.default.createElement(_reactRouter.Route, { path: 'submit', component: _Submission2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: ':questionId', component: _Question2.default })
+	    ),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'results', component: _Results2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'demo', component: _Demo2.default })
+	  )
+	), document.getElementById('content'));
 
 /***/ },
 /* 1 */
@@ -20083,46 +20090,5689 @@
 /* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* components */
 	'use strict';
 
-	var _Dispatcher = __webpack_require__(167);
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _Router2 = __webpack_require__(167);
+
+	var _Router3 = _interopRequireDefault(_Router2);
+
+	exports.Router = _Router3['default'];
+
+	var _Link2 = __webpack_require__(203);
+
+	var _Link3 = _interopRequireDefault(_Link2);
+
+	exports.Link = _Link3['default'];
+
+	var _IndexLink2 = __webpack_require__(205);
+
+	var _IndexLink3 = _interopRequireDefault(_IndexLink2);
+
+	exports.IndexLink = _IndexLink3['default'];
+
+	/* components (configuration) */
+
+	var _IndexRedirect2 = __webpack_require__(206);
+
+	var _IndexRedirect3 = _interopRequireDefault(_IndexRedirect2);
+
+	exports.IndexRedirect = _IndexRedirect3['default'];
+
+	var _IndexRoute2 = __webpack_require__(208);
+
+	var _IndexRoute3 = _interopRequireDefault(_IndexRoute2);
+
+	exports.IndexRoute = _IndexRoute3['default'];
+
+	var _Redirect2 = __webpack_require__(207);
+
+	var _Redirect3 = _interopRequireDefault(_Redirect2);
+
+	exports.Redirect = _Redirect3['default'];
+
+	var _Route2 = __webpack_require__(209);
+
+	var _Route3 = _interopRequireDefault(_Route2);
+
+	exports.Route = _Route3['default'];
+
+	/* mixins */
+
+	var _History2 = __webpack_require__(210);
+
+	var _History3 = _interopRequireDefault(_History2);
+
+	exports.History = _History3['default'];
+
+	var _Lifecycle2 = __webpack_require__(211);
+
+	var _Lifecycle3 = _interopRequireDefault(_Lifecycle2);
+
+	exports.Lifecycle = _Lifecycle3['default'];
+
+	var _RouteContext2 = __webpack_require__(212);
+
+	var _RouteContext3 = _interopRequireDefault(_RouteContext2);
+
+	exports.RouteContext = _RouteContext3['default'];
+
+	/* utils */
+
+	var _useRoutes2 = __webpack_require__(213);
+
+	var _useRoutes3 = _interopRequireDefault(_useRoutes2);
+
+	exports.useRoutes = _useRoutes3['default'];
+
+	var _RouteUtils = __webpack_require__(198);
+
+	exports.createRoutes = _RouteUtils.createRoutes;
+
+	var _RouterContext2 = __webpack_require__(200);
+
+	var _RouterContext3 = _interopRequireDefault(_RouterContext2);
+
+	exports.RouterContext = _RouterContext3['default'];
+
+	var _RoutingContext2 = __webpack_require__(214);
+
+	var _RoutingContext3 = _interopRequireDefault(_RoutingContext2);
+
+	exports.RoutingContext = _RoutingContext3['default'];
+
+	var _PropTypes2 = __webpack_require__(204);
+
+	var _PropTypes3 = _interopRequireDefault(_PropTypes2);
+
+	exports.PropTypes = _PropTypes3['default'];
+	exports.locationShape = _PropTypes2.locationShape;
+	exports.routerShape = _PropTypes2.routerShape;
+
+	var _match2 = __webpack_require__(215);
+
+	var _match3 = _interopRequireDefault(_match2);
+
+	exports.match = _match3['default'];
+
+	var _useRouterHistory2 = __webpack_require__(219);
+
+	var _useRouterHistory3 = _interopRequireDefault(_useRouterHistory2);
+
+	exports.useRouterHistory = _useRouterHistory3['default'];
+
+	var _PatternUtils = __webpack_require__(191);
+
+	exports.formatPattern = _PatternUtils.formatPattern;
+
+	var _applyRouterMiddleware2 = __webpack_require__(220);
+
+	var _applyRouterMiddleware3 = _interopRequireDefault(_applyRouterMiddleware2);
+
+	exports.applyRouterMiddleware = _applyRouterMiddleware3['default'];
+
+	/* histories */
+
+	var _browserHistory2 = __webpack_require__(221);
+
+	var _browserHistory3 = _interopRequireDefault(_browserHistory2);
+
+	exports.browserHistory = _browserHistory3['default'];
+
+	var _hashHistory2 = __webpack_require__(224);
+
+	var _hashHistory3 = _interopRequireDefault(_hashHistory2);
+
+	exports.hashHistory = _hashHistory3['default'];
+
+	var _createMemoryHistory2 = __webpack_require__(216);
+
+	var _createMemoryHistory3 = _interopRequireDefault(_createMemoryHistory2);
+
+	exports.createMemoryHistory = _createMemoryHistory3['default'];
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	var _historyLibCreateHashHistory = __webpack_require__(168);
+
+	var _historyLibCreateHashHistory2 = _interopRequireDefault(_historyLibCreateHashHistory);
+
+	var _historyLibUseQueries = __webpack_require__(185);
+
+	var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _createTransitionManager = __webpack_require__(188);
+
+	var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
+
+	var _InternalPropTypes = __webpack_require__(199);
+
+	var _RouterContext = __webpack_require__(200);
+
+	var _RouterContext2 = _interopRequireDefault(_RouterContext);
+
+	var _RouteUtils = __webpack_require__(198);
+
+	var _RouterUtils = __webpack_require__(202);
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	function isDeprecatedHistory(history) {
+	  return !history || !history.__v2_compatible__;
+	}
+
+	var _React$PropTypes = _react2['default'].PropTypes;
+	var func = _React$PropTypes.func;
+	var object = _React$PropTypes.object;
+
+	/**
+	 * A <Router> is a high-level API for automatically setting up
+	 * a router that renders a <RouterContext> with all the props
+	 * it needs each time the URL changes.
+	 */
+	var Router = _react2['default'].createClass({
+	  displayName: 'Router',
+
+	  propTypes: {
+	    history: object,
+	    children: _InternalPropTypes.routes,
+	    routes: _InternalPropTypes.routes, // alias for children
+	    render: func,
+	    createElement: func,
+	    onError: func,
+	    onUpdate: func,
+
+	    // PRIVATE: For client-side rehydration of server match.
+	    matchContext: object
+	  },
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      render: function render(props) {
+	        return _react2['default'].createElement(_RouterContext2['default'], props);
+	      }
+	    };
+	  },
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      location: null,
+	      routes: null,
+	      params: null,
+	      components: null
+	    };
+	  },
+
+	  handleError: function handleError(error) {
+	    if (this.props.onError) {
+	      this.props.onError.call(this, error);
+	    } else {
+	      // Throw errors by default so we don't silently swallow them!
+	      throw error; // This error probably occurred in getChildRoutes or getComponents.
+	    }
+	  },
+
+	  componentWillMount: function componentWillMount() {
+	    var _this = this;
+
+	    var _props = this.props;
+	    var parseQueryString = _props.parseQueryString;
+	    var stringifyQuery = _props.stringifyQuery;
+
+	    process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](!(parseQueryString || stringifyQuery), '`parseQueryString` and `stringifyQuery` are deprecated. Please create a custom history. http://tiny.cc/router-customquerystring') : undefined;
+
+	    var _createRouterObjects = this.createRouterObjects();
+
+	    var history = _createRouterObjects.history;
+	    var transitionManager = _createRouterObjects.transitionManager;
+	    var router = _createRouterObjects.router;
+
+	    this._unlisten = transitionManager.listen(function (error, state) {
+	      if (error) {
+	        _this.handleError(error);
+	      } else {
+	        _this.setState(state, _this.props.onUpdate);
+	      }
+	    });
+
+	    this.history = history;
+	    this.router = router;
+	  },
+
+	  createRouterObjects: function createRouterObjects() {
+	    var matchContext = this.props.matchContext;
+
+	    if (matchContext) {
+	      return matchContext;
+	    }
+
+	    var history = this.props.history;
+	    var _props2 = this.props;
+	    var routes = _props2.routes;
+	    var children = _props2.children;
+
+	    if (isDeprecatedHistory(history)) {
+	      history = this.wrapDeprecatedHistory(history);
+	    }
+
+	    var transitionManager = _createTransitionManager2['default'](history, _RouteUtils.createRoutes(routes || children));
+	    var router = _RouterUtils.createRouterObject(history, transitionManager);
+	    var routingHistory = _RouterUtils.createRoutingHistory(history, transitionManager);
+
+	    return { history: routingHistory, transitionManager: transitionManager, router: router };
+	  },
+
+	  wrapDeprecatedHistory: function wrapDeprecatedHistory(history) {
+	    var _props3 = this.props;
+	    var parseQueryString = _props3.parseQueryString;
+	    var stringifyQuery = _props3.stringifyQuery;
+
+	    var createHistory = undefined;
+	    if (history) {
+	      process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, 'It appears you have provided a deprecated history object to `<Router/>`, please use a history provided by ' + 'React Router with `import { browserHistory } from \'react-router\'` or `import { hashHistory } from \'react-router\'`. ' + 'If you are using a custom history please create it with `useRouterHistory`, see http://tiny.cc/router-usinghistory for details.') : undefined;
+	      createHistory = function () {
+	        return history;
+	      };
+	    } else {
+	      process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, '`Router` no longer defaults the history prop to hash history. Please use the `hashHistory` singleton instead. http://tiny.cc/router-defaulthistory') : undefined;
+	      createHistory = _historyLibCreateHashHistory2['default'];
+	    }
+
+	    return _historyLibUseQueries2['default'](createHistory)({ parseQueryString: parseQueryString, stringifyQuery: stringifyQuery });
+	  },
+
+	  /* istanbul ignore next: sanity check */
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](nextProps.history === this.props.history, 'You cannot change <Router history>; it will be ignored') : undefined;
+
+	    process.env.NODE_ENV !== 'production' ? _routerWarning2['default']((nextProps.routes || nextProps.children) === (this.props.routes || this.props.children), 'You cannot change <Router routes>; it will be ignored') : undefined;
+	  },
+
+	  componentWillUnmount: function componentWillUnmount() {
+	    if (this._unlisten) this._unlisten();
+	  },
+
+	  render: function render() {
+	    var _state = this.state;
+	    var location = _state.location;
+	    var routes = _state.routes;
+	    var params = _state.params;
+	    var components = _state.components;
+	    var _props4 = this.props;
+	    var createElement = _props4.createElement;
+	    var render = _props4.render;
+
+	    var props = _objectWithoutProperties(_props4, ['createElement', 'render']);
+
+	    if (location == null) return null; // Async match
+
+	    // Only forward non-Router-specific props to routing context, as those are
+	    // the only ones that might be custom routing context props.
+	    Object.keys(Router.propTypes).forEach(function (propType) {
+	      return delete props[propType];
+	    });
+
+	    return render(_extends({}, props, {
+	      history: this.history,
+	      router: this.router,
+	      location: location,
+	      routes: routes,
+	      params: params,
+	      components: components,
+	      createElement: createElement
+	    }));
+	  }
+
+	});
+
+	exports['default'] = Router;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _warning = __webpack_require__(169);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	var _invariant = __webpack_require__(170);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	var _Actions = __webpack_require__(171);
+
+	var _PathUtils = __webpack_require__(172);
+
+	var _ExecutionEnvironment = __webpack_require__(173);
+
+	var _DOMUtils = __webpack_require__(174);
+
+	var _DOMStateStorage = __webpack_require__(175);
+
+	var _createDOMHistory = __webpack_require__(176);
+
+	var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
+
+	function isAbsolutePath(path) {
+	  return typeof path === 'string' && path.charAt(0) === '/';
+	}
+
+	function ensureSlash() {
+	  var path = _DOMUtils.getHashPath();
+
+	  if (isAbsolutePath(path)) return true;
+
+	  _DOMUtils.replaceHashPath('/' + path);
+
+	  return false;
+	}
+
+	function addQueryStringValueToPath(path, key, value) {
+	  return path + (path.indexOf('?') === -1 ? '?' : '&') + (key + '=' + value);
+	}
+
+	function stripQueryStringValueFromPath(path, key) {
+	  return path.replace(new RegExp('[?&]?' + key + '=[a-zA-Z0-9]+'), '');
+	}
+
+	function getQueryStringValueFromPath(path, key) {
+	  var match = path.match(new RegExp('\\?.*?\\b' + key + '=(.+?)\\b'));
+	  return match && match[1];
+	}
+
+	var DefaultQueryKey = '_k';
+
+	function createHashHistory() {
+	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	  !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Hash history needs a DOM') : _invariant2['default'](false) : undefined;
+
+	  var queryKey = options.queryKey;
+
+	  if (queryKey === undefined || !!queryKey) queryKey = typeof queryKey === 'string' ? queryKey : DefaultQueryKey;
+
+	  function getCurrentLocation() {
+	    var path = _DOMUtils.getHashPath();
+
+	    var key = undefined,
+	        state = undefined;
+	    if (queryKey) {
+	      key = getQueryStringValueFromPath(path, queryKey);
+	      path = stripQueryStringValueFromPath(path, queryKey);
+
+	      if (key) {
+	        state = _DOMStateStorage.readState(key);
+	      } else {
+	        state = null;
+	        key = history.createKey();
+	        _DOMUtils.replaceHashPath(addQueryStringValueToPath(path, queryKey, key));
+	      }
+	    } else {
+	      key = state = null;
+	    }
+
+	    var location = _PathUtils.parsePath(path);
+
+	    return history.createLocation(_extends({}, location, { state: state }), undefined, key);
+	  }
+
+	  function startHashChangeListener(_ref) {
+	    var transitionTo = _ref.transitionTo;
+
+	    function hashChangeListener() {
+	      if (!ensureSlash()) return; // Always make sure hashes are preceeded with a /.
+
+	      transitionTo(getCurrentLocation());
+	    }
+
+	    ensureSlash();
+	    _DOMUtils.addEventListener(window, 'hashchange', hashChangeListener);
+
+	    return function () {
+	      _DOMUtils.removeEventListener(window, 'hashchange', hashChangeListener);
+	    };
+	  }
+
+	  function finishTransition(location) {
+	    var basename = location.basename;
+	    var pathname = location.pathname;
+	    var search = location.search;
+	    var state = location.state;
+	    var action = location.action;
+	    var key = location.key;
+
+	    if (action === _Actions.POP) return; // Nothing to do.
+
+	    var path = (basename || '') + pathname + search;
+
+	    if (queryKey) {
+	      path = addQueryStringValueToPath(path, queryKey, key);
+	      _DOMStateStorage.saveState(key, state);
+	    } else {
+	      // Drop key and state.
+	      location.key = location.state = null;
+	    }
+
+	    var currentHash = _DOMUtils.getHashPath();
+
+	    if (action === _Actions.PUSH) {
+	      if (currentHash !== path) {
+	        window.location.hash = path;
+	      } else {
+	        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'You cannot PUSH the same path using hash history') : undefined;
+	      }
+	    } else if (currentHash !== path) {
+	      // REPLACE
+	      _DOMUtils.replaceHashPath(path);
+	    }
+	  }
+
+	  var history = _createDOMHistory2['default'](_extends({}, options, {
+	    getCurrentLocation: getCurrentLocation,
+	    finishTransition: finishTransition,
+	    saveState: _DOMStateStorage.saveState
+	  }));
+
+	  var listenerCount = 0,
+	      stopHashChangeListener = undefined;
+
+	  function listenBefore(listener) {
+	    if (++listenerCount === 1) stopHashChangeListener = startHashChangeListener(history);
+
+	    var unlisten = history.listenBefore(listener);
+
+	    return function () {
+	      unlisten();
+
+	      if (--listenerCount === 0) stopHashChangeListener();
+	    };
+	  }
+
+	  function listen(listener) {
+	    if (++listenerCount === 1) stopHashChangeListener = startHashChangeListener(history);
+
+	    var unlisten = history.listen(listener);
+
+	    return function () {
+	      unlisten();
+
+	      if (--listenerCount === 0) stopHashChangeListener();
+	    };
+	  }
+
+	  function push(location) {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+
+	    history.push(location);
+	  }
+
+	  function replace(location) {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || location.state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+
+	    history.replace(location);
+	  }
+
+	  var goIsSupportedWithoutReload = _DOMUtils.supportsGoWithoutReloadUsingHash();
+
+	  function go(n) {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](goIsSupportedWithoutReload, 'Hash history go(n) causes a full page reload in this browser') : undefined;
+
+	    history.go(n);
+	  }
+
+	  function createHref(path) {
+	    return '#' + history.createHref(path);
+	  }
+
+	  // deprecated
+	  function registerTransitionHook(hook) {
+	    if (++listenerCount === 1) stopHashChangeListener = startHashChangeListener(history);
+
+	    history.registerTransitionHook(hook);
+	  }
+
+	  // deprecated
+	  function unregisterTransitionHook(hook) {
+	    history.unregisterTransitionHook(hook);
+
+	    if (--listenerCount === 0) stopHashChangeListener();
+	  }
+
+	  // deprecated
+	  function pushState(state, path) {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+
+	    history.pushState(state, path);
+	  }
+
+	  // deprecated
+	  function replaceState(state, path) {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](queryKey || state == null, 'You cannot use state without a queryKey it will be dropped') : undefined;
+
+	    history.replaceState(state, path);
+	  }
+
+	  return _extends({}, history, {
+	    listenBefore: listenBefore,
+	    listen: listen,
+	    push: push,
+	    replace: replace,
+	    go: go,
+	    createHref: createHref,
+
+	    registerTransitionHook: registerTransitionHook, // deprecated - warning is in createHistory
+	    unregisterTransitionHook: unregisterTransitionHook, // deprecated - warning is in createHistory
+	    pushState: pushState, // deprecated - warning is in createHistory
+	    replaceState: replaceState // deprecated - warning is in createHistory
+	  });
+	}
+
+	exports['default'] = createHashHistory;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+
+	'use strict';
+
+	/**
+	 * Similar to invariant but only logs a warning if the condition is not met.
+	 * This can be used to log issues in development environments in critical
+	 * paths. Removing the logging code for production environments will keep the
+	 * same logic and follow the same code paths.
+	 */
+
+	var warning = function() {};
+
+	if (process.env.NODE_ENV !== 'production') {
+	  warning = function(condition, format, args) {
+	    var len = arguments.length;
+	    args = new Array(len > 2 ? len - 2 : 0);
+	    for (var key = 2; key < len; key++) {
+	      args[key - 2] = arguments[key];
+	    }
+	    if (format === undefined) {
+	      throw new Error(
+	        '`warning(condition, format, ...args)` requires a warning ' +
+	        'message argument'
+	      );
+	    }
+
+	    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
+	      throw new Error(
+	        'The warning format should be able to uniquely identify this ' +
+	        'warning. Please, use a more descriptive format than: ' + format
+	      );
+	    }
+
+	    if (!condition) {
+	      var argIndex = 0;
+	      var message = 'Warning: ' +
+	        format.replace(/%s/g, function() {
+	          return args[argIndex++];
+	        });
+	      if (typeof console !== 'undefined') {
+	        console.error(message);
+	      }
+	      try {
+	        // This error was thrown as a convenience so that you can use this stack
+	        // to find the callsite that caused this warning to fire.
+	        throw new Error(message);
+	      } catch(x) {}
+	    }
+	  };
+	}
+
+	module.exports = warning;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+
+	'use strict';
+
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+
+	var invariant = function(condition, format, a, b, c, d, e, f) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
+
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error(
+	        'Minified exception occurred; use the non-minified dev environment ' +
+	        'for the full error message and additional helpful warnings.'
+	      );
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(
+	        format.replace(/%s/g, function() { return args[argIndex++]; })
+	      );
+	      error.name = 'Invariant Violation';
+	    }
+
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	};
+
+	module.exports = invariant;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 171 */
+/***/ function(module, exports) {
+
+	/**
+	 * Indicates that navigation was caused by a call to history.push.
+	 */
+	'use strict';
+
+	exports.__esModule = true;
+	var PUSH = 'PUSH';
+
+	exports.PUSH = PUSH;
+	/**
+	 * Indicates that navigation was caused by a call to history.replace.
+	 */
+	var REPLACE = 'REPLACE';
+
+	exports.REPLACE = REPLACE;
+	/**
+	 * Indicates that navigation was caused by some other action such
+	 * as using a browser's back/forward buttons and/or manually manipulating
+	 * the URL in a browser's location bar. This is the default.
+	 *
+	 * See https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onpopstate
+	 * for more information.
+	 */
+	var POP = 'POP';
+
+	exports.POP = POP;
+	exports['default'] = {
+	  PUSH: PUSH,
+	  REPLACE: REPLACE,
+	  POP: POP
+	};
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+	exports.extractPath = extractPath;
+	exports.parsePath = parsePath;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _warning = __webpack_require__(169);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	function extractPath(string) {
+	  var match = string.match(/^https?:\/\/[^\/]*/);
+
+	  if (match == null) return string;
+
+	  return string.substring(match[0].length);
+	}
+
+	function parsePath(path) {
+	  var pathname = extractPath(path);
+	  var search = '';
+	  var hash = '';
+
+	  process.env.NODE_ENV !== 'production' ? _warning2['default'](path === pathname, 'A path must be pathname + search + hash only, not a fully qualified URL like "%s"', path) : undefined;
+
+	  var hashIndex = pathname.indexOf('#');
+	  if (hashIndex !== -1) {
+	    hash = pathname.substring(hashIndex);
+	    pathname = pathname.substring(0, hashIndex);
+	  }
+
+	  var searchIndex = pathname.indexOf('?');
+	  if (searchIndex !== -1) {
+	    search = pathname.substring(searchIndex);
+	    pathname = pathname.substring(0, searchIndex);
+	  }
+
+	  if (pathname === '') pathname = '/';
+
+	  return {
+	    pathname: pathname,
+	    search: search,
+	    hash: hash
+	  };
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 173 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+	exports.canUseDOM = canUseDOM;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports.addEventListener = addEventListener;
+	exports.removeEventListener = removeEventListener;
+	exports.getHashPath = getHashPath;
+	exports.replaceHashPath = replaceHashPath;
+	exports.getWindowPath = getWindowPath;
+	exports.go = go;
+	exports.getUserConfirmation = getUserConfirmation;
+	exports.supportsHistory = supportsHistory;
+	exports.supportsGoWithoutReloadUsingHash = supportsGoWithoutReloadUsingHash;
+
+	function addEventListener(node, event, listener) {
+	  if (node.addEventListener) {
+	    node.addEventListener(event, listener, false);
+	  } else {
+	    node.attachEvent('on' + event, listener);
+	  }
+	}
+
+	function removeEventListener(node, event, listener) {
+	  if (node.removeEventListener) {
+	    node.removeEventListener(event, listener, false);
+	  } else {
+	    node.detachEvent('on' + event, listener);
+	  }
+	}
+
+	function getHashPath() {
+	  // We can't use window.location.hash here because it's not
+	  // consistent across browsers - Firefox will pre-decode it!
+	  return window.location.href.split('#')[1] || '';
+	}
+
+	function replaceHashPath(path) {
+	  window.location.replace(window.location.pathname + window.location.search + '#' + path);
+	}
+
+	function getWindowPath() {
+	  return window.location.pathname + window.location.search + window.location.hash;
+	}
+
+	function go(n) {
+	  if (n) window.history.go(n);
+	}
+
+	function getUserConfirmation(message, callback) {
+	  callback(window.confirm(message));
+	}
+
+	/**
+	 * Returns true if the HTML5 history API is supported. Taken from Modernizr.
+	 *
+	 * https://github.com/Modernizr/Modernizr/blob/master/LICENSE
+	 * https://github.com/Modernizr/Modernizr/blob/master/feature-detects/history.js
+	 * changed to avoid false negatives for Windows Phones: https://github.com/rackt/react-router/issues/586
+	 */
+
+	function supportsHistory() {
+	  var ua = navigator.userAgent;
+	  if ((ua.indexOf('Android 2.') !== -1 || ua.indexOf('Android 4.0') !== -1) && ua.indexOf('Mobile Safari') !== -1 && ua.indexOf('Chrome') === -1 && ua.indexOf('Windows Phone') === -1) {
+	    return false;
+	  }
+	  return window.history && 'pushState' in window.history;
+	}
+
+	/**
+	 * Returns false if using go(n) with hash history causes a full page reload.
+	 */
+
+	function supportsGoWithoutReloadUsingHash() {
+	  var ua = navigator.userAgent;
+	  return ua.indexOf('Firefox') === -1;
+	}
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/*eslint-disable no-empty */
+	'use strict';
+
+	exports.__esModule = true;
+	exports.saveState = saveState;
+	exports.readState = readState;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _warning = __webpack_require__(169);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	var KeyPrefix = '@@History/';
+	var QuotaExceededErrors = ['QuotaExceededError', 'QUOTA_EXCEEDED_ERR'];
+
+	var SecurityError = 'SecurityError';
+
+	function createKey(key) {
+	  return KeyPrefix + key;
+	}
+
+	function saveState(key, state) {
+	  try {
+	    if (state == null) {
+	      window.sessionStorage.removeItem(createKey(key));
+	    } else {
+	      window.sessionStorage.setItem(createKey(key), JSON.stringify(state));
+	    }
+	  } catch (error) {
+	    if (error.name === SecurityError) {
+	      // Blocking cookies in Chrome/Firefox/Safari throws SecurityError on any
+	      // attempt to access window.sessionStorage.
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '[history] Unable to save state; sessionStorage is not available due to security settings') : undefined;
+
+	      return;
+	    }
+
+	    if (QuotaExceededErrors.indexOf(error.name) >= 0 && window.sessionStorage.length === 0) {
+	      // Safari "private mode" throws QuotaExceededError.
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '[history] Unable to save state; sessionStorage is not available in Safari private mode') : undefined;
+
+	      return;
+	    }
+
+	    throw error;
+	  }
+	}
+
+	function readState(key) {
+	  var json = undefined;
+	  try {
+	    json = window.sessionStorage.getItem(createKey(key));
+	  } catch (error) {
+	    if (error.name === SecurityError) {
+	      // Blocking cookies in Chrome/Firefox/Safari throws SecurityError on any
+	      // attempt to access window.sessionStorage.
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '[history] Unable to read state; sessionStorage is not available due to security settings') : undefined;
+
+	      return null;
+	    }
+	  }
+
+	  if (json) {
+	    try {
+	      return JSON.parse(json);
+	    } catch (error) {
+	      // Ignore invalid JSON.
+	    }
+	  }
+
+	  return null;
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _invariant = __webpack_require__(170);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	var _ExecutionEnvironment = __webpack_require__(173);
+
+	var _DOMUtils = __webpack_require__(174);
+
+	var _createHistory = __webpack_require__(177);
+
+	var _createHistory2 = _interopRequireDefault(_createHistory);
+
+	function createDOMHistory(options) {
+	  var history = _createHistory2['default'](_extends({
+	    getUserConfirmation: _DOMUtils.getUserConfirmation
+	  }, options, {
+	    go: _DOMUtils.go
+	  }));
+
+	  function listen(listener) {
+	    !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'DOM history needs a DOM') : _invariant2['default'](false) : undefined;
+
+	    return history.listen(listener);
+	  }
+
+	  return _extends({}, history, {
+	    listen: listen
+	  });
+	}
+
+	exports['default'] = createDOMHistory;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _warning = __webpack_require__(169);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	var _deepEqual = __webpack_require__(178);
+
+	var _deepEqual2 = _interopRequireDefault(_deepEqual);
+
+	var _PathUtils = __webpack_require__(172);
+
+	var _AsyncUtils = __webpack_require__(181);
+
+	var _Actions = __webpack_require__(171);
+
+	var _createLocation2 = __webpack_require__(182);
+
+	var _createLocation3 = _interopRequireDefault(_createLocation2);
+
+	var _runTransitionHook = __webpack_require__(183);
+
+	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
+
+	var _deprecate = __webpack_require__(184);
+
+	var _deprecate2 = _interopRequireDefault(_deprecate);
+
+	function createRandomKey(length) {
+	  return Math.random().toString(36).substr(2, length);
+	}
+
+	function locationsAreEqual(a, b) {
+	  return a.pathname === b.pathname && a.search === b.search &&
+	  //a.action === b.action && // Different action !== location change.
+	  a.key === b.key && _deepEqual2['default'](a.state, b.state);
+	}
+
+	var DefaultKeyLength = 6;
+
+	function createHistory() {
+	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var getCurrentLocation = options.getCurrentLocation;
+	  var finishTransition = options.finishTransition;
+	  var saveState = options.saveState;
+	  var go = options.go;
+	  var getUserConfirmation = options.getUserConfirmation;
+	  var keyLength = options.keyLength;
+
+	  if (typeof keyLength !== 'number') keyLength = DefaultKeyLength;
+
+	  var transitionHooks = [];
+
+	  function listenBefore(hook) {
+	    transitionHooks.push(hook);
+
+	    return function () {
+	      transitionHooks = transitionHooks.filter(function (item) {
+	        return item !== hook;
+	      });
+	    };
+	  }
+
+	  var allKeys = [];
+	  var changeListeners = [];
+	  var location = undefined;
+
+	  function getCurrent() {
+	    if (pendingLocation && pendingLocation.action === _Actions.POP) {
+	      return allKeys.indexOf(pendingLocation.key);
+	    } else if (location) {
+	      return allKeys.indexOf(location.key);
+	    } else {
+	      return -1;
+	    }
+	  }
+
+	  function updateLocation(newLocation) {
+	    var current = getCurrent();
+
+	    location = newLocation;
+
+	    if (location.action === _Actions.PUSH) {
+	      allKeys = [].concat(allKeys.slice(0, current + 1), [location.key]);
+	    } else if (location.action === _Actions.REPLACE) {
+	      allKeys[current] = location.key;
+	    }
+
+	    changeListeners.forEach(function (listener) {
+	      listener(location);
+	    });
+	  }
+
+	  function listen(listener) {
+	    changeListeners.push(listener);
+
+	    if (location) {
+	      listener(location);
+	    } else {
+	      var _location = getCurrentLocation();
+	      allKeys = [_location.key];
+	      updateLocation(_location);
+	    }
+
+	    return function () {
+	      changeListeners = changeListeners.filter(function (item) {
+	        return item !== listener;
+	      });
+	    };
+	  }
+
+	  function confirmTransitionTo(location, callback) {
+	    _AsyncUtils.loopAsync(transitionHooks.length, function (index, next, done) {
+	      _runTransitionHook2['default'](transitionHooks[index], location, function (result) {
+	        if (result != null) {
+	          done(result);
+	        } else {
+	          next();
+	        }
+	      });
+	    }, function (message) {
+	      if (getUserConfirmation && typeof message === 'string') {
+	        getUserConfirmation(message, function (ok) {
+	          callback(ok !== false);
+	        });
+	      } else {
+	        callback(message !== false);
+	      }
+	    });
+	  }
+
+	  var pendingLocation = undefined;
+
+	  function transitionTo(nextLocation) {
+	    if (location && locationsAreEqual(location, nextLocation)) return; // Nothing to do.
+
+	    pendingLocation = nextLocation;
+
+	    confirmTransitionTo(nextLocation, function (ok) {
+	      if (pendingLocation !== nextLocation) return; // Transition was interrupted.
+
+	      if (ok) {
+	        // treat PUSH to current path like REPLACE to be consistent with browsers
+	        if (nextLocation.action === _Actions.PUSH) {
+	          var prevPath = createPath(location);
+	          var nextPath = createPath(nextLocation);
+
+	          if (nextPath === prevPath && _deepEqual2['default'](location.state, nextLocation.state)) nextLocation.action = _Actions.REPLACE;
+	        }
+
+	        if (finishTransition(nextLocation) !== false) updateLocation(nextLocation);
+	      } else if (location && nextLocation.action === _Actions.POP) {
+	        var prevIndex = allKeys.indexOf(location.key);
+	        var nextIndex = allKeys.indexOf(nextLocation.key);
+
+	        if (prevIndex !== -1 && nextIndex !== -1) go(prevIndex - nextIndex); // Restore the URL.
+	      }
+	    });
+	  }
+
+	  function push(location) {
+	    transitionTo(createLocation(location, _Actions.PUSH, createKey()));
+	  }
+
+	  function replace(location) {
+	    transitionTo(createLocation(location, _Actions.REPLACE, createKey()));
+	  }
+
+	  function goBack() {
+	    go(-1);
+	  }
+
+	  function goForward() {
+	    go(1);
+	  }
+
+	  function createKey() {
+	    return createRandomKey(keyLength);
+	  }
+
+	  function createPath(location) {
+	    if (location == null || typeof location === 'string') return location;
+
+	    var pathname = location.pathname;
+	    var search = location.search;
+	    var hash = location.hash;
+
+	    var result = pathname;
+
+	    if (search) result += search;
+
+	    if (hash) result += hash;
+
+	    return result;
+	  }
+
+	  function createHref(location) {
+	    return createPath(location);
+	  }
+
+	  function createLocation(location, action) {
+	    var key = arguments.length <= 2 || arguments[2] === undefined ? createKey() : arguments[2];
+
+	    if (typeof action === 'object') {
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'The state (2nd) argument to history.createLocation is deprecated; use a ' + 'location descriptor instead') : undefined;
+
+	      if (typeof location === 'string') location = _PathUtils.parsePath(location);
+
+	      location = _extends({}, location, { state: action });
+
+	      action = key;
+	      key = arguments[3] || createKey();
+	    }
+
+	    return _createLocation3['default'](location, action, key);
+	  }
+
+	  // deprecated
+	  function setState(state) {
+	    if (location) {
+	      updateLocationState(location, state);
+	      updateLocation(location);
+	    } else {
+	      updateLocationState(getCurrentLocation(), state);
+	    }
+	  }
+
+	  function updateLocationState(location, state) {
+	    location.state = _extends({}, location.state, state);
+	    saveState(location.key, location.state);
+	  }
+
+	  // deprecated
+	  function registerTransitionHook(hook) {
+	    if (transitionHooks.indexOf(hook) === -1) transitionHooks.push(hook);
+	  }
+
+	  // deprecated
+	  function unregisterTransitionHook(hook) {
+	    transitionHooks = transitionHooks.filter(function (item) {
+	      return item !== hook;
+	    });
+	  }
+
+	  // deprecated
+	  function pushState(state, path) {
+	    if (typeof path === 'string') path = _PathUtils.parsePath(path);
+
+	    push(_extends({ state: state }, path));
+	  }
+
+	  // deprecated
+	  function replaceState(state, path) {
+	    if (typeof path === 'string') path = _PathUtils.parsePath(path);
+
+	    replace(_extends({ state: state }, path));
+	  }
+
+	  return {
+	    listenBefore: listenBefore,
+	    listen: listen,
+	    transitionTo: transitionTo,
+	    push: push,
+	    replace: replace,
+	    go: go,
+	    goBack: goBack,
+	    goForward: goForward,
+	    createKey: createKey,
+	    createPath: createPath,
+	    createHref: createHref,
+	    createLocation: createLocation,
+
+	    setState: _deprecate2['default'](setState, 'setState is deprecated; use location.key to save state instead'),
+	    registerTransitionHook: _deprecate2['default'](registerTransitionHook, 'registerTransitionHook is deprecated; use listenBefore instead'),
+	    unregisterTransitionHook: _deprecate2['default'](unregisterTransitionHook, 'unregisterTransitionHook is deprecated; use the callback returned from listenBefore instead'),
+	    pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
+	    replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
+	  };
+	}
+
+	exports['default'] = createHistory;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var pSlice = Array.prototype.slice;
+	var objectKeys = __webpack_require__(179);
+	var isArguments = __webpack_require__(180);
+
+	var deepEqual = module.exports = function (actual, expected, opts) {
+	  if (!opts) opts = {};
+	  // 7.1. All identical values are equivalent, as determined by ===.
+	  if (actual === expected) {
+	    return true;
+
+	  } else if (actual instanceof Date && expected instanceof Date) {
+	    return actual.getTime() === expected.getTime();
+
+	  // 7.3. Other pairs that do not both pass typeof value == 'object',
+	  // equivalence is determined by ==.
+	  } else if (!actual || !expected || typeof actual != 'object' && typeof expected != 'object') {
+	    return opts.strict ? actual === expected : actual == expected;
+
+	  // 7.4. For all other Object pairs, including Array objects, equivalence is
+	  // determined by having the same number of owned properties (as verified
+	  // with Object.prototype.hasOwnProperty.call), the same set of keys
+	  // (although not necessarily the same order), equivalent values for every
+	  // corresponding key, and an identical 'prototype' property. Note: this
+	  // accounts for both named and indexed properties on Arrays.
+	  } else {
+	    return objEquiv(actual, expected, opts);
+	  }
+	}
+
+	function isUndefinedOrNull(value) {
+	  return value === null || value === undefined;
+	}
+
+	function isBuffer (x) {
+	  if (!x || typeof x !== 'object' || typeof x.length !== 'number') return false;
+	  if (typeof x.copy !== 'function' || typeof x.slice !== 'function') {
+	    return false;
+	  }
+	  if (x.length > 0 && typeof x[0] !== 'number') return false;
+	  return true;
+	}
+
+	function objEquiv(a, b, opts) {
+	  var i, key;
+	  if (isUndefinedOrNull(a) || isUndefinedOrNull(b))
+	    return false;
+	  // an identical 'prototype' property.
+	  if (a.prototype !== b.prototype) return false;
+	  //~~~I've managed to break Object.keys through screwy arguments passing.
+	  //   Converting to array solves the problem.
+	  if (isArguments(a)) {
+	    if (!isArguments(b)) {
+	      return false;
+	    }
+	    a = pSlice.call(a);
+	    b = pSlice.call(b);
+	    return deepEqual(a, b, opts);
+	  }
+	  if (isBuffer(a)) {
+	    if (!isBuffer(b)) {
+	      return false;
+	    }
+	    if (a.length !== b.length) return false;
+	    for (i = 0; i < a.length; i++) {
+	      if (a[i] !== b[i]) return false;
+	    }
+	    return true;
+	  }
+	  try {
+	    var ka = objectKeys(a),
+	        kb = objectKeys(b);
+	  } catch (e) {//happens when one is a string literal and the other isn't
+	    return false;
+	  }
+	  // having the same number of owned properties (keys incorporates
+	  // hasOwnProperty)
+	  if (ka.length != kb.length)
+	    return false;
+	  //the same set of keys (although not necessarily the same order),
+	  ka.sort();
+	  kb.sort();
+	  //~~~cheap key test
+	  for (i = ka.length - 1; i >= 0; i--) {
+	    if (ka[i] != kb[i])
+	      return false;
+	  }
+	  //equivalent values for every corresponding key, and
+	  //~~~possibly expensive deep test
+	  for (i = ka.length - 1; i >= 0; i--) {
+	    key = ka[i];
+	    if (!deepEqual(a[key], b[key], opts)) return false;
+	  }
+	  return typeof a === typeof b;
+	}
+
+
+/***/ },
+/* 179 */
+/***/ function(module, exports) {
+
+	exports = module.exports = typeof Object.keys === 'function'
+	  ? Object.keys : shim;
+
+	exports.shim = shim;
+	function shim (obj) {
+	  var keys = [];
+	  for (var key in obj) keys.push(key);
+	  return keys;
+	}
+
+
+/***/ },
+/* 180 */
+/***/ function(module, exports) {
+
+	var supportsArgumentsClass = (function(){
+	  return Object.prototype.toString.call(arguments)
+	})() == '[object Arguments]';
+
+	exports = module.exports = supportsArgumentsClass ? supported : unsupported;
+
+	exports.supported = supported;
+	function supported(object) {
+	  return Object.prototype.toString.call(object) == '[object Arguments]';
+	};
+
+	exports.unsupported = unsupported;
+	function unsupported(object){
+	  return object &&
+	    typeof object == 'object' &&
+	    typeof object.length == 'number' &&
+	    Object.prototype.hasOwnProperty.call(object, 'callee') &&
+	    !Object.prototype.propertyIsEnumerable.call(object, 'callee') ||
+	    false;
+	};
+
+
+/***/ },
+/* 181 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	exports.__esModule = true;
+	var _slice = Array.prototype.slice;
+	exports.loopAsync = loopAsync;
+
+	function loopAsync(turns, work, callback) {
+	  var currentTurn = 0,
+	      isDone = false;
+	  var sync = false,
+	      hasNext = false,
+	      doneArgs = undefined;
+
+	  function done() {
+	    isDone = true;
+	    if (sync) {
+	      // Iterate instead of recursing if possible.
+	      doneArgs = [].concat(_slice.call(arguments));
+	      return;
+	    }
+
+	    callback.apply(this, arguments);
+	  }
+
+	  function next() {
+	    if (isDone) {
+	      return;
+	    }
+
+	    hasNext = true;
+	    if (sync) {
+	      // Iterate instead of recursing if possible.
+	      return;
+	    }
+
+	    sync = true;
+
+	    while (!isDone && currentTurn < turns && hasNext) {
+	      hasNext = false;
+	      work.call(this, currentTurn++, next, done);
+	    }
+
+	    sync = false;
+
+	    if (isDone) {
+	      // This means the loop finished synchronously.
+	      callback.apply(this, doneArgs);
+	      return;
+	    }
+
+	    if (currentTurn >= turns && hasNext) {
+	      isDone = true;
+	      callback();
+	    }
+	  }
+
+	  next();
+	}
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _warning = __webpack_require__(169);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	var _Actions = __webpack_require__(171);
+
+	var _PathUtils = __webpack_require__(172);
+
+	function createLocation() {
+	  var location = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
+	  var action = arguments.length <= 1 || arguments[1] === undefined ? _Actions.POP : arguments[1];
+	  var key = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+
+	  var _fourthArg = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
+
+	  if (typeof location === 'string') location = _PathUtils.parsePath(location);
+
+	  if (typeof action === 'object') {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'The state (2nd) argument to createLocation is deprecated; use a ' + 'location descriptor instead') : undefined;
+
+	    location = _extends({}, location, { state: action });
+
+	    action = key || _Actions.POP;
+	    key = _fourthArg;
+	  }
+
+	  var pathname = location.pathname || '/';
+	  var search = location.search || '';
+	  var hash = location.hash || '';
+	  var state = location.state || null;
+
+	  return {
+	    pathname: pathname,
+	    search: search,
+	    hash: hash,
+	    state: state,
+	    action: action,
+	    key: key
+	  };
+	}
+
+	exports['default'] = createLocation;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _warning = __webpack_require__(169);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	function runTransitionHook(hook, location, callback) {
+	  var result = hook(location, callback);
+
+	  if (hook.length < 2) {
+	    // Assume the hook runs synchronously and automatically
+	    // call the callback with the return value.
+	    callback(result);
+	  } else {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](result === undefined, 'You should not "return" in a transition hook with a callback argument; call the callback instead') : undefined;
+	  }
+	}
+
+	exports['default'] = runTransitionHook;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _warning = __webpack_require__(169);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	function deprecate(fn, message) {
+	  return function () {
+	    process.env.NODE_ENV !== 'production' ? _warning2['default'](false, '[history] ' + message) : undefined;
+	    return fn.apply(this, arguments);
+	  };
+	}
+
+	exports['default'] = deprecate;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _warning = __webpack_require__(169);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	var _queryString = __webpack_require__(186);
+
+	var _runTransitionHook = __webpack_require__(183);
+
+	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
+
+	var _PathUtils = __webpack_require__(172);
+
+	var _deprecate = __webpack_require__(184);
+
+	var _deprecate2 = _interopRequireDefault(_deprecate);
+
+	var SEARCH_BASE_KEY = '$searchBase';
+
+	function defaultStringifyQuery(query) {
+	  return _queryString.stringify(query).replace(/%20/g, '+');
+	}
+
+	var defaultParseQueryString = _queryString.parse;
+
+	function isNestedObject(object) {
+	  for (var p in object) {
+	    if (Object.prototype.hasOwnProperty.call(object, p) && typeof object[p] === 'object' && !Array.isArray(object[p]) && object[p] !== null) return true;
+	  }return false;
+	}
+
+	/**
+	 * Returns a new createHistory function that may be used to create
+	 * history objects that know how to handle URL queries.
+	 */
+	function useQueries(createHistory) {
+	  return function () {
+	    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	    var history = createHistory(options);
+
+	    var stringifyQuery = options.stringifyQuery;
+	    var parseQueryString = options.parseQueryString;
+
+	    if (typeof stringifyQuery !== 'function') stringifyQuery = defaultStringifyQuery;
+
+	    if (typeof parseQueryString !== 'function') parseQueryString = defaultParseQueryString;
+
+	    function addQuery(location) {
+	      if (location.query == null) {
+	        var search = location.search;
+
+	        location.query = parseQueryString(search.substring(1));
+	        location[SEARCH_BASE_KEY] = { search: search, searchBase: '' };
+	      }
+
+	      // TODO: Instead of all the book-keeping here, this should just strip the
+	      // stringified query from the search.
+
+	      return location;
+	    }
+
+	    function appendQuery(location, query) {
+	      var _extends2;
+
+	      var searchBaseSpec = location[SEARCH_BASE_KEY];
+	      var queryString = query ? stringifyQuery(query) : '';
+	      if (!searchBaseSpec && !queryString) {
+	        return location;
+	      }
+
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](stringifyQuery !== defaultStringifyQuery || !isNestedObject(query), 'useQueries does not stringify nested query objects by default; ' + 'use a custom stringifyQuery function') : undefined;
+
+	      if (typeof location === 'string') location = _PathUtils.parsePath(location);
+
+	      var searchBase = undefined;
+	      if (searchBaseSpec && location.search === searchBaseSpec.search) {
+	        searchBase = searchBaseSpec.searchBase;
+	      } else {
+	        searchBase = location.search || '';
+	      }
+
+	      var search = searchBase;
+	      if (queryString) {
+	        search += (search ? '&' : '?') + queryString;
+	      }
+
+	      return _extends({}, location, (_extends2 = {
+	        search: search
+	      }, _extends2[SEARCH_BASE_KEY] = { search: search, searchBase: searchBase }, _extends2));
+	    }
+
+	    // Override all read methods with query-aware versions.
+	    function listenBefore(hook) {
+	      return history.listenBefore(function (location, callback) {
+	        _runTransitionHook2['default'](hook, addQuery(location), callback);
+	      });
+	    }
+
+	    function listen(listener) {
+	      return history.listen(function (location) {
+	        listener(addQuery(location));
+	      });
+	    }
+
+	    // Override all write methods with query-aware versions.
+	    function push(location) {
+	      history.push(appendQuery(location, location.query));
+	    }
+
+	    function replace(location) {
+	      history.replace(appendQuery(location, location.query));
+	    }
+
+	    function createPath(location, query) {
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](!query, 'the query argument to createPath is deprecated; use a location descriptor instead') : undefined;
+
+	      return history.createPath(appendQuery(location, query || location.query));
+	    }
+
+	    function createHref(location, query) {
+	      process.env.NODE_ENV !== 'production' ? _warning2['default'](!query, 'the query argument to createHref is deprecated; use a location descriptor instead') : undefined;
+
+	      return history.createHref(appendQuery(location, query || location.query));
+	    }
+
+	    function createLocation(location) {
+	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	        args[_key - 1] = arguments[_key];
+	      }
+
+	      var fullLocation = history.createLocation.apply(history, [appendQuery(location, location.query)].concat(args));
+	      if (location.query) {
+	        fullLocation.query = location.query;
+	      }
+	      return addQuery(fullLocation);
+	    }
+
+	    // deprecated
+	    function pushState(state, path, query) {
+	      if (typeof path === 'string') path = _PathUtils.parsePath(path);
+
+	      push(_extends({ state: state }, path, { query: query }));
+	    }
+
+	    // deprecated
+	    function replaceState(state, path, query) {
+	      if (typeof path === 'string') path = _PathUtils.parsePath(path);
+
+	      replace(_extends({ state: state }, path, { query: query }));
+	    }
+
+	    return _extends({}, history, {
+	      listenBefore: listenBefore,
+	      listen: listen,
+	      push: push,
+	      replace: replace,
+	      createPath: createPath,
+	      createHref: createHref,
+	      createLocation: createLocation,
+
+	      pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
+	      replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
+	    });
+	  };
+	}
+
+	exports['default'] = useQueries;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var strictUriEncode = __webpack_require__(187);
+
+	exports.extract = function (str) {
+		return str.split('?')[1] || '';
+	};
+
+	exports.parse = function (str) {
+		if (typeof str !== 'string') {
+			return {};
+		}
+
+		str = str.trim().replace(/^(\?|#|&)/, '');
+
+		if (!str) {
+			return {};
+		}
+
+		return str.split('&').reduce(function (ret, param) {
+			var parts = param.replace(/\+/g, ' ').split('=');
+			// Firefox (pre 40) decodes `%3D` to `=`
+			// https://github.com/sindresorhus/query-string/pull/37
+			var key = parts.shift();
+			var val = parts.length > 0 ? parts.join('=') : undefined;
+
+			key = decodeURIComponent(key);
+
+			// missing `=` should be `null`:
+			// http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+			val = val === undefined ? null : decodeURIComponent(val);
+
+			if (!ret.hasOwnProperty(key)) {
+				ret[key] = val;
+			} else if (Array.isArray(ret[key])) {
+				ret[key].push(val);
+			} else {
+				ret[key] = [ret[key], val];
+			}
+
+			return ret;
+		}, {});
+	};
+
+	exports.stringify = function (obj) {
+		return obj ? Object.keys(obj).sort().map(function (key) {
+			var val = obj[key];
+
+			if (val === undefined) {
+				return '';
+			}
+
+			if (val === null) {
+				return key;
+			}
+
+			if (Array.isArray(val)) {
+				return val.slice().sort().map(function (val2) {
+					return strictUriEncode(key) + '=' + strictUriEncode(val2);
+				}).join('&');
+			}
+
+			return strictUriEncode(key) + '=' + strictUriEncode(val);
+		}).filter(function (x) {
+			return x.length > 0;
+		}).join('&') : '';
+	};
+
+
+/***/ },
+/* 187 */
+/***/ function(module, exports) {
+
+	'use strict';
+	module.exports = function (str) {
+		return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
+			return '%' + c.charCodeAt(0).toString(16).toUpperCase();
+		});
+	};
+
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports['default'] = createTransitionManager;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	var _historyLibActions = __webpack_require__(171);
+
+	var _computeChangedRoutes2 = __webpack_require__(190);
+
+	var _computeChangedRoutes3 = _interopRequireDefault(_computeChangedRoutes2);
+
+	var _TransitionUtils = __webpack_require__(192);
+
+	var _isActive2 = __webpack_require__(194);
+
+	var _isActive3 = _interopRequireDefault(_isActive2);
+
+	var _getComponents = __webpack_require__(195);
+
+	var _getComponents2 = _interopRequireDefault(_getComponents);
+
+	var _matchRoutes = __webpack_require__(197);
+
+	var _matchRoutes2 = _interopRequireDefault(_matchRoutes);
+
+	function hasAnyProperties(object) {
+	  for (var p in object) {
+	    if (Object.prototype.hasOwnProperty.call(object, p)) return true;
+	  }return false;
+	}
+
+	function createTransitionManager(history, routes) {
+	  var state = {};
+
+	  // Signature should be (location, indexOnly), but needs to support (path,
+	  // query, indexOnly)
+	  function isActive(location) {
+	    var indexOnlyOrDeprecatedQuery = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+	    var deprecatedIndexOnly = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+
+	    var indexOnly = undefined;
+	    if (indexOnlyOrDeprecatedQuery && indexOnlyOrDeprecatedQuery !== true || deprecatedIndexOnly !== null) {
+	      process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, '`isActive(pathname, query, indexOnly) is deprecated; use `isActive(location, indexOnly)` with a location descriptor instead. http://tiny.cc/router-isActivedeprecated') : undefined;
+	      location = { pathname: location, query: indexOnlyOrDeprecatedQuery };
+	      indexOnly = deprecatedIndexOnly || false;
+	    } else {
+	      location = history.createLocation(location);
+	      indexOnly = indexOnlyOrDeprecatedQuery;
+	    }
+
+	    return _isActive3['default'](location, indexOnly, state.location, state.routes, state.params);
+	  }
+
+	  function createLocationFromRedirectInfo(location) {
+	    return history.createLocation(location, _historyLibActions.REPLACE);
+	  }
+
+	  var partialNextState = undefined;
+
+	  function match(location, callback) {
+	    if (partialNextState && partialNextState.location === location) {
+	      // Continue from where we left off.
+	      finishMatch(partialNextState, callback);
+	    } else {
+	      _matchRoutes2['default'](routes, location, function (error, nextState) {
+	        if (error) {
+	          callback(error);
+	        } else if (nextState) {
+	          finishMatch(_extends({}, nextState, { location: location }), callback);
+	        } else {
+	          callback();
+	        }
+	      });
+	    }
+	  }
+
+	  function finishMatch(nextState, callback) {
+	    var _computeChangedRoutes = _computeChangedRoutes3['default'](state, nextState);
+
+	    var leaveRoutes = _computeChangedRoutes.leaveRoutes;
+	    var changeRoutes = _computeChangedRoutes.changeRoutes;
+	    var enterRoutes = _computeChangedRoutes.enterRoutes;
+
+	    _TransitionUtils.runLeaveHooks(leaveRoutes);
+
+	    // Tear down confirmation hooks for left routes
+	    leaveRoutes.filter(function (route) {
+	      return enterRoutes.indexOf(route) === -1;
+	    }).forEach(removeListenBeforeHooksForRoute);
+
+	    // change and enter hooks are run in series
+	    _TransitionUtils.runChangeHooks(changeRoutes, state, nextState, function (error, redirectInfo) {
+	      if (error || redirectInfo) return handleErrorOrRedirect(error, redirectInfo);
+
+	      _TransitionUtils.runEnterHooks(enterRoutes, nextState, finishEnterHooks);
+	    });
+
+	    function finishEnterHooks(error, redirectInfo) {
+	      if (error || redirectInfo) return handleErrorOrRedirect(error, redirectInfo);
+
+	      // TODO: Fetch components after state is updated.
+	      _getComponents2['default'](nextState, function (error, components) {
+	        if (error) {
+	          callback(error);
+	        } else {
+	          // TODO: Make match a pure function and have some other API
+	          // for "match and update state".
+	          callback(null, null, state = _extends({}, nextState, { components: components }));
+	        }
+	      });
+	    }
+
+	    function handleErrorOrRedirect(error, redirectInfo) {
+	      if (error) callback(error);else callback(null, createLocationFromRedirectInfo(redirectInfo));
+	    }
+	  }
+
+	  var RouteGuid = 1;
+
+	  function getRouteID(route) {
+	    var create = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
+
+	    return route.__id__ || create && (route.__id__ = RouteGuid++);
+	  }
+
+	  var RouteHooks = Object.create(null);
+
+	  function getRouteHooksForRoutes(routes) {
+	    return routes.reduce(function (hooks, route) {
+	      hooks.push.apply(hooks, RouteHooks[getRouteID(route)]);
+	      return hooks;
+	    }, []);
+	  }
+
+	  function transitionHook(location, callback) {
+	    _matchRoutes2['default'](routes, location, function (error, nextState) {
+	      if (nextState == null) {
+	        // TODO: We didn't actually match anything, but hang
+	        // onto error/nextState so we don't have to matchRoutes
+	        // again in the listen callback.
+	        callback();
+	        return;
+	      }
+
+	      // Cache some state here so we don't have to
+	      // matchRoutes() again in the listen callback.
+	      partialNextState = _extends({}, nextState, { location: location });
+
+	      var hooks = getRouteHooksForRoutes(_computeChangedRoutes3['default'](state, partialNextState).leaveRoutes);
+
+	      var result = undefined;
+	      for (var i = 0, len = hooks.length; result == null && i < len; ++i) {
+	        // Passing the location arg here indicates to
+	        // the user that this is a transition hook.
+	        result = hooks[i](location);
+	      }
+
+	      callback(result);
+	    });
+	  }
+
+	  /* istanbul ignore next: untestable with Karma */
+	  function beforeUnloadHook() {
+	    // Synchronously check to see if any route hooks want
+	    // to prevent the current window/tab from closing.
+	    if (state.routes) {
+	      var hooks = getRouteHooksForRoutes(state.routes);
+
+	      var message = undefined;
+	      for (var i = 0, len = hooks.length; typeof message !== 'string' && i < len; ++i) {
+	        // Passing no args indicates to the user that this is a
+	        // beforeunload hook. We don't know the next location.
+	        message = hooks[i]();
+	      }
+
+	      return message;
+	    }
+	  }
+
+	  var unlistenBefore = undefined,
+	      unlistenBeforeUnload = undefined;
+
+	  function removeListenBeforeHooksForRoute(route) {
+	    var routeID = getRouteID(route, false);
+	    if (!routeID) {
+	      return;
+	    }
+
+	    delete RouteHooks[routeID];
+
+	    if (!hasAnyProperties(RouteHooks)) {
+	      // teardown transition & beforeunload hooks
+	      if (unlistenBefore) {
+	        unlistenBefore();
+	        unlistenBefore = null;
+	      }
+
+	      if (unlistenBeforeUnload) {
+	        unlistenBeforeUnload();
+	        unlistenBeforeUnload = null;
+	      }
+	    }
+	  }
+
+	  /**
+	   * Registers the given hook function to run before leaving the given route.
+	   *
+	   * During a normal transition, the hook function receives the next location
+	   * as its only argument and must return either a) a prompt message to show
+	   * the user, to make sure they want to leave the page or b) false, to prevent
+	   * the transition.
+	   *
+	   * During the beforeunload event (in browsers) the hook receives no arguments.
+	   * In this case it must return a prompt message to prevent the transition.
+	   *
+	   * Returns a function that may be used to unbind the listener.
+	   */
+	  function listenBeforeLeavingRoute(route, hook) {
+	    // TODO: Warn if they register for a route that isn't currently
+	    // active. They're probably doing something wrong, like re-creating
+	    // route objects on every location change.
+	    var routeID = getRouteID(route);
+	    var hooks = RouteHooks[routeID];
+
+	    if (!hooks) {
+	      var thereWereNoRouteHooks = !hasAnyProperties(RouteHooks);
+
+	      RouteHooks[routeID] = [hook];
+
+	      if (thereWereNoRouteHooks) {
+	        // setup transition & beforeunload hooks
+	        unlistenBefore = history.listenBefore(transitionHook);
+
+	        if (history.listenBeforeUnload) unlistenBeforeUnload = history.listenBeforeUnload(beforeUnloadHook);
+	      }
+	    } else {
+	      if (hooks.indexOf(hook) === -1) {
+	        process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, 'adding multiple leave hooks for the same route is deprecated; manage multiple confirmations in your own code instead') : undefined;
+
+	        hooks.push(hook);
+	      }
+	    }
+
+	    return function () {
+	      var hooks = RouteHooks[routeID];
+
+	      if (hooks) {
+	        var newHooks = hooks.filter(function (item) {
+	          return item !== hook;
+	        });
+
+	        if (newHooks.length === 0) {
+	          removeListenBeforeHooksForRoute(route);
+	        } else {
+	          RouteHooks[routeID] = newHooks;
+	        }
+	      }
+	    };
+	  }
+
+	  /**
+	   * This is the API for stateful environments. As the location
+	   * changes, we update state and call the listener. We can also
+	   * gracefully handle errors and redirects.
+	   */
+	  function listen(listener) {
+	    // TODO: Only use a single history listener. Otherwise we'll
+	    // end up with multiple concurrent calls to match.
+	    return history.listen(function (location) {
+	      if (state.location === location) {
+	        listener(null, state);
+	      } else {
+	        match(location, function (error, redirectLocation, nextState) {
+	          if (error) {
+	            listener(error);
+	          } else if (redirectLocation) {
+	            history.transitionTo(redirectLocation);
+	          } else if (nextState) {
+	            listener(null, nextState);
+	          } else {
+	            process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, 'Location "%s" did not match any routes', location.pathname + location.search + location.hash) : undefined;
+	          }
+	        });
+	      }
+	    });
+	  }
+
+	  return {
+	    isActive: isActive,
+	    match: match,
+	    listenBeforeLeavingRoute: listenBeforeLeavingRoute,
+	    listen: listen
+	  };
+	}
+
+	//export default useRoutes
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+	exports['default'] = routerWarning;
+	exports._resetWarned = _resetWarned;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _warning = __webpack_require__(169);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	var warned = {};
+
+	function routerWarning(falseToWarn, message) {
+	  // Only issue deprecation warnings once.
+	  if (message.indexOf('deprecated') !== -1) {
+	    if (warned[message]) {
+	      return;
+	    }
+
+	    warned[message] = true;
+	  }
+
+	  message = '[react-router] ' + message;
+
+	  for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+	    args[_key - 2] = arguments[_key];
+	  }
+
+	  process.env.NODE_ENV !== 'production' ? _warning2['default'].apply(undefined, [falseToWarn, message].concat(args)) : undefined;
+	}
+
+	function _resetWarned() {
+	  warned = {};
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	var _PatternUtils = __webpack_require__(191);
+
+	function routeParamsChanged(route, prevState, nextState) {
+	  if (!route.path) return false;
+
+	  var paramNames = _PatternUtils.getParamNames(route.path);
+
+	  return paramNames.some(function (paramName) {
+	    return prevState.params[paramName] !== nextState.params[paramName];
+	  });
+	}
+
+	/**
+	 * Returns an object of { leaveRoutes, changeRoutes, enterRoutes } determined by
+	 * the change from prevState to nextState. We leave routes if either
+	 * 1) they are not in the next state or 2) they are in the next state
+	 * but their params have changed (i.e. /users/123 => /users/456).
+	 *
+	 * leaveRoutes are ordered starting at the leaf route of the tree
+	 * we're leaving up to the common parent route. enterRoutes are ordered
+	 * from the top of the tree we're entering down to the leaf route.
+	 *
+	 * changeRoutes are any routes that didn't leave or enter during
+	 * the transition.
+	 */
+	function computeChangedRoutes(prevState, nextState) {
+	  var prevRoutes = prevState && prevState.routes;
+	  var nextRoutes = nextState.routes;
+
+	  var leaveRoutes = undefined,
+	      changeRoutes = undefined,
+	      enterRoutes = undefined;
+	  if (prevRoutes) {
+	    (function () {
+	      var parentIsLeaving = false;
+	      leaveRoutes = prevRoutes.filter(function (route) {
+	        if (parentIsLeaving) {
+	          return true;
+	        } else {
+	          var isLeaving = nextRoutes.indexOf(route) === -1 || routeParamsChanged(route, prevState, nextState);
+	          if (isLeaving) parentIsLeaving = true;
+	          return isLeaving;
+	        }
+	      });
+
+	      // onLeave hooks start at the leaf route.
+	      leaveRoutes.reverse();
+
+	      enterRoutes = [];
+	      changeRoutes = [];
+
+	      nextRoutes.forEach(function (route) {
+	        var isNew = prevRoutes.indexOf(route) === -1;
+	        var paramsChanged = leaveRoutes.indexOf(route) !== -1;
+
+	        if (isNew || paramsChanged) enterRoutes.push(route);else changeRoutes.push(route);
+	      });
+	    })();
+	  } else {
+	    leaveRoutes = [];
+	    changeRoutes = [];
+	    enterRoutes = nextRoutes;
+	  }
+
+	  return {
+	    leaveRoutes: leaveRoutes,
+	    changeRoutes: changeRoutes,
+	    enterRoutes: enterRoutes
+	  };
+	}
+
+	exports['default'] = computeChangedRoutes;
+	module.exports = exports['default'];
+
+/***/ },
+/* 191 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+	exports.compilePattern = compilePattern;
+	exports.matchPattern = matchPattern;
+	exports.getParamNames = getParamNames;
+	exports.getParams = getParams;
+	exports.formatPattern = formatPattern;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _invariant = __webpack_require__(170);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	function escapeRegExp(string) {
+	  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	}
+
+	function _compilePattern(pattern) {
+	  var regexpSource = '';
+	  var paramNames = [];
+	  var tokens = [];
+
+	  var match = undefined,
+	      lastIndex = 0,
+	      matcher = /:([a-zA-Z_$][a-zA-Z0-9_$]*)|\*\*|\*|\(|\)/g;
+	  while (match = matcher.exec(pattern)) {
+	    if (match.index !== lastIndex) {
+	      tokens.push(pattern.slice(lastIndex, match.index));
+	      regexpSource += escapeRegExp(pattern.slice(lastIndex, match.index));
+	    }
+
+	    if (match[1]) {
+	      regexpSource += '([^/]+)';
+	      paramNames.push(match[1]);
+	    } else if (match[0] === '**') {
+	      regexpSource += '(.*)';
+	      paramNames.push('splat');
+	    } else if (match[0] === '*') {
+	      regexpSource += '(.*?)';
+	      paramNames.push('splat');
+	    } else if (match[0] === '(') {
+	      regexpSource += '(?:';
+	    } else if (match[0] === ')') {
+	      regexpSource += ')?';
+	    }
+
+	    tokens.push(match[0]);
+
+	    lastIndex = matcher.lastIndex;
+	  }
+
+	  if (lastIndex !== pattern.length) {
+	    tokens.push(pattern.slice(lastIndex, pattern.length));
+	    regexpSource += escapeRegExp(pattern.slice(lastIndex, pattern.length));
+	  }
+
+	  return {
+	    pattern: pattern,
+	    regexpSource: regexpSource,
+	    paramNames: paramNames,
+	    tokens: tokens
+	  };
+	}
+
+	var CompiledPatternsCache = {};
+
+	function compilePattern(pattern) {
+	  if (!(pattern in CompiledPatternsCache)) CompiledPatternsCache[pattern] = _compilePattern(pattern);
+
+	  return CompiledPatternsCache[pattern];
+	}
+
+	/**
+	 * Attempts to match a pattern on the given pathname. Patterns may use
+	 * the following special characters:
+	 *
+	 * - :paramName     Matches a URL segment up to the next /, ?, or #. The
+	 *                  captured string is considered a "param"
+	 * - ()             Wraps a segment of the URL that is optional
+	 * - *              Consumes (non-greedy) all characters up to the next
+	 *                  character in the pattern, or to the end of the URL if
+	 *                  there is none
+	 * - **             Consumes (greedy) all characters up to the next character
+	 *                  in the pattern, or to the end of the URL if there is none
+	 *
+	 * The return value is an object with the following properties:
+	 *
+	 * - remainingPathname
+	 * - paramNames
+	 * - paramValues
+	 */
+
+	function matchPattern(pattern, pathname) {
+	  // Ensure pattern starts with leading slash for consistency with pathname.
+	  if (pattern.charAt(0) !== '/') {
+	    pattern = '/' + pattern;
+	  }
+
+	  var _compilePattern2 = compilePattern(pattern);
+
+	  var regexpSource = _compilePattern2.regexpSource;
+	  var paramNames = _compilePattern2.paramNames;
+	  var tokens = _compilePattern2.tokens;
+
+	  if (pattern.charAt(pattern.length - 1) !== '/') {
+	    regexpSource += '/?'; // Allow optional path separator at end.
+	  }
+
+	  // Special-case patterns like '*' for catch-all routes.
+	  if (tokens[tokens.length - 1] === '*') {
+	    regexpSource += '$';
+	  }
+
+	  var match = pathname.match(new RegExp('^' + regexpSource, 'i'));
+
+	  var remainingPathname = undefined,
+	      paramValues = undefined;
+	  if (match != null) {
+	    var matchedPath = match[0];
+	    remainingPathname = pathname.substr(matchedPath.length);
+
+	    if (remainingPathname) {
+	      // Require that the match ends at a path separator, if we didn't match
+	      // the full path, so any remaining pathname is a new path segment.
+	      if (matchedPath.charAt(matchedPath.length - 1) !== '/') {
+	        return {
+	          remainingPathname: null,
+	          paramNames: paramNames,
+	          paramValues: null
+	        };
+	      }
+
+	      // If there is a remaining pathname, treat the path separator as part of
+	      // the remaining pathname for properly continuing the match.
+	      remainingPathname = '/' + remainingPathname;
+	    }
+
+	    paramValues = match.slice(1).map(function (v) {
+	      return v && decodeURIComponent(v);
+	    });
+	  } else {
+	    remainingPathname = paramValues = null;
+	  }
+
+	  return {
+	    remainingPathname: remainingPathname,
+	    paramNames: paramNames,
+	    paramValues: paramValues
+	  };
+	}
+
+	function getParamNames(pattern) {
+	  return compilePattern(pattern).paramNames;
+	}
+
+	function getParams(pattern, pathname) {
+	  var _matchPattern = matchPattern(pattern, pathname);
+
+	  var paramNames = _matchPattern.paramNames;
+	  var paramValues = _matchPattern.paramValues;
+
+	  if (paramValues != null) {
+	    return paramNames.reduce(function (memo, paramName, index) {
+	      memo[paramName] = paramValues[index];
+	      return memo;
+	    }, {});
+	  }
+
+	  return null;
+	}
+
+	/**
+	 * Returns a version of the given pattern with params interpolated. Throws
+	 * if there is a dynamic segment of the pattern for which there is no param.
+	 */
+
+	function formatPattern(pattern, params) {
+	  params = params || {};
+
+	  var _compilePattern3 = compilePattern(pattern);
+
+	  var tokens = _compilePattern3.tokens;
+
+	  var parenCount = 0,
+	      pathname = '',
+	      splatIndex = 0;
+
+	  var token = undefined,
+	      paramName = undefined,
+	      paramValue = undefined;
+	  for (var i = 0, len = tokens.length; i < len; ++i) {
+	    token = tokens[i];
+
+	    if (token === '*' || token === '**') {
+	      paramValue = Array.isArray(params.splat) ? params.splat[splatIndex++] : params.splat;
+
+	      !(paramValue != null || parenCount > 0) ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Missing splat #%s for path "%s"', splatIndex, pattern) : _invariant2['default'](false) : undefined;
+
+	      if (paramValue != null) pathname += encodeURI(paramValue);
+	    } else if (token === '(') {
+	      parenCount += 1;
+	    } else if (token === ')') {
+	      parenCount -= 1;
+	    } else if (token.charAt(0) === ':') {
+	      paramName = token.substring(1);
+	      paramValue = params[paramName];
+
+	      !(paramValue != null || parenCount > 0) ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Missing "%s" parameter for path "%s"', paramName, pattern) : _invariant2['default'](false) : undefined;
+
+	      if (paramValue != null) pathname += encodeURIComponent(paramValue);
+	    } else {
+	      pathname += token;
+	    }
+	  }
+
+	  return pathname.replace(/\/+/g, '/');
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 192 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+	exports.runEnterHooks = runEnterHooks;
+	exports.runChangeHooks = runChangeHooks;
+	exports.runLeaveHooks = runLeaveHooks;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _AsyncUtils = __webpack_require__(193);
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	function createTransitionHook(hook, route, asyncArity) {
+	  return function () {
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    hook.apply(route, args);
+
+	    if (hook.length < asyncArity) {
+	      var callback = args[args.length - 1];
+	      // Assume hook executes synchronously and
+	      // automatically call the callback.
+	      callback();
+	    }
+	  };
+	}
+
+	function getEnterHooks(routes) {
+	  return routes.reduce(function (hooks, route) {
+	    if (route.onEnter) hooks.push(createTransitionHook(route.onEnter, route, 3));
+
+	    return hooks;
+	  }, []);
+	}
+
+	function getChangeHooks(routes) {
+	  return routes.reduce(function (hooks, route) {
+	    if (route.onChange) hooks.push(createTransitionHook(route.onChange, route, 4));
+	    return hooks;
+	  }, []);
+	}
+
+	function runTransitionHooks(length, iter, callback) {
+	  if (!length) {
+	    callback();
+	    return;
+	  }
+
+	  var redirectInfo = undefined;
+	  function replace(location, deprecatedPathname, deprecatedQuery) {
+	    if (deprecatedPathname) {
+	      process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, '`replaceState(state, pathname, query) is deprecated; use `replace(location)` with a location descriptor instead. http://tiny.cc/router-isActivedeprecated') : undefined;
+	      redirectInfo = {
+	        pathname: deprecatedPathname,
+	        query: deprecatedQuery,
+	        state: location
+	      };
+
+	      return;
+	    }
+
+	    redirectInfo = location;
+	  }
+
+	  _AsyncUtils.loopAsync(length, function (index, next, done) {
+	    iter(index, replace, function (error) {
+	      if (error || redirectInfo) {
+	        done(error, redirectInfo); // No need to continue.
+	      } else {
+	          next();
+	        }
+	    });
+	  }, callback);
+	}
+
+	/**
+	 * Runs all onEnter hooks in the given array of routes in order
+	 * with onEnter(nextState, replace, callback) and calls
+	 * callback(error, redirectInfo) when finished. The first hook
+	 * to use replace short-circuits the loop.
+	 *
+	 * If a hook needs to run asynchronously, it may use the callback
+	 * function. However, doing so will cause the transition to pause,
+	 * which could lead to a non-responsive UI if the hook is slow.
+	 */
+
+	function runEnterHooks(routes, nextState, callback) {
+	  var hooks = getEnterHooks(routes);
+	  return runTransitionHooks(hooks.length, function (index, replace, next) {
+	    hooks[index](nextState, replace, next);
+	  }, callback);
+	}
+
+	/**
+	 * Runs all onChange hooks in the given array of routes in order
+	 * with onChange(prevState, nextState, replace, callback) and calls
+	 * callback(error, redirectInfo) when finished. The first hook
+	 * to use replace short-circuits the loop.
+	 *
+	 * If a hook needs to run asynchronously, it may use the callback
+	 * function. However, doing so will cause the transition to pause,
+	 * which could lead to a non-responsive UI if the hook is slow.
+	 */
+
+	function runChangeHooks(routes, state, nextState, callback) {
+	  var hooks = getChangeHooks(routes);
+	  return runTransitionHooks(hooks.length, function (index, replace, next) {
+	    hooks[index](state, nextState, replace, next);
+	  }, callback);
+	}
+
+	/**
+	 * Runs all onLeave hooks in the given array of routes in order.
+	 */
+
+	function runLeaveHooks(routes) {
+	  for (var i = 0, len = routes.length; i < len; ++i) {
+	    if (routes[i].onLeave) routes[i].onLeave.call(routes[i]);
+	  }
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 193 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	exports.__esModule = true;
+	var _slice = Array.prototype.slice;
+	exports.loopAsync = loopAsync;
+	exports.mapAsync = mapAsync;
+
+	function loopAsync(turns, work, callback) {
+	  var currentTurn = 0,
+	      isDone = false;
+	  var sync = false,
+	      hasNext = false,
+	      doneArgs = undefined;
+
+	  function done() {
+	    isDone = true;
+	    if (sync) {
+	      // Iterate instead of recursing if possible.
+	      doneArgs = [].concat(_slice.call(arguments));
+	      return;
+	    }
+
+	    callback.apply(this, arguments);
+	  }
+
+	  function next() {
+	    if (isDone) {
+	      return;
+	    }
+
+	    hasNext = true;
+	    if (sync) {
+	      // Iterate instead of recursing if possible.
+	      return;
+	    }
+
+	    sync = true;
+
+	    while (!isDone && currentTurn < turns && hasNext) {
+	      hasNext = false;
+	      work.call(this, currentTurn++, next, done);
+	    }
+
+	    sync = false;
+
+	    if (isDone) {
+	      // This means the loop finished synchronously.
+	      callback.apply(this, doneArgs);
+	      return;
+	    }
+
+	    if (currentTurn >= turns && hasNext) {
+	      isDone = true;
+	      callback();
+	    }
+	  }
+
+	  next();
+	}
+
+	function mapAsync(array, work, callback) {
+	  var length = array.length;
+	  var values = [];
+
+	  if (length === 0) return callback(null, values);
+
+	  var isDone = false,
+	      doneCount = 0;
+
+	  function done(index, error, value) {
+	    if (isDone) return;
+
+	    if (error) {
+	      isDone = true;
+	      callback(error);
+	    } else {
+	      values[index] = value;
+
+	      isDone = ++doneCount === length;
+
+	      if (isDone) callback(null, values);
+	    }
+	  }
+
+	  array.forEach(function (item, index) {
+	    work(item, index, function (error, value) {
+	      done(index, error, value);
+	    });
+	  });
+	}
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports['default'] = isActive;
+
+	var _PatternUtils = __webpack_require__(191);
+
+	function deepEqual(a, b) {
+	  if (a == b) return true;
+
+	  if (a == null || b == null) return false;
+
+	  if (Array.isArray(a)) {
+	    return Array.isArray(b) && a.length === b.length && a.every(function (item, index) {
+	      return deepEqual(item, b[index]);
+	    });
+	  }
+
+	  if (typeof a === 'object') {
+	    for (var p in a) {
+	      if (!Object.prototype.hasOwnProperty.call(a, p)) {
+	        continue;
+	      }
+
+	      if (a[p] === undefined) {
+	        if (b[p] !== undefined) {
+	          return false;
+	        }
+	      } else if (!Object.prototype.hasOwnProperty.call(b, p)) {
+	        return false;
+	      } else if (!deepEqual(a[p], b[p])) {
+	        return false;
+	      }
+	    }
+
+	    return true;
+	  }
+
+	  return String(a) === String(b);
+	}
+
+	/**
+	 * Returns true if the current pathname matches the supplied one, net of
+	 * leading and trailing slash normalization. This is sufficient for an
+	 * indexOnly route match.
+	 */
+	function pathIsActive(pathname, currentPathname) {
+	  // Normalize leading slash for consistency. Leading slash on pathname has
+	  // already been normalized in isActive. See caveat there.
+	  if (currentPathname.charAt(0) !== '/') {
+	    currentPathname = '/' + currentPathname;
+	  }
+
+	  // Normalize the end of both path names too. Maybe `/foo/` shouldn't show
+	  // `/foo` as active, but in this case, we would already have failed the
+	  // match.
+	  if (pathname.charAt(pathname.length - 1) !== '/') {
+	    pathname += '/';
+	  }
+	  if (currentPathname.charAt(currentPathname.length - 1) !== '/') {
+	    currentPathname += '/';
+	  }
+
+	  return currentPathname === pathname;
+	}
+
+	/**
+	 * Returns true if the given pathname matches the active routes and params.
+	 */
+	function routeIsActive(pathname, routes, params) {
+	  var remainingPathname = pathname,
+	      paramNames = [],
+	      paramValues = [];
+
+	  // for...of would work here but it's probably slower post-transpilation.
+	  for (var i = 0, len = routes.length; i < len; ++i) {
+	    var route = routes[i];
+	    var pattern = route.path || '';
+
+	    if (pattern.charAt(0) === '/') {
+	      remainingPathname = pathname;
+	      paramNames = [];
+	      paramValues = [];
+	    }
+
+	    if (remainingPathname !== null && pattern) {
+	      var matched = _PatternUtils.matchPattern(pattern, remainingPathname);
+	      remainingPathname = matched.remainingPathname;
+	      paramNames = [].concat(paramNames, matched.paramNames);
+	      paramValues = [].concat(paramValues, matched.paramValues);
+
+	      if (remainingPathname === '') {
+	        // We have an exact match on the route. Just check that all the params
+	        // match.
+	        // FIXME: This doesn't work on repeated params.
+	        return paramNames.every(function (paramName, index) {
+	          return String(paramValues[index]) === String(params[paramName]);
+	        });
+	      }
+	    }
+	  }
+
+	  return false;
+	}
+
+	/**
+	 * Returns true if all key/value pairs in the given query are
+	 * currently active.
+	 */
+	function queryIsActive(query, activeQuery) {
+	  if (activeQuery == null) return query == null;
+
+	  if (query == null) return true;
+
+	  return deepEqual(query, activeQuery);
+	}
+
+	/**
+	 * Returns true if a <Link> to the given pathname/query combination is
+	 * currently active.
+	 */
+
+	function isActive(_ref, indexOnly, currentLocation, routes, params) {
+	  var pathname = _ref.pathname;
+	  var query = _ref.query;
+
+	  if (currentLocation == null) return false;
+
+	  // TODO: This is a bit ugly. It keeps around support for treating pathnames
+	  // without preceding slashes as absolute paths, but possibly also works
+	  // around the same quirks with basenames as in matchRoutes.
+	  if (pathname.charAt(0) !== '/') {
+	    pathname = '/' + pathname;
+	  }
+
+	  if (!pathIsActive(pathname, currentLocation.pathname)) {
+	    // The path check is necessary and sufficient for indexOnly, but otherwise
+	    // we still need to check the routes.
+	    if (indexOnly || !routeIsActive(pathname, routes, params)) {
+	      return false;
+	    }
+	  }
+
+	  return queryIsActive(query, currentLocation.query);
+	}
+
+	module.exports = exports['default'];
+
+/***/ },
+/* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _AsyncUtils = __webpack_require__(193);
+
+	var _deprecateObjectProperties = __webpack_require__(196);
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	function getComponentsForRoute(nextState, route, callback) {
+	  if (route.component || route.components) {
+	    callback(null, route.component || route.components);
+	    return;
+	  }
+
+	  var getComponent = route.getComponent || route.getComponents;
+	  if (!getComponent) {
+	    callback();
+	    return;
+	  }
+
+	  var location = nextState.location;
+
+	  var nextStateWithLocation = undefined;
+
+	  if (process.env.NODE_ENV !== 'production' && _deprecateObjectProperties.canUseMembrane) {
+	    nextStateWithLocation = _extends({}, nextState);
+
+	    // I don't use deprecateObjectProperties here because I want to keep the
+	    // same code path between development and production, in that we just
+	    // assign extra properties to the copy of the state object in both cases.
+
+	    var _loop = function (prop) {
+	      if (!Object.prototype.hasOwnProperty.call(location, prop)) {
+	        return 'continue';
+	      }
+
+	      Object.defineProperty(nextStateWithLocation, prop, {
+	        get: function get() {
+	          process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, 'Accessing location properties from the first argument to `getComponent` and `getComponents` is deprecated. That argument is now the router state (`nextState`) rather than the location. To access the location, use `nextState.location`.') : undefined;
+	          return location[prop];
+	        }
+	      });
+	    };
+
+	    for (var prop in location) {
+	      var _ret = _loop(prop);
+
+	      if (_ret === 'continue') continue;
+	    }
+	  } else {
+	    nextStateWithLocation = _extends({}, nextState, location);
+	  }
+
+	  getComponent.call(route, nextStateWithLocation, callback);
+	}
+
+	/**
+	 * Asynchronously fetches all components needed for the given router
+	 * state and calls callback(error, components) when finished.
+	 *
+	 * Note: This operation may finish synchronously if no routes have an
+	 * asynchronous getComponents method.
+	 */
+	function getComponents(nextState, callback) {
+	  _AsyncUtils.mapAsync(nextState.routes, function (route, index, callback) {
+	    getComponentsForRoute(nextState, route, callback);
+	  }, callback);
+	}
+
+	exports['default'] = getComponents;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 196 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	var canUseMembrane = false;
+
+	exports.canUseMembrane = canUseMembrane;
+	// No-op by default.
+	var deprecateObjectProperties = function deprecateObjectProperties(object) {
+	  return object;
+	};
+
+	if (process.env.NODE_ENV !== 'production') {
+	  try {
+	    if (Object.defineProperty({}, 'x', { get: function get() {
+	        return true;
+	      } }).x) {
+	      exports.canUseMembrane = canUseMembrane = true;
+	    }
+	    /* eslint-disable no-empty */
+	  } catch (e) {}
+	  /* eslint-enable no-empty */
+
+	  if (canUseMembrane) {
+	    deprecateObjectProperties = function (object, message) {
+	      // Wrap the deprecated object in a membrane to warn on property access.
+	      var membrane = {};
+
+	      var _loop = function (prop) {
+	        if (!Object.prototype.hasOwnProperty.call(object, prop)) {
+	          return 'continue';
+	        }
+
+	        if (typeof object[prop] === 'function') {
+	          // Can't use fat arrow here because of use of arguments below.
+	          membrane[prop] = function () {
+	            process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, message) : undefined;
+	            return object[prop].apply(object, arguments);
+	          };
+	          return 'continue';
+	        }
+
+	        // These properties are non-enumerable to prevent React dev tools from
+	        // seeing them and causing spurious warnings when accessing them. In
+	        // principle this could be done with a proxy, but support for the
+	        // ownKeys trap on proxies is not universal, even among browsers that
+	        // otherwise support proxies.
+	        Object.defineProperty(membrane, prop, {
+	          get: function get() {
+	            process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, message) : undefined;
+	            return object[prop];
+	          }
+	        });
+	      };
+
+	      for (var prop in object) {
+	        var _ret = _loop(prop);
+
+	        if (_ret === 'continue') continue;
+	      }
+
+	      return membrane;
+	    };
+	  }
+	}
+
+	exports['default'] = deprecateObjectProperties;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 197 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports['default'] = matchRoutes;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	var _AsyncUtils = __webpack_require__(193);
+
+	var _PatternUtils = __webpack_require__(191);
+
+	var _RouteUtils = __webpack_require__(198);
+
+	function getChildRoutes(route, location, callback) {
+	  if (route.childRoutes) {
+	    return [null, route.childRoutes];
+	  }
+	  if (!route.getChildRoutes) {
+	    return [];
+	  }
+
+	  var sync = true,
+	      result = undefined;
+
+	  route.getChildRoutes(location, function (error, childRoutes) {
+	    childRoutes = !error && _RouteUtils.createRoutes(childRoutes);
+	    if (sync) {
+	      result = [error, childRoutes];
+	      return;
+	    }
+
+	    callback(error, childRoutes);
+	  });
+
+	  sync = false;
+	  return result; // Might be undefined.
+	}
+
+	function getIndexRoute(route, location, callback) {
+	  if (route.indexRoute) {
+	    callback(null, route.indexRoute);
+	  } else if (route.getIndexRoute) {
+	    route.getIndexRoute(location, function (error, indexRoute) {
+	      callback(error, !error && _RouteUtils.createRoutes(indexRoute)[0]);
+	    });
+	  } else if (route.childRoutes) {
+	    (function () {
+	      var pathless = route.childRoutes.filter(function (childRoute) {
+	        return !childRoute.path;
+	      });
+
+	      _AsyncUtils.loopAsync(pathless.length, function (index, next, done) {
+	        getIndexRoute(pathless[index], location, function (error, indexRoute) {
+	          if (error || indexRoute) {
+	            var routes = [pathless[index]].concat(Array.isArray(indexRoute) ? indexRoute : [indexRoute]);
+	            done(error, routes);
+	          } else {
+	            next();
+	          }
+	        });
+	      }, function (err, routes) {
+	        callback(null, routes);
+	      });
+	    })();
+	  } else {
+	    callback();
+	  }
+	}
+
+	function assignParams(params, paramNames, paramValues) {
+	  return paramNames.reduce(function (params, paramName, index) {
+	    var paramValue = paramValues && paramValues[index];
+
+	    if (Array.isArray(params[paramName])) {
+	      params[paramName].push(paramValue);
+	    } else if (paramName in params) {
+	      params[paramName] = [params[paramName], paramValue];
+	    } else {
+	      params[paramName] = paramValue;
+	    }
+
+	    return params;
+	  }, params);
+	}
+
+	function createParams(paramNames, paramValues) {
+	  return assignParams({}, paramNames, paramValues);
+	}
+
+	function matchRouteDeep(route, location, remainingPathname, paramNames, paramValues, callback) {
+	  var pattern = route.path || '';
+
+	  if (pattern.charAt(0) === '/') {
+	    remainingPathname = location.pathname;
+	    paramNames = [];
+	    paramValues = [];
+	  }
+
+	  // Only try to match the path if the route actually has a pattern, and if
+	  // we're not just searching for potential nested absolute paths.
+	  if (remainingPathname !== null && pattern) {
+	    var matched = _PatternUtils.matchPattern(pattern, remainingPathname);
+	    remainingPathname = matched.remainingPathname;
+	    paramNames = [].concat(paramNames, matched.paramNames);
+	    paramValues = [].concat(paramValues, matched.paramValues);
+
+	    // By assumption, pattern is non-empty here, which is the prerequisite for
+	    // actually terminating a match.
+	    if (remainingPathname === '') {
+	      var _ret2 = (function () {
+	        var match = {
+	          routes: [route],
+	          params: createParams(paramNames, paramValues)
+	        };
+
+	        getIndexRoute(route, location, function (error, indexRoute) {
+	          if (error) {
+	            callback(error);
+	          } else {
+	            if (Array.isArray(indexRoute)) {
+	              var _match$routes;
+
+	              process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](indexRoute.every(function (route) {
+	                return !route.path;
+	              }), 'Index routes should not have paths') : undefined;
+	              (_match$routes = match.routes).push.apply(_match$routes, indexRoute);
+	            } else if (indexRoute) {
+	              process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](!indexRoute.path, 'Index routes should not have paths') : undefined;
+	              match.routes.push(indexRoute);
+	            }
+
+	            callback(null, match);
+	          }
+	        });
+
+	        return {
+	          v: undefined
+	        };
+	      })();
+
+	      if (typeof _ret2 === 'object') return _ret2.v;
+	    }
+	  }
+
+	  if (remainingPathname != null || route.childRoutes) {
+	    // Either a) this route matched at least some of the path or b)
+	    // we don't have to load this route's children asynchronously. In
+	    // either case continue checking for matches in the subtree.
+	    var onChildRoutes = function onChildRoutes(error, childRoutes) {
+	      if (error) {
+	        callback(error);
+	      } else if (childRoutes) {
+	        // Check the child routes to see if any of them match.
+	        matchRoutes(childRoutes, location, function (error, match) {
+	          if (error) {
+	            callback(error);
+	          } else if (match) {
+	            // A child route matched! Augment the match and pass it up the stack.
+	            match.routes.unshift(route);
+	            callback(null, match);
+	          } else {
+	            callback();
+	          }
+	        }, remainingPathname, paramNames, paramValues);
+	      } else {
+	        callback();
+	      }
+	    };
+
+	    var result = getChildRoutes(route, location, onChildRoutes);
+	    if (result) {
+	      onChildRoutes.apply(undefined, result);
+	    }
+	  } else {
+	    callback();
+	  }
+	}
+
+	/**
+	 * Asynchronously matches the given location to a set of routes and calls
+	 * callback(error, state) when finished. The state object will have the
+	 * following properties:
+	 *
+	 * - routes       An array of routes that matched, in hierarchical order
+	 * - params       An object of URL parameters
+	 *
+	 * Note: This operation may finish synchronously if no routes have an
+	 * asynchronous getChildRoutes method.
+	 */
+
+	function matchRoutes(routes, location, callback, remainingPathname) {
+	  var paramNames = arguments.length <= 4 || arguments[4] === undefined ? [] : arguments[4];
+	  var paramValues = arguments.length <= 5 || arguments[5] === undefined ? [] : arguments[5];
+
+	  if (remainingPathname === undefined) {
+	    // TODO: This is a little bit ugly, but it works around a quirk in history
+	    // that strips the leading slash from pathnames when using basenames with
+	    // trailing slashes.
+	    if (location.pathname.charAt(0) !== '/') {
+	      location = _extends({}, location, {
+	        pathname: '/' + location.pathname
+	      });
+	    }
+	    remainingPathname = location.pathname;
+	  }
+
+	  _AsyncUtils.loopAsync(routes.length, function (index, next, done) {
+	    matchRouteDeep(routes[index], location, remainingPathname, paramNames, paramValues, function (error, match) {
+	      if (error || match) {
+	        done(error, match);
+	      } else {
+	        next();
+	      }
+	    });
+	  }, callback);
+	}
+
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 198 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.isReactChildren = isReactChildren;
+	exports.createRouteFromReactElement = createRouteFromReactElement;
+	exports.createRoutesFromReactChildren = createRoutesFromReactChildren;
+	exports.createRoutes = createRoutes;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	function isValidChild(object) {
+	  return object == null || _react2['default'].isValidElement(object);
+	}
+
+	function isReactChildren(object) {
+	  return isValidChild(object) || Array.isArray(object) && object.every(isValidChild);
+	}
+
+	function checkPropTypes(componentName, propTypes, props) {
+	  componentName = componentName || 'UnknownComponent';
+
+	  for (var propName in propTypes) {
+	    if (Object.prototype.hasOwnProperty.call(propTypes, propName)) {
+	      var error = propTypes[propName](props, propName, componentName);
+
+	      /* istanbul ignore if: error logging */
+	      if (error instanceof Error) process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, error.message) : undefined;
+	    }
+	  }
+	}
+
+	function createRoute(defaultProps, props) {
+	  return _extends({}, defaultProps, props);
+	}
+
+	function createRouteFromReactElement(element) {
+	  var type = element.type;
+	  var route = createRoute(type.defaultProps, element.props);
+
+	  if (type.propTypes) checkPropTypes(type.displayName || type.name, type.propTypes, route);
+
+	  if (route.children) {
+	    var childRoutes = createRoutesFromReactChildren(route.children, route);
+
+	    if (childRoutes.length) route.childRoutes = childRoutes;
+
+	    delete route.children;
+	  }
+
+	  return route;
+	}
+
+	/**
+	 * Creates and returns a routes object from the given ReactChildren. JSX
+	 * provides a convenient way to visualize how routes in the hierarchy are
+	 * nested.
+	 *
+	 *   import { Route, createRoutesFromReactChildren } from 'react-router'
+	 *   
+	 *   const routes = createRoutesFromReactChildren(
+	 *     <Route component={App}>
+	 *       <Route path="home" component={Dashboard}/>
+	 *       <Route path="news" component={NewsFeed}/>
+	 *     </Route>
+	 *   )
+	 *
+	 * Note: This method is automatically used when you provide <Route> children
+	 * to a <Router> component.
+	 */
+
+	function createRoutesFromReactChildren(children, parentRoute) {
+	  var routes = [];
+
+	  _react2['default'].Children.forEach(children, function (element) {
+	    if (_react2['default'].isValidElement(element)) {
+	      // Component classes may have a static create* method.
+	      if (element.type.createRouteFromReactElement) {
+	        var route = element.type.createRouteFromReactElement(element, parentRoute);
+
+	        if (route) routes.push(route);
+	      } else {
+	        routes.push(createRouteFromReactElement(element));
+	      }
+	    }
+	  });
+
+	  return routes;
+	}
+
+	/**
+	 * Creates and returns an array of routes from the given object which
+	 * may be a JSX route, a plain object route, or an array of either.
+	 */
+
+	function createRoutes(routes) {
+	  if (isReactChildren(routes)) {
+	    routes = createRoutesFromReactChildren(routes);
+	  } else if (routes && !Array.isArray(routes)) {
+	    routes = [routes];
+	  }
+
+	  return routes;
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports.falsy = falsy;
+
+	var _react = __webpack_require__(1);
+
+	var func = _react.PropTypes.func;
+	var object = _react.PropTypes.object;
+	var arrayOf = _react.PropTypes.arrayOf;
+	var oneOfType = _react.PropTypes.oneOfType;
+	var element = _react.PropTypes.element;
+	var shape = _react.PropTypes.shape;
+	var string = _react.PropTypes.string;
+
+	function falsy(props, propName, componentName) {
+	  if (props[propName]) return new Error('<' + componentName + '> should not have a "' + propName + '" prop');
+	}
+
+	var history = shape({
+	  listen: func.isRequired,
+	  push: func.isRequired,
+	  replace: func.isRequired,
+	  go: func.isRequired,
+	  goBack: func.isRequired,
+	  goForward: func.isRequired
+	});
+
+	exports.history = history;
+	var component = oneOfType([func, string]);
+	exports.component = component;
+	var components = oneOfType([component, object]);
+	exports.components = components;
+	var route = oneOfType([object, element]);
+	exports.route = route;
+	var routes = oneOfType([route, arrayOf(route)]);
+	exports.routes = routes;
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _invariant = __webpack_require__(170);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _deprecateObjectProperties = __webpack_require__(196);
+
+	var _deprecateObjectProperties2 = _interopRequireDefault(_deprecateObjectProperties);
+
+	var _getRouteParams = __webpack_require__(201);
+
+	var _getRouteParams2 = _interopRequireDefault(_getRouteParams);
+
+	var _RouteUtils = __webpack_require__(198);
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	var _React$PropTypes = _react2['default'].PropTypes;
+	var array = _React$PropTypes.array;
+	var func = _React$PropTypes.func;
+	var object = _React$PropTypes.object;
+
+	/**
+	 * A <RouterContext> renders the component tree for a given router state
+	 * and sets the history object and the current location in context.
+	 */
+	var RouterContext = _react2['default'].createClass({
+	  displayName: 'RouterContext',
+
+	  propTypes: {
+	    history: object,
+	    router: object.isRequired,
+	    location: object.isRequired,
+	    routes: array.isRequired,
+	    params: object.isRequired,
+	    components: array.isRequired,
+	    createElement: func.isRequired
+	  },
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      createElement: _react2['default'].createElement
+	    };
+	  },
+
+	  childContextTypes: {
+	    history: object,
+	    location: object.isRequired,
+	    router: object.isRequired
+	  },
+
+	  getChildContext: function getChildContext() {
+	    var _props = this.props;
+	    var router = _props.router;
+	    var history = _props.history;
+	    var location = _props.location;
+
+	    if (!router) {
+	      process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, '`<RouterContext>` expects a `router` rather than a `history`') : undefined;
+
+	      router = _extends({}, history, {
+	        setRouteLeaveHook: history.listenBeforeLeavingRoute
+	      });
+	      delete router.listenBeforeLeavingRoute;
+	    }
+
+	    if (process.env.NODE_ENV !== 'production') {
+	      location = _deprecateObjectProperties2['default'](location, '`context.location` is deprecated, please use a route component\'s `props.location` instead. http://tiny.cc/router-accessinglocation');
+	    }
+
+	    return { history: history, location: location, router: router };
+	  },
+
+	  createElement: function createElement(component, props) {
+	    return component == null ? null : this.props.createElement(component, props);
+	  },
+
+	  render: function render() {
+	    var _this = this;
+
+	    var _props2 = this.props;
+	    var history = _props2.history;
+	    var location = _props2.location;
+	    var routes = _props2.routes;
+	    var params = _props2.params;
+	    var components = _props2.components;
+
+	    var element = null;
+
+	    if (components) {
+	      element = components.reduceRight(function (element, components, index) {
+	        if (components == null) return element; // Don't create new children; use the grandchildren.
+
+	        var route = routes[index];
+	        var routeParams = _getRouteParams2['default'](route, params);
+	        var props = {
+	          history: history,
+	          location: location,
+	          params: params,
+	          route: route,
+	          routeParams: routeParams,
+	          routes: routes
+	        };
+
+	        if (_RouteUtils.isReactChildren(element)) {
+	          props.children = element;
+	        } else if (element) {
+	          for (var prop in element) {
+	            if (Object.prototype.hasOwnProperty.call(element, prop)) props[prop] = element[prop];
+	          }
+	        }
+
+	        if (typeof components === 'object') {
+	          var elements = {};
+
+	          for (var key in components) {
+	            if (Object.prototype.hasOwnProperty.call(components, key)) {
+	              // Pass through the key as a prop to createElement to allow
+	              // custom createElement functions to know which named component
+	              // they're rendering, for e.g. matching up to fetched data.
+	              elements[key] = _this.createElement(components[key], _extends({
+	                key: key }, props));
+	            }
+	          }
+
+	          return elements;
+	        }
+
+	        return _this.createElement(components, props);
+	      }, element);
+	    }
+
+	    !(element === null || element === false || _react2['default'].isValidElement(element)) ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'The root route must render a single element') : _invariant2['default'](false) : undefined;
+
+	    return element;
+	  }
+
+	});
+
+	exports['default'] = RouterContext;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	var _PatternUtils = __webpack_require__(191);
+
+	/**
+	 * Extracts an object of params the given route cares about from
+	 * the given params object.
+	 */
+	function getRouteParams(route, params) {
+	  var routeParams = {};
+
+	  if (!route.path) return routeParams;
+
+	  var paramNames = _PatternUtils.getParamNames(route.path);
+
+	  for (var p in params) {
+	    if (Object.prototype.hasOwnProperty.call(params, p) && paramNames.indexOf(p) !== -1) {
+	      routeParams[p] = params[p];
+	    }
+	  }
+
+	  return routeParams;
+	}
+
+	exports['default'] = getRouteParams;
+	module.exports = exports['default'];
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.createRouterObject = createRouterObject;
+	exports.createRoutingHistory = createRoutingHistory;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _deprecateObjectProperties = __webpack_require__(196);
+
+	var _deprecateObjectProperties2 = _interopRequireDefault(_deprecateObjectProperties);
+
+	function createRouterObject(history, transitionManager) {
+	  return _extends({}, history, {
+	    setRouteLeaveHook: transitionManager.listenBeforeLeavingRoute,
+	    isActive: transitionManager.isActive
+	  });
+	}
+
+	// deprecated
+
+	function createRoutingHistory(history, transitionManager) {
+	  history = _extends({}, history, transitionManager);
+
+	  if (process.env.NODE_ENV !== 'production') {
+	    history = _deprecateObjectProperties2['default'](history, '`props.history` and `context.history` are deprecated. Please use `context.router`. http://tiny.cc/router-contextchanges');
+	  }
+
+	  return history;
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 203 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	var _PropTypes = __webpack_require__(204);
+
+	var _React$PropTypes = _react2['default'].PropTypes;
+	var bool = _React$PropTypes.bool;
+	var object = _React$PropTypes.object;
+	var string = _React$PropTypes.string;
+	var func = _React$PropTypes.func;
+	var oneOfType = _React$PropTypes.oneOfType;
+
+	function isLeftClickEvent(event) {
+	  return event.button === 0;
+	}
+
+	function isModifiedEvent(event) {
+	  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+	}
+
+	// TODO: De-duplicate against hasAnyProperties in createTransitionManager.
+	function isEmptyObject(object) {
+	  for (var p in object) {
+	    if (Object.prototype.hasOwnProperty.call(object, p)) return false;
+	  }return true;
+	}
+
+	function createLocationDescriptor(to, _ref) {
+	  var query = _ref.query;
+	  var hash = _ref.hash;
+	  var state = _ref.state;
+
+	  if (query || hash || state) {
+	    return { pathname: to, query: query, hash: hash, state: state };
+	  }
+
+	  return to;
+	}
+
+	/**
+	 * A <Link> is used to create an <a> element that links to a route.
+	 * When that route is active, the link gets the value of its
+	 * activeClassName prop.
+	 *
+	 * For example, assuming you have the following route:
+	 *
+	 *   <Route path="/posts/:postID" component={Post} />
+	 *
+	 * You could use the following component to link to that route:
+	 *
+	 *   <Link to={`/posts/${post.id}`} />
+	 *
+	 * Links may pass along location state and/or query string parameters
+	 * in the state/query props, respectively.
+	 *
+	 *   <Link ... query={{ show: true }} state={{ the: 'state' }} />
+	 */
+	var Link = _react2['default'].createClass({
+	  displayName: 'Link',
+
+	  contextTypes: {
+	    router: _PropTypes.routerShape
+	  },
+
+	  propTypes: {
+	    to: oneOfType([string, object]).isRequired,
+	    query: object,
+	    hash: string,
+	    state: object,
+	    activeStyle: object,
+	    activeClassName: string,
+	    onlyActiveOnIndex: bool.isRequired,
+	    onClick: func
+	  },
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      onlyActiveOnIndex: false,
+	      style: {}
+	    };
+	  },
+
+	  handleClick: function handleClick(event) {
+	    var allowTransition = true;
+
+	    if (this.props.onClick) this.props.onClick(event);
+
+	    if (isModifiedEvent(event) || !isLeftClickEvent(event)) return;
+
+	    if (event.defaultPrevented === true) allowTransition = false;
+
+	    // If target prop is set (e.g. to "_blank") let browser handle link.
+	    /* istanbul ignore if: untestable with Karma */
+	    if (this.props.target) {
+	      if (!allowTransition) event.preventDefault();
+
+	      return;
+	    }
+
+	    event.preventDefault();
+
+	    if (allowTransition) {
+	      var _props = this.props;
+	      var to = _props.to;
+	      var query = _props.query;
+	      var hash = _props.hash;
+	      var state = _props.state;
+
+	      var _location = createLocationDescriptor(to, { query: query, hash: hash, state: state });
+
+	      this.context.router.push(_location);
+	    }
+	  },
+
+	  render: function render() {
+	    var _props2 = this.props;
+	    var to = _props2.to;
+	    var query = _props2.query;
+	    var hash = _props2.hash;
+	    var state = _props2.state;
+	    var activeClassName = _props2.activeClassName;
+	    var activeStyle = _props2.activeStyle;
+	    var onlyActiveOnIndex = _props2.onlyActiveOnIndex;
+
+	    var props = _objectWithoutProperties(_props2, ['to', 'query', 'hash', 'state', 'activeClassName', 'activeStyle', 'onlyActiveOnIndex']);
+
+	    process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](!(query || hash || state), 'the `query`, `hash`, and `state` props on `<Link>` are deprecated, use `<Link to={{ pathname, query, hash, state }}/>. http://tiny.cc/router-isActivedeprecated') : undefined;
+
+	    // Ignore if rendered outside the context of router, simplifies unit testing.
+	    var router = this.context.router;
+
+	    if (router) {
+	      var _location2 = createLocationDescriptor(to, { query: query, hash: hash, state: state });
+	      props.href = router.createHref(_location2);
+
+	      if (activeClassName || activeStyle != null && !isEmptyObject(activeStyle)) {
+	        if (router.isActive(_location2, onlyActiveOnIndex)) {
+	          if (activeClassName) {
+	            if (props.className) {
+	              props.className += ' ' + activeClassName;
+	            } else {
+	              props.className = activeClassName;
+	            }
+	          }
+
+	          if (activeStyle) props.style = _extends({}, props.style, activeStyle);
+	        }
+	      }
+	    }
+
+	    return _react2['default'].createElement('a', _extends({}, props, { onClick: this.handleClick }));
+	  }
+
+	});
+
+	exports['default'] = Link;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 204 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _deprecateObjectProperties = __webpack_require__(196);
+
+	var _deprecateObjectProperties2 = _interopRequireDefault(_deprecateObjectProperties);
+
+	var _InternalPropTypes = __webpack_require__(199);
+
+	var InternalPropTypes = _interopRequireWildcard(_InternalPropTypes);
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	var func = _react.PropTypes.func;
+	var object = _react.PropTypes.object;
+	var shape = _react.PropTypes.shape;
+	var string = _react.PropTypes.string;
+	var routerShape = shape({
+	  push: func.isRequired,
+	  replace: func.isRequired,
+	  go: func.isRequired,
+	  goBack: func.isRequired,
+	  goForward: func.isRequired,
+	  setRouteLeaveHook: func.isRequired,
+	  isActive: func.isRequired
+	});
+
+	exports.routerShape = routerShape;
+	var locationShape = shape({
+	  pathname: string.isRequired,
+	  search: string.isRequired,
+	  state: object,
+	  action: string.isRequired,
+	  key: string
+	});
+
+	exports.locationShape = locationShape;
+	// Deprecated stuff below:
+
+	var falsy = InternalPropTypes.falsy;
+	exports.falsy = falsy;
+	var history = InternalPropTypes.history;
+	exports.history = history;
+	var location = locationShape;
+	exports.location = location;
+	var component = InternalPropTypes.component;
+	exports.component = component;
+	var components = InternalPropTypes.components;
+	exports.components = components;
+	var route = InternalPropTypes.route;
+	exports.route = route;
+	var routes = InternalPropTypes.routes;
+	exports.routes = routes;
+	var router = routerShape;
+
+	exports.router = router;
+	if (process.env.NODE_ENV !== 'production') {
+	  (function () {
+	    var deprecatePropType = function deprecatePropType(propType, message) {
+	      return function () {
+	        process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, message) : undefined;
+	        return propType.apply(undefined, arguments);
+	      };
+	    };
+
+	    var deprecateInternalPropType = function deprecateInternalPropType(propType) {
+	      return deprecatePropType(propType, 'This prop type is not intended for external use, and was previously exported by mistake. These internal prop types are deprecated for external use, and will be removed in a later version.');
+	    };
+
+	    var deprecateRenamedPropType = function deprecateRenamedPropType(propType, name) {
+	      return deprecatePropType(propType, 'The `' + name + '` prop type is now exported as `' + name + 'Shape` to avoid name conflicts. This export is deprecated and will be removed in a later version.');
+	    };
+
+	    exports.falsy = falsy = deprecateInternalPropType(falsy);
+	    exports.history = history = deprecateInternalPropType(history);
+	    exports.component = component = deprecateInternalPropType(component);
+	    exports.components = components = deprecateInternalPropType(components);
+	    exports.route = route = deprecateInternalPropType(route);
+	    exports.routes = routes = deprecateInternalPropType(routes);
+
+	    exports.location = location = deprecateRenamedPropType(location, 'location');
+	    exports.router = router = deprecateRenamedPropType(router, 'router');
+	  })();
+	}
+
+	var defaultExport = {
+	  falsy: falsy,
+	  history: history,
+	  location: location,
+	  component: component,
+	  components: components,
+	  route: route,
+	  // For some reason, routes was never here.
+	  router: router
+	};
+
+	if (process.env.NODE_ENV !== 'production') {
+	  defaultExport = _deprecateObjectProperties2['default'](defaultExport, 'The default export from `react-router/lib/PropTypes` is deprecated. Please use the named exports instead.');
+	}
+
+	exports['default'] = defaultExport;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 205 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Link = __webpack_require__(203);
+
+	var _Link2 = _interopRequireDefault(_Link);
+
+	/**
+	 * An <IndexLink> is used to link to an <IndexRoute>.
+	 */
+	var IndexLink = _react2['default'].createClass({
+	  displayName: 'IndexLink',
+
+	  render: function render() {
+	    return _react2['default'].createElement(_Link2['default'], _extends({}, this.props, { onlyActiveOnIndex: true }));
+	  }
+
+	});
+
+	exports['default'] = IndexLink;
+	module.exports = exports['default'];
+
+/***/ },
+/* 206 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	var _invariant = __webpack_require__(170);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	var _Redirect = __webpack_require__(207);
+
+	var _Redirect2 = _interopRequireDefault(_Redirect);
+
+	var _InternalPropTypes = __webpack_require__(199);
+
+	var _React$PropTypes = _react2['default'].PropTypes;
+	var string = _React$PropTypes.string;
+	var object = _React$PropTypes.object;
+
+	/**
+	 * An <IndexRedirect> is used to redirect from an indexRoute.
+	 */
+	var IndexRedirect = _react2['default'].createClass({
+	  displayName: 'IndexRedirect',
+
+	  statics: {
+
+	    createRouteFromReactElement: function createRouteFromReactElement(element, parentRoute) {
+	      /* istanbul ignore else: sanity check */
+	      if (parentRoute) {
+	        parentRoute.indexRoute = _Redirect2['default'].createRouteFromReactElement(element);
+	      } else {
+	        process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, 'An <IndexRedirect> does not make sense at the root of your route config') : undefined;
+	      }
+	    }
+
+	  },
+
+	  propTypes: {
+	    to: string.isRequired,
+	    query: object,
+	    state: object,
+	    onEnter: _InternalPropTypes.falsy,
+	    children: _InternalPropTypes.falsy
+	  },
+
+	  /* istanbul ignore next: sanity check */
+	  render: function render() {
+	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<IndexRedirect> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
+	  }
+
+	});
+
+	exports['default'] = IndexRedirect;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 207 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _invariant = __webpack_require__(170);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	var _RouteUtils = __webpack_require__(198);
+
+	var _PatternUtils = __webpack_require__(191);
+
+	var _InternalPropTypes = __webpack_require__(199);
+
+	var _React$PropTypes = _react2['default'].PropTypes;
+	var string = _React$PropTypes.string;
+	var object = _React$PropTypes.object;
+
+	/**
+	 * A <Redirect> is used to declare another URL path a client should
+	 * be sent to when they request a given URL.
+	 *
+	 * Redirects are placed alongside routes in the route configuration
+	 * and are traversed in the same manner.
+	 */
+	var Redirect = _react2['default'].createClass({
+	  displayName: 'Redirect',
+
+	  statics: {
+
+	    createRouteFromReactElement: function createRouteFromReactElement(element) {
+	      var route = _RouteUtils.createRouteFromReactElement(element);
+
+	      if (route.from) route.path = route.from;
+
+	      route.onEnter = function (nextState, replace) {
+	        var location = nextState.location;
+	        var params = nextState.params;
+
+	        var pathname = undefined;
+	        if (route.to.charAt(0) === '/') {
+	          pathname = _PatternUtils.formatPattern(route.to, params);
+	        } else if (!route.to) {
+	          pathname = location.pathname;
+	        } else {
+	          var routeIndex = nextState.routes.indexOf(route);
+	          var parentPattern = Redirect.getRoutePattern(nextState.routes, routeIndex - 1);
+	          var pattern = parentPattern.replace(/\/*$/, '/') + route.to;
+	          pathname = _PatternUtils.formatPattern(pattern, params);
+	        }
+
+	        replace({
+	          pathname: pathname,
+	          query: route.query || location.query,
+	          state: route.state || location.state
+	        });
+	      };
+
+	      return route;
+	    },
+
+	    getRoutePattern: function getRoutePattern(routes, routeIndex) {
+	      var parentPattern = '';
+
+	      for (var i = routeIndex; i >= 0; i--) {
+	        var route = routes[i];
+	        var pattern = route.path || '';
+
+	        parentPattern = pattern.replace(/\/*$/, '/') + parentPattern;
+
+	        if (pattern.indexOf('/') === 0) break;
+	      }
+
+	      return '/' + parentPattern;
+	    }
+
+	  },
+
+	  propTypes: {
+	    path: string,
+	    from: string, // Alias for path
+	    to: string.isRequired,
+	    query: object,
+	    state: object,
+	    onEnter: _InternalPropTypes.falsy,
+	    children: _InternalPropTypes.falsy
+	  },
+
+	  /* istanbul ignore next: sanity check */
+	  render: function render() {
+	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<Redirect> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
+	  }
+
+	});
+
+	exports['default'] = Redirect;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 208 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	var _invariant = __webpack_require__(170);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	var _RouteUtils = __webpack_require__(198);
+
+	var _InternalPropTypes = __webpack_require__(199);
+
+	var func = _react2['default'].PropTypes.func;
+
+	/**
+	 * An <IndexRoute> is used to specify its parent's <Route indexRoute> in
+	 * a JSX route config.
+	 */
+	var IndexRoute = _react2['default'].createClass({
+	  displayName: 'IndexRoute',
+
+	  statics: {
+
+	    createRouteFromReactElement: function createRouteFromReactElement(element, parentRoute) {
+	      /* istanbul ignore else: sanity check */
+	      if (parentRoute) {
+	        parentRoute.indexRoute = _RouteUtils.createRouteFromReactElement(element);
+	      } else {
+	        process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, 'An <IndexRoute> does not make sense at the root of your route config') : undefined;
+	      }
+	    }
+
+	  },
+
+	  propTypes: {
+	    path: _InternalPropTypes.falsy,
+	    component: _InternalPropTypes.component,
+	    components: _InternalPropTypes.components,
+	    getComponent: func,
+	    getComponents: func
+	  },
+
+	  /* istanbul ignore next: sanity check */
+	  render: function render() {
+	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<IndexRoute> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
+	  }
+
+	});
+
+	exports['default'] = IndexRoute;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _invariant = __webpack_require__(170);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	var _RouteUtils = __webpack_require__(198);
+
+	var _InternalPropTypes = __webpack_require__(199);
+
+	var _React$PropTypes = _react2['default'].PropTypes;
+	var string = _React$PropTypes.string;
+	var func = _React$PropTypes.func;
+
+	/**
+	 * A <Route> is used to declare which components are rendered to the
+	 * page when the URL matches a given pattern.
+	 *
+	 * Routes are arranged in a nested tree structure. When a new URL is
+	 * requested, the tree is searched depth-first to find a route whose
+	 * path matches the URL.  When one is found, all routes in the tree
+	 * that lead to it are considered "active" and their components are
+	 * rendered into the DOM, nested in the same order as in the tree.
+	 */
+	var Route = _react2['default'].createClass({
+	  displayName: 'Route',
+
+	  statics: {
+	    createRouteFromReactElement: _RouteUtils.createRouteFromReactElement
+	  },
+
+	  propTypes: {
+	    path: string,
+	    component: _InternalPropTypes.component,
+	    components: _InternalPropTypes.components,
+	    getComponent: func,
+	    getComponents: func
+	  },
+
+	  /* istanbul ignore next: sanity check */
+	  render: function render() {
+	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, '<Route> elements are for router configuration only and should not be rendered') : _invariant2['default'](false) : undefined;
+	  }
+
+	});
+
+	exports['default'] = Route;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 210 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	var _InternalPropTypes = __webpack_require__(199);
+
+	/**
+	 * A mixin that adds the "history" instance variable to components.
+	 */
+	var History = {
+
+	  contextTypes: {
+	    history: _InternalPropTypes.history
+	  },
+
+	  componentWillMount: function componentWillMount() {
+	    process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, 'the `History` mixin is deprecated, please access `context.router` with your own `contextTypes`. http://tiny.cc/router-historymixin') : undefined;
+	    this.history = this.context.history;
+	  }
+
+	};
+
+	exports['default'] = History;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _invariant = __webpack_require__(170);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	var object = _react2['default'].PropTypes.object;
+
+	/**
+	 * The Lifecycle mixin adds the routerWillLeave lifecycle method to a
+	 * component that may be used to cancel a transition or prompt the user
+	 * for confirmation.
+	 *
+	 * On standard transitions, routerWillLeave receives a single argument: the
+	 * location we're transitioning to. To cancel the transition, return false.
+	 * To prompt the user for confirmation, return a prompt message (string).
+	 *
+	 * During the beforeunload event (assuming you're using the useBeforeUnload
+	 * history enhancer), routerWillLeave does not receive a location object
+	 * because it isn't possible for us to know the location we're transitioning
+	 * to. In this case routerWillLeave must return a prompt message to prevent
+	 * the user from closing the window/tab.
+	 */
+	var Lifecycle = {
+
+	  contextTypes: {
+	    history: object.isRequired,
+	    // Nested children receive the route as context, either
+	    // set by the route component using the RouteContext mixin
+	    // or by some other ancestor.
+	    route: object
+	  },
+
+	  propTypes: {
+	    // Route components receive the route object as a prop.
+	    route: object
+	  },
+
+	  componentDidMount: function componentDidMount() {
+	    process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, 'the `Lifecycle` mixin is deprecated, please use `context.router.setRouteLeaveHook(route, hook)`. http://tiny.cc/router-lifecyclemixin') : undefined;
+	    !this.routerWillLeave ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'The Lifecycle mixin requires you to define a routerWillLeave method') : _invariant2['default'](false) : undefined;
+
+	    var route = this.props.route || this.context.route;
+
+	    !route ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'The Lifecycle mixin must be used on either a) a <Route component> or ' + 'b) a descendant of a <Route component> that uses the RouteContext mixin') : _invariant2['default'](false) : undefined;
+
+	    this._unlistenBeforeLeavingRoute = this.context.history.listenBeforeLeavingRoute(route, this.routerWillLeave);
+	  },
+
+	  componentWillUnmount: function componentWillUnmount() {
+	    if (this._unlistenBeforeLeavingRoute) this._unlistenBeforeLeavingRoute();
+	  }
+
+	};
+
+	exports['default'] = Lifecycle;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var object = _react2['default'].PropTypes.object;
+
+	/**
+	 * The RouteContext mixin provides a convenient way for route
+	 * components to set the route in context. This is needed for
+	 * routes that render elements that want to use the Lifecycle
+	 * mixin to prevent transitions.
+	 */
+	var RouteContext = {
+
+	  propTypes: {
+	    route: object.isRequired
+	  },
+
+	  childContextTypes: {
+	    route: object.isRequired
+	  },
+
+	  getChildContext: function getChildContext() {
+	    return {
+	      route: this.props.route
+	    };
+	  },
+
+	  componentWillMount: function componentWillMount() {
+	    process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, 'The `RouteContext` mixin is deprecated. You can provide `this.props.route` on context with your own `contextTypes`. http://tiny.cc/router-routecontextmixin') : undefined;
+	  }
+
+	};
+
+	exports['default'] = RouteContext;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 213 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	var _historyLibUseQueries = __webpack_require__(185);
+
+	var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
+
+	var _createTransitionManager = __webpack_require__(188);
+
+	var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	/**
+	 * Returns a new createHistory function that may be used to create
+	 * history objects that know about routing.
+	 *
+	 * Enhances history objects with the following methods:
+	 *
+	 * - listen((error, nextState) => {})
+	 * - listenBeforeLeavingRoute(route, (nextLocation) => {})
+	 * - match(location, (error, redirectLocation, nextState) => {})
+	 * - isActive(pathname, query, indexOnly=false)
+	 */
+	function useRoutes(createHistory) {
+	  process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, '`useRoutes` is deprecated. Please use `createTransitionManager` instead.') : undefined;
+
+	  return function () {
+	    var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	    var routes = _ref.routes;
+
+	    var options = _objectWithoutProperties(_ref, ['routes']);
+
+	    var history = _historyLibUseQueries2['default'](createHistory)(options);
+	    var transitionManager = _createTransitionManager2['default'](history, routes);
+	    return _extends({}, history, transitionManager);
+	  };
+	}
+
+	exports['default'] = useRoutes;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _RouterContext = __webpack_require__(200);
+
+	var _RouterContext2 = _interopRequireDefault(_RouterContext);
+
+	var _routerWarning = __webpack_require__(189);
+
+	var _routerWarning2 = _interopRequireDefault(_routerWarning);
+
+	var RoutingContext = _react2['default'].createClass({
+	  displayName: 'RoutingContext',
+
+	  componentWillMount: function componentWillMount() {
+	    process.env.NODE_ENV !== 'production' ? _routerWarning2['default'](false, '`RoutingContext` has been renamed to `RouterContext`. Please use `import { RouterContext } from \'react-router\'`. http://tiny.cc/router-routercontext') : undefined;
+	  },
+
+	  render: function render() {
+	    return _react2['default'].createElement(_RouterContext2['default'], this.props);
+	  }
+	});
+
+	exports['default'] = RoutingContext;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	var _invariant = __webpack_require__(170);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	var _createMemoryHistory = __webpack_require__(216);
+
+	var _createMemoryHistory2 = _interopRequireDefault(_createMemoryHistory);
+
+	var _createTransitionManager = __webpack_require__(188);
+
+	var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
+
+	var _RouteUtils = __webpack_require__(198);
+
+	var _RouterUtils = __webpack_require__(202);
+
+	/**
+	 * A high-level API to be used for server-side rendering.
+	 *
+	 * This function matches a location to a set of routes and calls
+	 * callback(error, redirectLocation, renderProps) when finished.
+	 *
+	 * Note: You probably don't want to use this in a browser unless you're using
+	 * server-side rendering with async routes.
+	 */
+	function match(_ref, callback) {
+	  var history = _ref.history;
+	  var routes = _ref.routes;
+	  var location = _ref.location;
+
+	  var options = _objectWithoutProperties(_ref, ['history', 'routes', 'location']);
+
+	  !(history || location) ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'match needs a history or a location') : _invariant2['default'](false) : undefined;
+
+	  history = history ? history : _createMemoryHistory2['default'](options);
+	  var transitionManager = _createTransitionManager2['default'](history, _RouteUtils.createRoutes(routes));
+
+	  var unlisten = undefined;
+
+	  if (location) {
+	    // Allow match({ location: '/the/path', ... })
+	    location = history.createLocation(location);
+	  } else {
+	    // Pick up the location from the history via synchronous history.listen
+	    // call if needed.
+	    unlisten = history.listen(function (historyLocation) {
+	      location = historyLocation;
+	    });
+	  }
+
+	  var router = _RouterUtils.createRouterObject(history, transitionManager);
+	  history = _RouterUtils.createRoutingHistory(history, transitionManager);
+
+	  transitionManager.match(location, function (error, redirectLocation, nextState) {
+	    callback(error, redirectLocation, nextState && _extends({}, nextState, {
+	      history: history,
+	      router: router,
+	      matchContext: { history: history, transitionManager: transitionManager, router: router }
+	    }));
+
+	    // Defer removing the listener to here to prevent DOM histories from having
+	    // to unwind DOM event listeners unnecessarily, in case callback renders a
+	    // <Router> and attaches another history listener.
+	    if (unlisten) {
+	      unlisten();
+	    }
+	  });
+	}
+
+	exports['default'] = match;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports['default'] = createMemoryHistory;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _historyLibUseQueries = __webpack_require__(185);
+
+	var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
+
+	var _historyLibUseBasename = __webpack_require__(217);
+
+	var _historyLibUseBasename2 = _interopRequireDefault(_historyLibUseBasename);
+
+	var _historyLibCreateMemoryHistory = __webpack_require__(218);
+
+	var _historyLibCreateMemoryHistory2 = _interopRequireDefault(_historyLibCreateMemoryHistory);
+
+	function createMemoryHistory(options) {
+	  // signatures and type checking differ between `useRoutes` and
+	  // `createMemoryHistory`, have to create `memoryHistory` first because
+	  // `useQueries` doesn't understand the signature
+	  var memoryHistory = _historyLibCreateMemoryHistory2['default'](options);
+	  var createHistory = function createHistory() {
+	    return memoryHistory;
+	  };
+	  var history = _historyLibUseQueries2['default'](_historyLibUseBasename2['default'](createHistory))(options);
+	  history.__v2_compatible__ = true;
+	  return history;
+	}
+
+	module.exports = exports['default'];
+
+/***/ },
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _warning = __webpack_require__(169);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	var _ExecutionEnvironment = __webpack_require__(173);
+
+	var _PathUtils = __webpack_require__(172);
+
+	var _runTransitionHook = __webpack_require__(183);
+
+	var _runTransitionHook2 = _interopRequireDefault(_runTransitionHook);
+
+	var _deprecate = __webpack_require__(184);
+
+	var _deprecate2 = _interopRequireDefault(_deprecate);
+
+	function useBasename(createHistory) {
+	  return function () {
+	    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	    var history = createHistory(options);
+
+	    var basename = options.basename;
+
+	    // Automatically use the value of <base href> in HTML
+	    // documents as basename if it's not explicitly given.
+	    if (basename == null && _ExecutionEnvironment.canUseDOM) {
+	      var base = document.getElementsByTagName('base')[0];
+
+	      if (base) {
+	        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'Automatically setting basename using <base href> is deprecated and will ' + 'be removed in the next major release. The semantics of <base href> are ' + 'subtly different from basename. Please pass the basename explicitly in ' + 'the options to createHistory') : undefined;
+
+	        basename = base.getAttribute('href');
+	      }
+	    }
+
+	    function addBasename(location) {
+	      if (basename && location.basename == null) {
+	        if (location.pathname.indexOf(basename) === 0) {
+	          location.pathname = location.pathname.substring(basename.length);
+	          location.basename = basename;
+
+	          if (location.pathname === '') location.pathname = '/';
+	        } else {
+	          location.basename = '';
+	        }
+	      }
+
+	      return location;
+	    }
+
+	    function prependBasename(location) {
+	      if (!basename) return location;
+
+	      if (typeof location === 'string') location = _PathUtils.parsePath(location);
+
+	      var pname = location.pathname;
+	      var normalizedBasename = basename.slice(-1) === '/' ? basename : basename + '/';
+	      var normalizedPathname = pname.charAt(0) === '/' ? pname.slice(1) : pname;
+	      var pathname = normalizedBasename + normalizedPathname;
+
+	      return _extends({}, location, {
+	        pathname: pathname
+	      });
+	    }
+
+	    // Override all read methods with basename-aware versions.
+	    function listenBefore(hook) {
+	      return history.listenBefore(function (location, callback) {
+	        _runTransitionHook2['default'](hook, addBasename(location), callback);
+	      });
+	    }
+
+	    function listen(listener) {
+	      return history.listen(function (location) {
+	        listener(addBasename(location));
+	      });
+	    }
+
+	    // Override all write methods with basename-aware versions.
+	    function push(location) {
+	      history.push(prependBasename(location));
+	    }
+
+	    function replace(location) {
+	      history.replace(prependBasename(location));
+	    }
+
+	    function createPath(location) {
+	      return history.createPath(prependBasename(location));
+	    }
+
+	    function createHref(location) {
+	      return history.createHref(prependBasename(location));
+	    }
+
+	    function createLocation(location) {
+	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	        args[_key - 1] = arguments[_key];
+	      }
+
+	      return addBasename(history.createLocation.apply(history, [prependBasename(location)].concat(args)));
+	    }
+
+	    // deprecated
+	    function pushState(state, path) {
+	      if (typeof path === 'string') path = _PathUtils.parsePath(path);
+
+	      push(_extends({ state: state }, path));
+	    }
+
+	    // deprecated
+	    function replaceState(state, path) {
+	      if (typeof path === 'string') path = _PathUtils.parsePath(path);
+
+	      replace(_extends({ state: state }, path));
+	    }
+
+	    return _extends({}, history, {
+	      listenBefore: listenBefore,
+	      listen: listen,
+	      push: push,
+	      replace: replace,
+	      createPath: createPath,
+	      createHref: createHref,
+	      createLocation: createLocation,
+
+	      pushState: _deprecate2['default'](pushState, 'pushState is deprecated; use push instead'),
+	      replaceState: _deprecate2['default'](replaceState, 'replaceState is deprecated; use replace instead')
+	    });
+	  };
+	}
+
+	exports['default'] = useBasename;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _warning = __webpack_require__(169);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	var _invariant = __webpack_require__(170);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	var _PathUtils = __webpack_require__(172);
+
+	var _Actions = __webpack_require__(171);
+
+	var _createHistory = __webpack_require__(177);
+
+	var _createHistory2 = _interopRequireDefault(_createHistory);
+
+	function createStateStorage(entries) {
+	  return entries.filter(function (entry) {
+	    return entry.state;
+	  }).reduce(function (memo, entry) {
+	    memo[entry.key] = entry.state;
+	    return memo;
+	  }, {});
+	}
+
+	function createMemoryHistory() {
+	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	  if (Array.isArray(options)) {
+	    options = { entries: options };
+	  } else if (typeof options === 'string') {
+	    options = { entries: [options] };
+	  }
+
+	  var history = _createHistory2['default'](_extends({}, options, {
+	    getCurrentLocation: getCurrentLocation,
+	    finishTransition: finishTransition,
+	    saveState: saveState,
+	    go: go
+	  }));
+
+	  var _options = options;
+	  var entries = _options.entries;
+	  var current = _options.current;
+
+	  if (typeof entries === 'string') {
+	    entries = [entries];
+	  } else if (!Array.isArray(entries)) {
+	    entries = ['/'];
+	  }
+
+	  entries = entries.map(function (entry) {
+	    var key = history.createKey();
+
+	    if (typeof entry === 'string') return { pathname: entry, key: key };
+
+	    if (typeof entry === 'object' && entry) return _extends({}, entry, { key: key });
+
+	     true ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Unable to create history entry from %s', entry) : _invariant2['default'](false) : undefined;
+	  });
+
+	  if (current == null) {
+	    current = entries.length - 1;
+	  } else {
+	    !(current >= 0 && current < entries.length) ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Current index must be >= 0 and < %s, was %s', entries.length, current) : _invariant2['default'](false) : undefined;
+	  }
+
+	  var storage = createStateStorage(entries);
+
+	  function saveState(key, state) {
+	    storage[key] = state;
+	  }
+
+	  function readState(key) {
+	    return storage[key];
+	  }
+
+	  function getCurrentLocation() {
+	    var entry = entries[current];
+	    var basename = entry.basename;
+	    var pathname = entry.pathname;
+	    var search = entry.search;
+
+	    var path = (basename || '') + pathname + (search || '');
+
+	    var key = undefined,
+	        state = undefined;
+	    if (entry.key) {
+	      key = entry.key;
+	      state = readState(key);
+	    } else {
+	      key = history.createKey();
+	      state = null;
+	      entry.key = key;
+	    }
+
+	    var location = _PathUtils.parsePath(path);
+
+	    return history.createLocation(_extends({}, location, { state: state }), undefined, key);
+	  }
+
+	  function canGo(n) {
+	    var index = current + n;
+	    return index >= 0 && index < entries.length;
+	  }
+
+	  function go(n) {
+	    if (n) {
+	      if (!canGo(n)) {
+	        process.env.NODE_ENV !== 'production' ? _warning2['default'](false, 'Cannot go(%s) there is not enough history', n) : undefined;
+	        return;
+	      }
+
+	      current += n;
+
+	      var currentLocation = getCurrentLocation();
+
+	      // change action to POP
+	      history.transitionTo(_extends({}, currentLocation, { action: _Actions.POP }));
+	    }
+	  }
+
+	  function finishTransition(location) {
+	    switch (location.action) {
+	      case _Actions.PUSH:
+	        current += 1;
+
+	        // if we are not on the top of stack
+	        // remove rest and push new
+	        if (current < entries.length) entries.splice(current);
+
+	        entries.push(location);
+	        saveState(location.key, location.state);
+	        break;
+	      case _Actions.REPLACE:
+	        entries[current] = location;
+	        saveState(location.key, location.state);
+	        break;
+	    }
+	  }
+
+	  return history;
+	}
+
+	exports['default'] = createMemoryHistory;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports['default'] = useRouterHistory;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _historyLibUseQueries = __webpack_require__(185);
+
+	var _historyLibUseQueries2 = _interopRequireDefault(_historyLibUseQueries);
+
+	var _historyLibUseBasename = __webpack_require__(217);
+
+	var _historyLibUseBasename2 = _interopRequireDefault(_historyLibUseBasename);
+
+	function useRouterHistory(createHistory) {
+	  return function (options) {
+	    var history = _historyLibUseQueries2['default'](_historyLibUseBasename2['default'](createHistory))(options);
+	    history.__v2_compatible__ = true;
+	    return history;
+	  };
+	}
+
+	module.exports = exports['default'];
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _RouterContext = __webpack_require__(200);
+
+	var _RouterContext2 = _interopRequireDefault(_RouterContext);
+
+	exports['default'] = function () {
+	  for (var _len = arguments.length, middlewares = Array(_len), _key = 0; _key < _len; _key++) {
+	    middlewares[_key] = arguments[_key];
+	  }
+
+	  var withContext = middlewares.map(function (m) {
+	    return m.renderRouterContext;
+	  }).filter(function (f) {
+	    return f;
+	  });
+	  var withComponent = middlewares.map(function (m) {
+	    return m.renderRouteComponent;
+	  }).filter(function (f) {
+	    return f;
+	  });
+	  var makeCreateElement = function makeCreateElement() {
+	    var baseCreateElement = arguments.length <= 0 || arguments[0] === undefined ? _react.createElement : arguments[0];
+	    return function (Component, props) {
+	      return withComponent.reduceRight(function (previous, renderRouteComponent) {
+	        return renderRouteComponent(previous, props);
+	      }, baseCreateElement(Component, props));
+	    };
+	  };
+
+	  return function (renderProps) {
+	    return withContext.reduceRight(function (previous, renderRouterContext) {
+	      return renderRouterContext(previous, renderProps);
+	    }, _react2['default'].createElement(_RouterContext2['default'], _extends({}, renderProps, {
+	      createElement: makeCreateElement(renderProps.createElement)
+	    })));
+	  };
+	};
+
+	module.exports = exports['default'];
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _historyLibCreateBrowserHistory = __webpack_require__(222);
+
+	var _historyLibCreateBrowserHistory2 = _interopRequireDefault(_historyLibCreateBrowserHistory);
+
+	var _createRouterHistory = __webpack_require__(223);
+
+	var _createRouterHistory2 = _interopRequireDefault(_createRouterHistory);
+
+	exports['default'] = _createRouterHistory2['default'](_historyLibCreateBrowserHistory2['default']);
+	module.exports = exports['default'];
+
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _invariant = __webpack_require__(170);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	var _Actions = __webpack_require__(171);
+
+	var _PathUtils = __webpack_require__(172);
+
+	var _ExecutionEnvironment = __webpack_require__(173);
+
+	var _DOMUtils = __webpack_require__(174);
+
+	var _DOMStateStorage = __webpack_require__(175);
+
+	var _createDOMHistory = __webpack_require__(176);
+
+	var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
+
+	/**
+	 * Creates and returns a history object that uses HTML5's history API
+	 * (pushState, replaceState, and the popstate event) to manage history.
+	 * This is the recommended method of managing history in browsers because
+	 * it provides the cleanest URLs.
+	 *
+	 * Note: In browsers that do not support the HTML5 history API full
+	 * page reloads will be used to preserve URLs.
+	 */
+	function createBrowserHistory() {
+	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	  !_ExecutionEnvironment.canUseDOM ? process.env.NODE_ENV !== 'production' ? _invariant2['default'](false, 'Browser history needs a DOM') : _invariant2['default'](false) : undefined;
+
+	  var forceRefresh = options.forceRefresh;
+
+	  var isSupported = _DOMUtils.supportsHistory();
+	  var useRefresh = !isSupported || forceRefresh;
+
+	  function getCurrentLocation(historyState) {
+	    historyState = historyState || window.history.state || {};
+
+	    var path = _DOMUtils.getWindowPath();
+	    var _historyState = historyState;
+	    var key = _historyState.key;
+
+	    var state = undefined;
+	    if (key) {
+	      state = _DOMStateStorage.readState(key);
+	    } else {
+	      state = null;
+	      key = history.createKey();
+
+	      if (isSupported) window.history.replaceState(_extends({}, historyState, { key: key }), null);
+	    }
+
+	    var location = _PathUtils.parsePath(path);
+
+	    return history.createLocation(_extends({}, location, { state: state }), undefined, key);
+	  }
+
+	  function startPopStateListener(_ref) {
+	    var transitionTo = _ref.transitionTo;
+
+	    function popStateListener(event) {
+	      if (event.state === undefined) return; // Ignore extraneous popstate events in WebKit.
+
+	      transitionTo(getCurrentLocation(event.state));
+	    }
+
+	    _DOMUtils.addEventListener(window, 'popstate', popStateListener);
+
+	    return function () {
+	      _DOMUtils.removeEventListener(window, 'popstate', popStateListener);
+	    };
+	  }
+
+	  function finishTransition(location) {
+	    var basename = location.basename;
+	    var pathname = location.pathname;
+	    var search = location.search;
+	    var hash = location.hash;
+	    var state = location.state;
+	    var action = location.action;
+	    var key = location.key;
+
+	    if (action === _Actions.POP) return; // Nothing to do.
+
+	    _DOMStateStorage.saveState(key, state);
+
+	    var path = (basename || '') + pathname + search + hash;
+	    var historyState = {
+	      key: key
+	    };
+
+	    if (action === _Actions.PUSH) {
+	      if (useRefresh) {
+	        window.location.href = path;
+	        return false; // Prevent location update.
+	      } else {
+	          window.history.pushState(historyState, null, path);
+	        }
+	    } else {
+	      // REPLACE
+	      if (useRefresh) {
+	        window.location.replace(path);
+	        return false; // Prevent location update.
+	      } else {
+	          window.history.replaceState(historyState, null, path);
+	        }
+	    }
+	  }
+
+	  var history = _createDOMHistory2['default'](_extends({}, options, {
+	    getCurrentLocation: getCurrentLocation,
+	    finishTransition: finishTransition,
+	    saveState: _DOMStateStorage.saveState
+	  }));
+
+	  var listenerCount = 0,
+	      stopPopStateListener = undefined;
+
+	  function listenBefore(listener) {
+	    if (++listenerCount === 1) stopPopStateListener = startPopStateListener(history);
+
+	    var unlisten = history.listenBefore(listener);
+
+	    return function () {
+	      unlisten();
+
+	      if (--listenerCount === 0) stopPopStateListener();
+	    };
+	  }
+
+	  function listen(listener) {
+	    if (++listenerCount === 1) stopPopStateListener = startPopStateListener(history);
+
+	    var unlisten = history.listen(listener);
+
+	    return function () {
+	      unlisten();
+
+	      if (--listenerCount === 0) stopPopStateListener();
+	    };
+	  }
+
+	  // deprecated
+	  function registerTransitionHook(hook) {
+	    if (++listenerCount === 1) stopPopStateListener = startPopStateListener(history);
+
+	    history.registerTransitionHook(hook);
+	  }
+
+	  // deprecated
+	  function unregisterTransitionHook(hook) {
+	    history.unregisterTransitionHook(hook);
+
+	    if (--listenerCount === 0) stopPopStateListener();
+	  }
+
+	  return _extends({}, history, {
+	    listenBefore: listenBefore,
+	    listen: listen,
+	    registerTransitionHook: registerTransitionHook,
+	    unregisterTransitionHook: unregisterTransitionHook
+	  });
+	}
+
+	exports['default'] = createBrowserHistory;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 223 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _useRouterHistory = __webpack_require__(219);
+
+	var _useRouterHistory2 = _interopRequireDefault(_useRouterHistory);
+
+	var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+
+	exports['default'] = function (createHistory) {
+	  var history = undefined;
+	  if (canUseDOM) history = _useRouterHistory2['default'](createHistory)();
+	  return history;
+	};
+
+	module.exports = exports['default'];
+
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _historyLibCreateHashHistory = __webpack_require__(168);
+
+	var _historyLibCreateHashHistory2 = _interopRequireDefault(_historyLibCreateHashHistory);
+
+	var _createRouterHistory = __webpack_require__(223);
+
+	var _createRouterHistory2 = _interopRequireDefault(_createRouterHistory);
+
+	exports['default'] = _createRouterHistory2['default'](_historyLibCreateHashHistory2['default']);
+	module.exports = exports['default'];
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _reactRouter = __webpack_require__(166);
+
+	var _Card = __webpack_require__(226);
+
+	var _Card2 = _interopRequireDefault(_Card);
+
+	__webpack_require__(227);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Home = function Home(_ref) {
+	  var onStart = _ref.onStart;
+	  var onDemo = _ref.onDemo;
+
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'home amber lighten-2 white-text' },
+	    _react2.default.createElement(
+	      'h1',
+	      null,
+	      'Take the',
+	      _react2.default.createElement('br', null),
+	      'Survey'
+	    ),
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      'This questionaire... supports you to find the right spot at work...'
+	    ),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { className: 'demo waves-effect waves-light btn-flat', to: 'demo' },
+	      'View Demo Results'
+	    ),
+	    _react2.default.createElement(
+	      _reactRouter.Link,
+	      { className: 'start btn-floating btn-large waves-effect waves-dark white black-text', to: 'questions/1' },
+	      'Go'
+	    )
+	  );
+	};
+
+	module.exports = Home;
+
+/***/ },
+/* 226 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Card = function Card(props) {
+	  var titleElement = !!props.title ? _react2.default.createElement(
+	    'div',
+	    { className: 'card-title' },
+	    props.title
+	  ) : null;
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'card elevation-0' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'card-content' },
+	      titleElement,
+	      props.children
+	    )
+	  );
+	};
+
+	Card.propTypes = {
+	  title: _react.PropTypes.string
+	};
+
+	module.exports = Card;
+
+/***/ },
+/* 227 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _SurveyStore = __webpack_require__(232);
+
+	var _SurveyStore2 = _interopRequireDefault(_SurveyStore);
+
+	var _reactRouter = __webpack_require__(166);
+
+	__webpack_require__(239);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Questionnaire = function (_Component) {
+	  _inherits(Questionnaire, _Component);
+
+	  function Questionnaire(props) {
+	    _classCallCheck(this, Questionnaire);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Questionnaire).call(this, props));
+
+	    _this.state = {
+	      questions: _SurveyStore2.default.getQuestions()
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Questionnaire, [{
+	    key: 'render',
+	    value: function render() {
+	      var _state = this.state;
+	      var question = _state.question;
+	      var pagination = _state.pagination;
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'questionnaire' },
+	        this.props.children,
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'pagination center' },
+	          this.state.questions.map(this.renderPage, this),
+	          this.renderSubmitPage()
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'renderPage',
+	    value: function renderPage(question) {
+	      var liClassName = "waves-effect",
+	          linkClassName = "";
+	      if (question.id == this.props.params.questionId) {
+	        liClassName = "active";
+	      } else if (!question.answer) {
+	        linkClassName = "grey-text text-lighten-1";
+	      }
+	      return _react2.default.createElement(
+	        'li',
+	        { key: question.id, className: liClassName },
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { className: linkClassName, to: 'questions/' + question.id },
+	          question.id
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'renderSubmitPage',
+	    value: function renderSubmitPage() {
+	      var liClassName = "waves-effect",
+	          linkClassName = "";
+	      if (this.props.location.pathname == '/questions/submit') {
+	        liClassName = "active";
+	      } else {
+	        linkClassName = "grey-text text-lighten-1";
+	      }
+	      return _react2.default.createElement(
+	        'li',
+	        { className: liClassName },
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { className: linkClassName, to: 'questions/submit' },
+	          'Results'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Questionnaire;
+	}(_react.Component);
+
+	exports.default = Questionnaire;
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _Dispatcher = __webpack_require__(233);
 
 	var _Dispatcher2 = _interopRequireDefault(_Dispatcher);
 
-	var _questions = __webpack_require__(171);
+	var _questions = __webpack_require__(237);
 
 	var _questions2 = _interopRequireDefault(_questions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	//import AppConstants = from '../constants/AppConstants'
-	var EventEmitter = __webpack_require__(172).EventEmitter;
+	var EventEmitter = __webpack_require__(238).EventEmitter;
 
 
 	var SurveyStore = module.exports = {};
 
+	var results = null;
+
 	// // Accessors
 
-	SurveyStore.getCurrentQuestion = function () {
-	  return _questions2.default.find(function (question) {
-	    return !question.answer;
+	SurveyStore.getQuestion = function (id) {
+	  return _questions2.default.find(function (q) {
+	    return q.id == id;
 	  });
 	};
 
-	SurveyStore.getQuestionsPaginationInfo = function () {
-	  var currentQuestion = SurveyStore.getCurrentQuestion();
-	  return {
-	    current: _questions2.default.findIndex(function (question) {
-	      return !question.answer;
-	    }) + 1,
-	    total: _questions2.default.length
-	  };
+	SurveyStore.getQuestions = function () {
+	  return _questions2.default;
 	};
 
 	SurveyStore.getAnswers = function () {
-	  return _questions2.default.map(function (question) {
-	    return question.answer;
+	  return _questions2.default.map(function (q) {
+	    return q.answer;
+	  }).filter(function (a) {
+	    return !!a;
 	  });
+	};
+
+	SurveyStore.isFilledOut = function () {
+	  return SurveyStore.getAnswers().length == _questions2.default.length;
+	};
+
+	SurveyStore.getResults = function () {
+	  return results;
+	};
+
+	SurveyStore.isFinalQuestion = function (id) {
+	  return _questions2.default[_questions2.default.length - 1].id == id;
 	};
 
 	// // Emitting Change Events
@@ -20135,11 +25785,11 @@
 	}
 
 	SurveyStore.addChangeListener = function (callback) {
-	  eventEmitter.on(CHANGE_EVENT, callback);
+	  return eventEmitter.on(CHANGE_EVENT, callback);
 	};
 
 	SurveyStore.removeChangeListener = function (callback) {
-	  eventEmitter.removeListener(CHANGE_EVENT, callback);
+	  return eventEmitter.removeListener(CHANGE_EVENT, callback);
 	};
 
 	// // RESPONDING TO ACTIONS
@@ -20156,23 +25806,27 @@
 	      });
 	      emitChangeEvent();
 	      break;
+	    case 'RETRIEVE_RESULTS':
+	      results = action.results;
+	      emitChangeEvent();
+	      break;
 	    default:
 	      break;
 	  }
 	});
 
 /***/ },
-/* 167 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Dispatcher = __webpack_require__(168).Dispatcher;
+	var Dispatcher = __webpack_require__(234).Dispatcher;
 
 	module.exports = new Dispatcher();
 
 /***/ },
-/* 168 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20184,11 +25838,11 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 
-	module.exports.Dispatcher = __webpack_require__(169);
+	module.exports.Dispatcher = __webpack_require__(235);
 
 
 /***/ },
-/* 169 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -20210,7 +25864,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var invariant = __webpack_require__(170);
+	var invariant = __webpack_require__(236);
 
 	var _prefix = 'ID_';
 
@@ -20425,7 +26079,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 170 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -20480,64 +26134,18 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 171 */
+/* 237 */
 /***/ function(module, exports) {
 
 	"use strict";
 
-	module.exports = [{ id: 1, text: "I am the life of the party." }, { id: 2, text: "I feel little concern for others." }, { id: 3, text: "I am always prepared." }, { id: 4, text: "I get stressed out easily." }, { id: 5, text: "I have a rich vocabulary." }].
-	/*{id: 6, text: "I don't talk a lot."},
-	{id: 7, text: "I am interested in people."},
-	{id: 8, text: "I leave my belongings around."},
-	{id: 9, text: "I am relaxed most of the time."},
-	{id: 10, text: "I have difficulty understanding abstract ideas."},
-	{id: 11, text: "I feel comfortable around people."},
-	{id: 12, text: "I insult people."},
-	{id: 13, text: "I pay attention to details."},
-	{id: 14, text: "I worry about things."},
-	{id: 15, text: "I have a vivid imagination."},
-	{id: 16, text: "I keep in the background."},
-	{id: 17, text: "I sympathize with others' feelings."},
-	{id: 18, text: "I make a mess of things."},
-	{id: 19, text: "I seldom feel blue."},
-	{id: 20, text: "I am not interested in abstract ideas."},
-	{id: 21, text: "I start conversations."},
-	{id: 22, text: "I am not interested in other people's problems."},
-	{id: 23, text: "I get chores done right away."},
-	{id: 24, text: "I am easily disturbed."},
-	{id: 25, text: "I have excellent ideas."},
-	{id: 26, text: "I have little to say."},
-	{id: 27, text: "I have a soft heart."},
-	{id: 28, text: "I often forget to put things back in their proper place."},
-	{id: 29, text: "I get upset easily."},
-	{id: 30, text: "I do not have a good imagination."},
-	{id: 31, text: "I talk to a lot of different people at parties."},
-	{id: 32, text: "I am not really interested in others."},
-	{id: 33, text: "I like order."},
-	{id: 34, text: "I change my mood a lot."},
-	{id: 35, text: "I am quick to understand things."},
-	{id: 36, text: "I don't like to draw attention to myself."},
-	{id: 37, text: "I take time out for others."},
-	{id: 38, text: "I shirk my duties."},
-	{id: 39, text: "I have frequent mood swings."},
-	{id: 40, text: "I use difficult words."},
-	{id: 41, text: "I don't mind being the center of attention."},
-	{id: 42, text: "I feel others' emotions."},
-	{id: 43, text: "I follow a schedule."},
-	{id: 44, text: "I get irritated easily."},
-	{id: 45, text: "I spend time reflecting on things."},
-	{id: 46, text: "I am quiet around strangers."},
-	{id: 47, text: "I make people feel at ease."},
-	{id: 48, text: "I am exacting in my work."},
-	{id: 49, text: "I often feel blue."},
-	{id: 50, text: "I am full of ideas."}*/
-	map(function (q) {
-	  q.answers = [{ id: 1, text: "Nope" }, { id: 2, text: "Kinda" }, { id: 3, text: "Yep" }];
+	module.exports = [{ id: 1, text: "I spend\ntime reflecting on things." }, { id: 2, text: "I pay\nattention to details." }, { id: 3, text: "I don't mind being\nthe center of attention." }, { id: 4, text: "I take\ntime out for others." }, { id: 5, text: "I get\nstressed out easily." }].map(function (q) {
+	  q.answers = [{ id: 1, text: "Disagree" }, { id: 2, text: "Neutral" }, { id: 3, text: "Agree" }];
 	  return q;
 	});
 
 /***/ },
-/* 172 */
+/* 238 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -20841,48 +26449,14 @@
 
 
 /***/ },
-/* 173 */
-/***/ function(module, exports, __webpack_require__) {
+/* 239 */
+/***/ function(module, exports) {
 
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(32);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Landing = function Landing(_ref) {
-	  var onStart = _ref.onStart;
-
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      'Welcome to our bla bla bla...'
-	    ),
-	    _react2.default.createElement(
-	      'a',
-	      { onClick: onStart },
-	      'Get Started!'
-	    )
-	  );
-	};
-
-	Landing.propTypes = {
-	  onStart: _react.PropTypes.func
-	};
-
-	module.exports = Landing;
+	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 174 */
+/* 240 */,
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20901,17 +26475,15 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _SurveyStore = __webpack_require__(166);
+	var _SurveyStore = __webpack_require__(232);
 
 	var _SurveyStore2 = _interopRequireDefault(_SurveyStore);
 
-	var _answerQuestion = __webpack_require__(175);
+	var _answerQuestion2 = __webpack_require__(242);
 
-	var _answerQuestion2 = _interopRequireDefault(_answerQuestion);
+	var _answerQuestion3 = _interopRequireDefault(_answerQuestion2);
 
-	var _Question = __webpack_require__(176);
-
-	var _Question2 = _interopRequireDefault(_Question);
+	__webpack_require__(239);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20921,88 +26493,128 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	function getState() {
+	function getState(props) {
 	  return {
-	    question: _SurveyStore2.default.getCurrentQuestion(),
-	    pagination: _SurveyStore2.default.getQuestionsPaginationInfo()
+	    question: _SurveyStore2.default.getQuestion(props.params.questionId),
+	    isFinalQuestion: _SurveyStore2.default.isFinalQuestion(props.params.questionId)
 	  };
 	}
 
-	var Hello = function (_Component) {
-	  _inherits(Hello, _Component);
+	var Question = function (_Component) {
+	  _inherits(Question, _Component);
 
-	  function Hello(props) {
-	    _classCallCheck(this, Hello);
+	  function Question(props) {
+	    _classCallCheck(this, Question);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Hello).call(this, props));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Question).call(this, props));
 
-	    _this.state = getState();
+	    _this.state = getState(props);
 	    return _this;
 	  }
 
-	  _createClass(Hello, [{
+	  _createClass(Question, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this._hndl = _SurveyStore2.default.addChangeListener(this.onChange.bind(this));
+	      var _this2 = this;
+
+	      this._surveyStoreListener = function (e) {
+	        return _this2.setState(getState(_this2.props));
+	      };
+	      _SurveyStore2.default.addChangeListener(this._surveyStoreListener);
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
-	      this._hndl();
+	      _SurveyStore2.default.removeChangeListener(this._surveyStoreListener);
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState(getState(nextProps));
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
+	      var question = this.state.question;
 
 	      return _react2.default.createElement(
 	        'div',
-	        null,
-	        _react2.default.createElement(_Question2.default, { question: this.state.question, onSelect: function onSelect(answer) {
-	            (0, _answerQuestion2.default)(_this2.state.question, answer);
-	          } }),
-	        this.renderNavigation()
-	      );
-	    }
-	  }, {
-	    key: 'renderNavigation',
-	    value: function renderNavigation() {
-	      var _state$pagination = this.state.pagination;
-	      var current = _state$pagination.current;
-	      var total = _state$pagination.total;
-
-	      return _react2.default.createElement(
-	        'div',
-	        null,
+	        { className: 'question amber lighten-2 z-depth-1' },
+	        _react2.default.createElement(
+	          'h2',
+	          { className: 'white-text' },
+	          question.text.split('\n').map(function (substring) {
+	            return _react2.default.createElement(
+	              'span',
+	              null,
+	              substring,
+	              _react2.default.createElement('br', null)
+	            );
+	          })
+	        ),
 	        _react2.default.createElement(
 	          'div',
-	          null,
-	          'Question ',
-	          current,
-	          ' of ',
-	          total
+	          { className: 'answers' },
+	          question.answers.map(this.renderAnswer, this)
 	        )
 	      );
 	    }
 	  }, {
-	    key: 'onChange',
-	    value: function onChange() {
-	      this.setState(getState());
+	    key: 'renderAnswer',
+	    value: function renderAnswer(answer) {
+	      var _this3 = this;
+
+	      var question = this.state.question;
+
+	      var className = 'waves-effect waves-dark btn btn-large white black-text';
+	      if (question.answer && answer.id == question.answer.id) {
+	        className += ' red';
+	      }
+	      return _react2.default.createElement(
+	        'div',
+	        { key: answer.id, className: 'answer' },
+	        _react2.default.createElement(
+	          'a',
+	          { className: className, onClick: function onClick() {
+	              return _this3.answerQuestion(answer);
+	            } },
+	          answer.text
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'answerQuestion',
+	    value: function answerQuestion(answer) {
+	      var _state = this.state;
+	      var question = _state.question;
+	      var isFinalQuestion = _state.isFinalQuestion;
+
+	      (0, _answerQuestion3.default)(question, answer);
+	      if (!isFinalQuestion) {
+	        this.context.router.push('questions/' + (question.id + 1));
+	      } else {
+	        this.context.router.push('questions/submit');
+	      }
 	    }
 	  }]);
 
-	  return Hello;
+	  return Question;
 	}(_react.Component);
 
-	exports.default = Hello;
+	exports.default = Question;
+
+
+	Question.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
+	};
 
 /***/ },
-/* 175 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _Dispatcher = __webpack_require__(167);
+	var _Dispatcher = __webpack_require__(233);
 
 	var _Dispatcher2 = _interopRequireDefault(_Dispatcher);
 
@@ -21017,10 +26629,16 @@
 	};
 
 /***/ },
-/* 176 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -21030,50 +26648,5939 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Card = __webpack_require__(177);
+	var _reactRouter = __webpack_require__(166);
 
-	var _Card2 = _interopRequireDefault(_Card);
+	var _SurveyStore = __webpack_require__(232);
+
+	var _SurveyStore2 = _interopRequireDefault(_SurveyStore);
+
+	var _submitQuestionnaire = __webpack_require__(244);
+
+	var _submitQuestionnaire2 = _interopRequireDefault(_submitQuestionnaire);
+
+	__webpack_require__(251);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Question = function Question(_ref) {
-	  var question = _ref.question;
-	  var _onSelect = _ref.onSelect;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	  return _react2.default.createElement(
-	    _Card2.default,
-	    { title: question.text },
-	    question.answers.map(function (answer, idx) {
-	      return _react2.default.createElement(Answer, { key: idx, answer: answer, isSelected: !!question.answer && answer.id == question.answer.id, onSelect: function onSelect() {
-	          return _onSelect(answer);
-	        } });
-	    })
-	  );
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Submission = function (_Component) {
+	  _inherits(Submission, _Component);
+
+	  function Submission(props) {
+	    _classCallCheck(this, Submission);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Submission).call(this, props));
+
+	    _this.state = {
+	      isFilledOut: _SurveyStore2.default.isFilledOut(),
+	      isSubmitting: false,
+	      error: null
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Submission, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'submission' },
+	        this.renderContent()
+	      );
+	    }
+	  }, {
+	    key: 'renderContent',
+	    value: function renderContent() {
+	      var _state = this.state;
+	      var isFilledOut = _state.isFilledOut;
+	      var isSubmitting = _state.isSubmitting;
+	      var error = _state.error;
+
+	      if (!!error) {
+	        return this.renderMessage(error);
+	      } else if (isSubmitting) {
+	        return this.renderMessage("Submitting...");
+	      } else if (!isFilledOut) {
+	        return this.renderMessage("The form is not yet filled out completely.");
+	      } else {
+	        return _react2.default.createElement(
+	          'a',
+	          { className: 'btn-floating btn-large waves-effect waves-light amber lighten-2 white-text',
+	            onClick: this.submit.bind(this) },
+	          'Compute'
+	        );
+	      }
+	    }
+	  }, {
+	    key: 'renderMessage',
+	    value: function renderMessage(message) {
+	      return _react2.default.createElement(
+	        'h4',
+	        { className: 'grey-text' },
+	        message
+	      );
+	    }
+	  }, {
+	    key: 'submit',
+	    value: function submit() {
+	      var _this2 = this;
+
+	      this.setState({ isSubmitting: true, error: null });
+	      (0, _submitQuestionnaire2.default)().then(function () {
+	        _this2.setState({ isSubmitting: false });
+	        _this2.context.router.push('results');
+	      }, function (error) {
+	        console.log(error);
+	        _this2.setState({ isSubmitting: false, error: error || "Unknown error" });
+	      });
+	    }
+	  }]);
+
+	  return Submission;
+	}(_react.Component);
+
+	exports.default = Submission;
+
+
+	Submission.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
 	};
-
-	Question.propTypes = {
-	  question: _react.PropTypes.object.isRequired, // TODO: shape
-	  onSelect: _react.PropTypes.func
-	};
-
-	var Answer = function Answer(_ref2) {
-	  var answer = _ref2.answer;
-	  var isSelected = _ref2.isSelected;
-	  var onSelect = _ref2.onSelect;
-
-	  var className = 'waves-effect waves-light btn';
-	  if (isSelected) className += ' red';
-	  return _react2.default.createElement(
-	    'a',
-	    { className: className, onClick: onSelect },
-	    answer.text
-	  );
-	};
-
-	module.exports = Question;
 
 /***/ },
-/* 177 */
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _superagent = __webpack_require__(245);
+
+	var _superagent2 = _interopRequireDefault(_superagent);
+
+	var _Dispatcher = __webpack_require__(233);
+
+	var _Dispatcher2 = _interopRequireDefault(_Dispatcher);
+
+	var _SurveyStore = __webpack_require__(232);
+
+	var _SurveyStore2 = _interopRequireDefault(_SurveyStore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function getBody(answerIds) {
+	  answerIds.push("0");
+	  return {
+	    "Inputs": {
+	      "input1": {
+	        "ColumnNames": ["a1", "a2", "a3", "a4", "a5", "ide"],
+	        "Values": [answerIds]
+	      }
+	    },
+	    "GlobalParameters": {}
+	  };
+	}
+
+	module.exports = function () {
+	  return new Promise(function (resolve, reject) {
+	    var answerIds = _SurveyStore2.default.getAnswers().map(function (a) {
+	      return a.id;
+	    });
+	    console.log('Sending...', answerIds);
+	    _superagent2.default.post('https://ussouthcentral.services.azureml.net/workspaces/4f5cd4796bcc49fc919ebb6fde724e0a/services/c9747cdea43a474cb77c27c129788263/execute?api-version=2.0&details=true').send(getBody(answerIds)).set('Content-Type', 'application/json').set('Accept', 'application/json').set('Authorization', 'Bearer GFywvyXm+xfF//kvB5qkXVTJevXpBWaM8Xj3WnxzZTGBpETuIR+3q5nyUjSIGA1VHIzbnaLI0/yzRBD97E5ekw==').end(function (error, result) {
+	      if (!error && !!result) {
+	        try {
+	          var json = JSON.parse(result.text);
+	          var values = json.Results.output1.value.Values[0].slice(2, 7).map(function (v) {
+	            return 1 - parseFloat(v);
+	          });
+	          var results = {
+	            Tester: values[0],
+	            Sales: values[1],
+	            Architect: values[2],
+	            Algorithms: values[3],
+	            Developer: values[4]
+	          };
+	          console.log(results);
+	          _Dispatcher2.default.dispatch({
+	            type: 'RETRIEVE_RESULTS',
+	            results: results
+	          });
+	          resolve();
+	        } catch (error) {
+	          console.error(error);
+	          reject(error);
+	        }
+	      } else {
+	        console.error(error);
+	        reject(error);
+	      }
+	    });
+	  });
+	};
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Module dependencies.
+	 */
+
+	var Emitter = __webpack_require__(246);
+	var reduce = __webpack_require__(247);
+	var requestBase = __webpack_require__(248);
+	var isObject = __webpack_require__(249);
+
+	/**
+	 * Root reference for iframes.
+	 */
+
+	var root;
+	if (typeof window !== 'undefined') { // Browser window
+	  root = window;
+	} else if (typeof self !== 'undefined') { // Web Worker
+	  root = self;
+	} else { // Other environments
+	  root = this;
+	}
+
+	/**
+	 * Noop.
+	 */
+
+	function noop(){};
+
+	/**
+	 * Check if `obj` is a host object,
+	 * we don't want to serialize these :)
+	 *
+	 * TODO: future proof, move to compoent land
+	 *
+	 * @param {Object} obj
+	 * @return {Boolean}
+	 * @api private
+	 */
+
+	function isHost(obj) {
+	  var str = {}.toString.call(obj);
+
+	  switch (str) {
+	    case '[object File]':
+	    case '[object Blob]':
+	    case '[object FormData]':
+	      return true;
+	    default:
+	      return false;
+	  }
+	}
+
+	/**
+	 * Expose `request`.
+	 */
+
+	var request = module.exports = __webpack_require__(250).bind(null, Request);
+
+	/**
+	 * Determine XHR.
+	 */
+
+	request.getXHR = function () {
+	  if (root.XMLHttpRequest
+	      && (!root.location || 'file:' != root.location.protocol
+	          || !root.ActiveXObject)) {
+	    return new XMLHttpRequest;
+	  } else {
+	    try { return new ActiveXObject('Microsoft.XMLHTTP'); } catch(e) {}
+	    try { return new ActiveXObject('Msxml2.XMLHTTP.6.0'); } catch(e) {}
+	    try { return new ActiveXObject('Msxml2.XMLHTTP.3.0'); } catch(e) {}
+	    try { return new ActiveXObject('Msxml2.XMLHTTP'); } catch(e) {}
+	  }
+	  return false;
+	};
+
+	/**
+	 * Removes leading and trailing whitespace, added to support IE.
+	 *
+	 * @param {String} s
+	 * @return {String}
+	 * @api private
+	 */
+
+	var trim = ''.trim
+	  ? function(s) { return s.trim(); }
+	  : function(s) { return s.replace(/(^\s*|\s*$)/g, ''); };
+
+	/**
+	 * Serialize the given `obj`.
+	 *
+	 * @param {Object} obj
+	 * @return {String}
+	 * @api private
+	 */
+
+	function serialize(obj) {
+	  if (!isObject(obj)) return obj;
+	  var pairs = [];
+	  for (var key in obj) {
+	    if (null != obj[key]) {
+	      pushEncodedKeyValuePair(pairs, key, obj[key]);
+	        }
+	      }
+	  return pairs.join('&');
+	}
+
+	/**
+	 * Helps 'serialize' with serializing arrays.
+	 * Mutates the pairs array.
+	 *
+	 * @param {Array} pairs
+	 * @param {String} key
+	 * @param {Mixed} val
+	 */
+
+	function pushEncodedKeyValuePair(pairs, key, val) {
+	  if (Array.isArray(val)) {
+	    return val.forEach(function(v) {
+	      pushEncodedKeyValuePair(pairs, key, v);
+	    });
+	  }
+	  pairs.push(encodeURIComponent(key)
+	    + '=' + encodeURIComponent(val));
+	}
+
+	/**
+	 * Expose serialization method.
+	 */
+
+	 request.serializeObject = serialize;
+
+	 /**
+	  * Parse the given x-www-form-urlencoded `str`.
+	  *
+	  * @param {String} str
+	  * @return {Object}
+	  * @api private
+	  */
+
+	function parseString(str) {
+	  var obj = {};
+	  var pairs = str.split('&');
+	  var parts;
+	  var pair;
+
+	  for (var i = 0, len = pairs.length; i < len; ++i) {
+	    pair = pairs[i];
+	    parts = pair.split('=');
+	    obj[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
+	  }
+
+	  return obj;
+	}
+
+	/**
+	 * Expose parser.
+	 */
+
+	request.parseString = parseString;
+
+	/**
+	 * Default MIME type map.
+	 *
+	 *     superagent.types.xml = 'application/xml';
+	 *
+	 */
+
+	request.types = {
+	  html: 'text/html',
+	  json: 'application/json',
+	  xml: 'application/xml',
+	  urlencoded: 'application/x-www-form-urlencoded',
+	  'form': 'application/x-www-form-urlencoded',
+	  'form-data': 'application/x-www-form-urlencoded'
+	};
+
+	/**
+	 * Default serialization map.
+	 *
+	 *     superagent.serialize['application/xml'] = function(obj){
+	 *       return 'generated xml here';
+	 *     };
+	 *
+	 */
+
+	 request.serialize = {
+	   'application/x-www-form-urlencoded': serialize,
+	   'application/json': JSON.stringify
+	 };
+
+	 /**
+	  * Default parsers.
+	  *
+	  *     superagent.parse['application/xml'] = function(str){
+	  *       return { object parsed from str };
+	  *     };
+	  *
+	  */
+
+	request.parse = {
+	  'application/x-www-form-urlencoded': parseString,
+	  'application/json': JSON.parse
+	};
+
+	/**
+	 * Parse the given header `str` into
+	 * an object containing the mapped fields.
+	 *
+	 * @param {String} str
+	 * @return {Object}
+	 * @api private
+	 */
+
+	function parseHeader(str) {
+	  var lines = str.split(/\r?\n/);
+	  var fields = {};
+	  var index;
+	  var line;
+	  var field;
+	  var val;
+
+	  lines.pop(); // trailing CRLF
+
+	  for (var i = 0, len = lines.length; i < len; ++i) {
+	    line = lines[i];
+	    index = line.indexOf(':');
+	    field = line.slice(0, index).toLowerCase();
+	    val = trim(line.slice(index + 1));
+	    fields[field] = val;
+	  }
+
+	  return fields;
+	}
+
+	/**
+	 * Check if `mime` is json or has +json structured syntax suffix.
+	 *
+	 * @param {String} mime
+	 * @return {Boolean}
+	 * @api private
+	 */
+
+	function isJSON(mime) {
+	  return /[\/+]json\b/.test(mime);
+	}
+
+	/**
+	 * Return the mime type for the given `str`.
+	 *
+	 * @param {String} str
+	 * @return {String}
+	 * @api private
+	 */
+
+	function type(str){
+	  return str.split(/ *; */).shift();
+	};
+
+	/**
+	 * Return header field parameters.
+	 *
+	 * @param {String} str
+	 * @return {Object}
+	 * @api private
+	 */
+
+	function params(str){
+	  return reduce(str.split(/ *; */), function(obj, str){
+	    var parts = str.split(/ *= */)
+	      , key = parts.shift()
+	      , val = parts.shift();
+
+	    if (key && val) obj[key] = val;
+	    return obj;
+	  }, {});
+	};
+
+	/**
+	 * Initialize a new `Response` with the given `xhr`.
+	 *
+	 *  - set flags (.ok, .error, etc)
+	 *  - parse header
+	 *
+	 * Examples:
+	 *
+	 *  Aliasing `superagent` as `request` is nice:
+	 *
+	 *      request = superagent;
+	 *
+	 *  We can use the promise-like API, or pass callbacks:
+	 *
+	 *      request.get('/').end(function(res){});
+	 *      request.get('/', function(res){});
+	 *
+	 *  Sending data can be chained:
+	 *
+	 *      request
+	 *        .post('/user')
+	 *        .send({ name: 'tj' })
+	 *        .end(function(res){});
+	 *
+	 *  Or passed to `.send()`:
+	 *
+	 *      request
+	 *        .post('/user')
+	 *        .send({ name: 'tj' }, function(res){});
+	 *
+	 *  Or passed to `.post()`:
+	 *
+	 *      request
+	 *        .post('/user', { name: 'tj' })
+	 *        .end(function(res){});
+	 *
+	 * Or further reduced to a single call for simple cases:
+	 *
+	 *      request
+	 *        .post('/user', { name: 'tj' }, function(res){});
+	 *
+	 * @param {XMLHTTPRequest} xhr
+	 * @param {Object} options
+	 * @api private
+	 */
+
+	function Response(req, options) {
+	  options = options || {};
+	  this.req = req;
+	  this.xhr = this.req.xhr;
+	  // responseText is accessible only if responseType is '' or 'text' and on older browsers
+	  this.text = ((this.req.method !='HEAD' && (this.xhr.responseType === '' || this.xhr.responseType === 'text')) || typeof this.xhr.responseType === 'undefined')
+	     ? this.xhr.responseText
+	     : null;
+	  this.statusText = this.req.xhr.statusText;
+	  this.setStatusProperties(this.xhr.status);
+	  this.header = this.headers = parseHeader(this.xhr.getAllResponseHeaders());
+	  // getAllResponseHeaders sometimes falsely returns "" for CORS requests, but
+	  // getResponseHeader still works. so we get content-type even if getting
+	  // other headers fails.
+	  this.header['content-type'] = this.xhr.getResponseHeader('content-type');
+	  this.setHeaderProperties(this.header);
+	  this.body = this.req.method != 'HEAD'
+	    ? this.parseBody(this.text ? this.text : this.xhr.response)
+	    : null;
+	}
+
+	/**
+	 * Get case-insensitive `field` value.
+	 *
+	 * @param {String} field
+	 * @return {String}
+	 * @api public
+	 */
+
+	Response.prototype.get = function(field){
+	  return this.header[field.toLowerCase()];
+	};
+
+	/**
+	 * Set header related properties:
+	 *
+	 *   - `.type` the content type without params
+	 *
+	 * A response of "Content-Type: text/plain; charset=utf-8"
+	 * will provide you with a `.type` of "text/plain".
+	 *
+	 * @param {Object} header
+	 * @api private
+	 */
+
+	Response.prototype.setHeaderProperties = function(header){
+	  // content-type
+	  var ct = this.header['content-type'] || '';
+	  this.type = type(ct);
+
+	  // params
+	  var obj = params(ct);
+	  for (var key in obj) this[key] = obj[key];
+	};
+
+	/**
+	 * Parse the given body `str`.
+	 *
+	 * Used for auto-parsing of bodies. Parsers
+	 * are defined on the `superagent.parse` object.
+	 *
+	 * @param {String} str
+	 * @return {Mixed}
+	 * @api private
+	 */
+
+	Response.prototype.parseBody = function(str){
+	  var parse = request.parse[this.type];
+	  if (!parse && isJSON(this.type)) {
+	    parse = request.parse['application/json'];
+	  }
+	  return parse && str && (str.length || str instanceof Object)
+	    ? parse(str)
+	    : null;
+	};
+
+	/**
+	 * Set flags such as `.ok` based on `status`.
+	 *
+	 * For example a 2xx response will give you a `.ok` of __true__
+	 * whereas 5xx will be __false__ and `.error` will be __true__. The
+	 * `.clientError` and `.serverError` are also available to be more
+	 * specific, and `.statusType` is the class of error ranging from 1..5
+	 * sometimes useful for mapping respond colors etc.
+	 *
+	 * "sugar" properties are also defined for common cases. Currently providing:
+	 *
+	 *   - .noContent
+	 *   - .badRequest
+	 *   - .unauthorized
+	 *   - .notAcceptable
+	 *   - .notFound
+	 *
+	 * @param {Number} status
+	 * @api private
+	 */
+
+	Response.prototype.setStatusProperties = function(status){
+	  // handle IE9 bug: http://stackoverflow.com/questions/10046972/msie-returns-status-code-of-1223-for-ajax-request
+	  if (status === 1223) {
+	    status = 204;
+	  }
+
+	  var type = status / 100 | 0;
+
+	  // status / class
+	  this.status = this.statusCode = status;
+	  this.statusType = type;
+
+	  // basics
+	  this.info = 1 == type;
+	  this.ok = 2 == type;
+	  this.clientError = 4 == type;
+	  this.serverError = 5 == type;
+	  this.error = (4 == type || 5 == type)
+	    ? this.toError()
+	    : false;
+
+	  // sugar
+	  this.accepted = 202 == status;
+	  this.noContent = 204 == status;
+	  this.badRequest = 400 == status;
+	  this.unauthorized = 401 == status;
+	  this.notAcceptable = 406 == status;
+	  this.notFound = 404 == status;
+	  this.forbidden = 403 == status;
+	};
+
+	/**
+	 * Return an `Error` representative of this response.
+	 *
+	 * @return {Error}
+	 * @api public
+	 */
+
+	Response.prototype.toError = function(){
+	  var req = this.req;
+	  var method = req.method;
+	  var url = req.url;
+
+	  var msg = 'cannot ' + method + ' ' + url + ' (' + this.status + ')';
+	  var err = new Error(msg);
+	  err.status = this.status;
+	  err.method = method;
+	  err.url = url;
+
+	  return err;
+	};
+
+	/**
+	 * Expose `Response`.
+	 */
+
+	request.Response = Response;
+
+	/**
+	 * Initialize a new `Request` with the given `method` and `url`.
+	 *
+	 * @param {String} method
+	 * @param {String} url
+	 * @api public
+	 */
+
+	function Request(method, url) {
+	  var self = this;
+	  this._query = this._query || [];
+	  this.method = method;
+	  this.url = url;
+	  this.header = {}; // preserves header name case
+	  this._header = {}; // coerces header names to lowercase
+	  this.on('end', function(){
+	    var err = null;
+	    var res = null;
+
+	    try {
+	      res = new Response(self);
+	    } catch(e) {
+	      err = new Error('Parser is unable to parse the response');
+	      err.parse = true;
+	      err.original = e;
+	      // issue #675: return the raw response if the response parsing fails
+	      err.rawResponse = self.xhr && self.xhr.responseText ? self.xhr.responseText : null;
+	      // issue #876: return the http status code if the response parsing fails
+	      err.statusCode = self.xhr && self.xhr.status ? self.xhr.status : null;
+	      return self.callback(err);
+	    }
+
+	    self.emit('response', res);
+
+	    if (err) {
+	      return self.callback(err, res);
+	    }
+
+	    if (res.status >= 200 && res.status < 300) {
+	      return self.callback(err, res);
+	    }
+
+	    var new_err = new Error(res.statusText || 'Unsuccessful HTTP response');
+	    new_err.original = err;
+	    new_err.response = res;
+	    new_err.status = res.status;
+
+	    self.callback(new_err, res);
+	  });
+	}
+
+	/**
+	 * Mixin `Emitter` and `requestBase`.
+	 */
+
+	Emitter(Request.prototype);
+	for (var key in requestBase) {
+	  Request.prototype[key] = requestBase[key];
+	}
+
+	/**
+	 * Abort the request, and clear potential timeout.
+	 *
+	 * @return {Request}
+	 * @api public
+	 */
+
+	Request.prototype.abort = function(){
+	  if (this.aborted) return;
+	  this.aborted = true;
+	  this.xhr.abort();
+	  this.clearTimeout();
+	  this.emit('abort');
+	  return this;
+	};
+
+	/**
+	 * Set Content-Type to `type`, mapping values from `request.types`.
+	 *
+	 * Examples:
+	 *
+	 *      superagent.types.xml = 'application/xml';
+	 *
+	 *      request.post('/')
+	 *        .type('xml')
+	 *        .send(xmlstring)
+	 *        .end(callback);
+	 *
+	 *      request.post('/')
+	 *        .type('application/xml')
+	 *        .send(xmlstring)
+	 *        .end(callback);
+	 *
+	 * @param {String} type
+	 * @return {Request} for chaining
+	 * @api public
+	 */
+
+	Request.prototype.type = function(type){
+	  this.set('Content-Type', request.types[type] || type);
+	  return this;
+	};
+
+	/**
+	 * Set responseType to `val`. Presently valid responseTypes are 'blob' and 
+	 * 'arraybuffer'.
+	 *
+	 * Examples:
+	 *
+	 *      req.get('/')
+	 *        .responseType('blob')
+	 *        .end(callback);
+	 *
+	 * @param {String} val
+	 * @return {Request} for chaining
+	 * @api public
+	 */
+
+	Request.prototype.responseType = function(val){
+	  this._responseType = val;
+	  return this;
+	};
+
+	/**
+	 * Set Accept to `type`, mapping values from `request.types`.
+	 *
+	 * Examples:
+	 *
+	 *      superagent.types.json = 'application/json';
+	 *
+	 *      request.get('/agent')
+	 *        .accept('json')
+	 *        .end(callback);
+	 *
+	 *      request.get('/agent')
+	 *        .accept('application/json')
+	 *        .end(callback);
+	 *
+	 * @param {String} accept
+	 * @return {Request} for chaining
+	 * @api public
+	 */
+
+	Request.prototype.accept = function(type){
+	  this.set('Accept', request.types[type] || type);
+	  return this;
+	};
+
+	/**
+	 * Set Authorization field value with `user` and `pass`.
+	 *
+	 * @param {String} user
+	 * @param {String} pass
+	 * @param {Object} options with 'type' property 'auto' or 'basic' (default 'basic')
+	 * @return {Request} for chaining
+	 * @api public
+	 */
+
+	Request.prototype.auth = function(user, pass, options){
+	  if (!options) {
+	    options = {
+	      type: 'basic'
+	    }
+	  }
+
+	  switch (options.type) {
+	    case 'basic':
+	      var str = btoa(user + ':' + pass);
+	      this.set('Authorization', 'Basic ' + str);
+	    break;
+
+	    case 'auto':
+	      this.username = user;
+	      this.password = pass;
+	    break;
+	  }
+	  return this;
+	};
+
+	/**
+	* Add query-string `val`.
+	*
+	* Examples:
+	*
+	*   request.get('/shoes')
+	*     .query('size=10')
+	*     .query({ color: 'blue' })
+	*
+	* @param {Object|String} val
+	* @return {Request} for chaining
+	* @api public
+	*/
+
+	Request.prototype.query = function(val){
+	  if ('string' != typeof val) val = serialize(val);
+	  if (val) this._query.push(val);
+	  return this;
+	};
+
+	/**
+	 * Queue the given `file` as an attachment to the specified `field`,
+	 * with optional `filename`.
+	 *
+	 * ``` js
+	 * request.post('/upload')
+	 *   .attach(new Blob(['<a id="a"><b id="b">hey!</b></a>'], { type: "text/html"}))
+	 *   .end(callback);
+	 * ```
+	 *
+	 * @param {String} field
+	 * @param {Blob|File} file
+	 * @param {String} filename
+	 * @return {Request} for chaining
+	 * @api public
+	 */
+
+	Request.prototype.attach = function(field, file, filename){
+	  this._getFormData().append(field, file, filename || file.name);
+	  return this;
+	};
+
+	Request.prototype._getFormData = function(){
+	  if (!this._formData) {
+	    this._formData = new root.FormData();
+	  }
+	  return this._formData;
+	};
+
+	/**
+	 * Send `data` as the request body, defaulting the `.type()` to "json" when
+	 * an object is given.
+	 *
+	 * Examples:
+	 *
+	 *       // manual json
+	 *       request.post('/user')
+	 *         .type('json')
+	 *         .send('{"name":"tj"}')
+	 *         .end(callback)
+	 *
+	 *       // auto json
+	 *       request.post('/user')
+	 *         .send({ name: 'tj' })
+	 *         .end(callback)
+	 *
+	 *       // manual x-www-form-urlencoded
+	 *       request.post('/user')
+	 *         .type('form')
+	 *         .send('name=tj')
+	 *         .end(callback)
+	 *
+	 *       // auto x-www-form-urlencoded
+	 *       request.post('/user')
+	 *         .type('form')
+	 *         .send({ name: 'tj' })
+	 *         .end(callback)
+	 *
+	 *       // defaults to x-www-form-urlencoded
+	  *      request.post('/user')
+	  *        .send('name=tobi')
+	  *        .send('species=ferret')
+	  *        .end(callback)
+	 *
+	 * @param {String|Object} data
+	 * @return {Request} for chaining
+	 * @api public
+	 */
+
+	Request.prototype.send = function(data){
+	  var obj = isObject(data);
+	  var type = this._header['content-type'];
+
+	  // merge
+	  if (obj && isObject(this._data)) {
+	    for (var key in data) {
+	      this._data[key] = data[key];
+	    }
+	  } else if ('string' == typeof data) {
+	    if (!type) this.type('form');
+	    type = this._header['content-type'];
+	    if ('application/x-www-form-urlencoded' == type) {
+	      this._data = this._data
+	        ? this._data + '&' + data
+	        : data;
+	    } else {
+	      this._data = (this._data || '') + data;
+	    }
+	  } else {
+	    this._data = data;
+	  }
+
+	  if (!obj || isHost(data)) return this;
+	  if (!type) this.type('json');
+	  return this;
+	};
+
+	/**
+	 * @deprecated
+	 */
+	Response.prototype.parse = function serialize(fn){
+	  if (root.console) {
+	    console.warn("Client-side parse() method has been renamed to serialize(). This method is not compatible with superagent v2.0");
+	  }
+	  this.serialize(fn);
+	  return this;
+	};
+
+	Response.prototype.serialize = function serialize(fn){
+	  this._parser = fn;
+	  return this;
+	};
+
+	/**
+	 * Invoke the callback with `err` and `res`
+	 * and handle arity check.
+	 *
+	 * @param {Error} err
+	 * @param {Response} res
+	 * @api private
+	 */
+
+	Request.prototype.callback = function(err, res){
+	  var fn = this._callback;
+	  this.clearTimeout();
+	  fn(err, res);
+	};
+
+	/**
+	 * Invoke callback with x-domain error.
+	 *
+	 * @api private
+	 */
+
+	Request.prototype.crossDomainError = function(){
+	  var err = new Error('Request has been terminated\nPossible causes: the network is offline, Origin is not allowed by Access-Control-Allow-Origin, the page is being unloaded, etc.');
+	  err.crossDomain = true;
+
+	  err.status = this.status;
+	  err.method = this.method;
+	  err.url = this.url;
+
+	  this.callback(err);
+	};
+
+	/**
+	 * Invoke callback with timeout error.
+	 *
+	 * @api private
+	 */
+
+	Request.prototype.timeoutError = function(){
+	  var timeout = this._timeout;
+	  var err = new Error('timeout of ' + timeout + 'ms exceeded');
+	  err.timeout = timeout;
+	  this.callback(err);
+	};
+
+	/**
+	 * Enable transmission of cookies with x-domain requests.
+	 *
+	 * Note that for this to work the origin must not be
+	 * using "Access-Control-Allow-Origin" with a wildcard,
+	 * and also must set "Access-Control-Allow-Credentials"
+	 * to "true".
+	 *
+	 * @api public
+	 */
+
+	Request.prototype.withCredentials = function(){
+	  this._withCredentials = true;
+	  return this;
+	};
+
+	/**
+	 * Initiate request, invoking callback `fn(res)`
+	 * with an instanceof `Response`.
+	 *
+	 * @param {Function} fn
+	 * @return {Request} for chaining
+	 * @api public
+	 */
+
+	Request.prototype.end = function(fn){
+	  var self = this;
+	  var xhr = this.xhr = request.getXHR();
+	  var query = this._query.join('&');
+	  var timeout = this._timeout;
+	  var data = this._formData || this._data;
+
+	  // store callback
+	  this._callback = fn || noop;
+
+	  // state change
+	  xhr.onreadystatechange = function(){
+	    if (4 != xhr.readyState) return;
+
+	    // In IE9, reads to any property (e.g. status) off of an aborted XHR will
+	    // result in the error "Could not complete the operation due to error c00c023f"
+	    var status;
+	    try { status = xhr.status } catch(e) { status = 0; }
+
+	    if (0 == status) {
+	      if (self.timedout) return self.timeoutError();
+	      if (self.aborted) return;
+	      return self.crossDomainError();
+	    }
+	    self.emit('end');
+	  };
+
+	  // progress
+	  var handleProgress = function(e){
+	    if (e.total > 0) {
+	      e.percent = e.loaded / e.total * 100;
+	    }
+	    e.direction = 'download';
+	    self.emit('progress', e);
+	  };
+	  if (this.hasListeners('progress')) {
+	    xhr.onprogress = handleProgress;
+	  }
+	  try {
+	    if (xhr.upload && this.hasListeners('progress')) {
+	      xhr.upload.onprogress = handleProgress;
+	    }
+	  } catch(e) {
+	    // Accessing xhr.upload fails in IE from a web worker, so just pretend it doesn't exist.
+	    // Reported here:
+	    // https://connect.microsoft.com/IE/feedback/details/837245/xmlhttprequest-upload-throws-invalid-argument-when-used-from-web-worker-context
+	  }
+
+	  // timeout
+	  if (timeout && !this._timer) {
+	    this._timer = setTimeout(function(){
+	      self.timedout = true;
+	      self.abort();
+	    }, timeout);
+	  }
+
+	  // querystring
+	  if (query) {
+	    query = request.serializeObject(query);
+	    this.url += ~this.url.indexOf('?')
+	      ? '&' + query
+	      : '?' + query;
+	  }
+
+	  // initiate request
+	  if (this.username && this.password) {
+	    xhr.open(this.method, this.url, true, this.username, this.password);
+	  } else {
+	    xhr.open(this.method, this.url, true);
+	  }
+
+	  // CORS
+	  if (this._withCredentials) xhr.withCredentials = true;
+
+	  // body
+	  if ('GET' != this.method && 'HEAD' != this.method && 'string' != typeof data && !isHost(data)) {
+	    // serialize stuff
+	    var contentType = this._header['content-type'];
+	    var serialize = this._parser || request.serialize[contentType ? contentType.split(';')[0] : ''];
+	    if (!serialize && isJSON(contentType)) serialize = request.serialize['application/json'];
+	    if (serialize) data = serialize(data);
+	  }
+
+	  // set header fields
+	  for (var field in this.header) {
+	    if (null == this.header[field]) continue;
+	    xhr.setRequestHeader(field, this.header[field]);
+	  }
+
+	  if (this._responseType) {
+	    xhr.responseType = this._responseType;
+	  }
+
+	  // send stuff
+	  this.emit('request', this);
+
+	  // IE11 xhr.send(undefined) sends 'undefined' string as POST payload (instead of nothing)
+	  // We need null here if data is undefined
+	  xhr.send(typeof data !== 'undefined' ? data : null);
+	  return this;
+	};
+
+
+	/**
+	 * Expose `Request`.
+	 */
+
+	request.Request = Request;
+
+	/**
+	 * GET `url` with optional callback `fn(res)`.
+	 *
+	 * @param {String} url
+	 * @param {Mixed|Function} data or fn
+	 * @param {Function} fn
+	 * @return {Request}
+	 * @api public
+	 */
+
+	request.get = function(url, data, fn){
+	  var req = request('GET', url);
+	  if ('function' == typeof data) fn = data, data = null;
+	  if (data) req.query(data);
+	  if (fn) req.end(fn);
+	  return req;
+	};
+
+	/**
+	 * HEAD `url` with optional callback `fn(res)`.
+	 *
+	 * @param {String} url
+	 * @param {Mixed|Function} data or fn
+	 * @param {Function} fn
+	 * @return {Request}
+	 * @api public
+	 */
+
+	request.head = function(url, data, fn){
+	  var req = request('HEAD', url);
+	  if ('function' == typeof data) fn = data, data = null;
+	  if (data) req.send(data);
+	  if (fn) req.end(fn);
+	  return req;
+	};
+
+	/**
+	 * DELETE `url` with optional callback `fn(res)`.
+	 *
+	 * @param {String} url
+	 * @param {Function} fn
+	 * @return {Request}
+	 * @api public
+	 */
+
+	function del(url, fn){
+	  var req = request('DELETE', url);
+	  if (fn) req.end(fn);
+	  return req;
+	};
+
+	request['del'] = del;
+	request['delete'] = del;
+
+	/**
+	 * PATCH `url` with optional `data` and callback `fn(res)`.
+	 *
+	 * @param {String} url
+	 * @param {Mixed} data
+	 * @param {Function} fn
+	 * @return {Request}
+	 * @api public
+	 */
+
+	request.patch = function(url, data, fn){
+	  var req = request('PATCH', url);
+	  if ('function' == typeof data) fn = data, data = null;
+	  if (data) req.send(data);
+	  if (fn) req.end(fn);
+	  return req;
+	};
+
+	/**
+	 * POST `url` with optional `data` and callback `fn(res)`.
+	 *
+	 * @param {String} url
+	 * @param {Mixed} data
+	 * @param {Function} fn
+	 * @return {Request}
+	 * @api public
+	 */
+
+	request.post = function(url, data, fn){
+	  var req = request('POST', url);
+	  if ('function' == typeof data) fn = data, data = null;
+	  if (data) req.send(data);
+	  if (fn) req.end(fn);
+	  return req;
+	};
+
+	/**
+	 * PUT `url` with optional `data` and callback `fn(res)`.
+	 *
+	 * @param {String} url
+	 * @param {Mixed|Function} data or fn
+	 * @param {Function} fn
+	 * @return {Request}
+	 * @api public
+	 */
+
+	request.put = function(url, data, fn){
+	  var req = request('PUT', url);
+	  if ('function' == typeof data) fn = data, data = null;
+	  if (data) req.send(data);
+	  if (fn) req.end(fn);
+	  return req;
+	};
+
+
+/***/ },
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * Expose `Emitter`.
+	 */
+
+	if (true) {
+	  module.exports = Emitter;
+	}
+
+	/**
+	 * Initialize a new `Emitter`.
+	 *
+	 * @api public
+	 */
+
+	function Emitter(obj) {
+	  if (obj) return mixin(obj);
+	};
+
+	/**
+	 * Mixin the emitter properties.
+	 *
+	 * @param {Object} obj
+	 * @return {Object}
+	 * @api private
+	 */
+
+	function mixin(obj) {
+	  for (var key in Emitter.prototype) {
+	    obj[key] = Emitter.prototype[key];
+	  }
+	  return obj;
+	}
+
+	/**
+	 * Listen on the given `event` with `fn`.
+	 *
+	 * @param {String} event
+	 * @param {Function} fn
+	 * @return {Emitter}
+	 * @api public
+	 */
+
+	Emitter.prototype.on =
+	Emitter.prototype.addEventListener = function(event, fn){
+	  this._callbacks = this._callbacks || {};
+	  (this._callbacks['$' + event] = this._callbacks['$' + event] || [])
+	    .push(fn);
+	  return this;
+	};
+
+	/**
+	 * Adds an `event` listener that will be invoked a single
+	 * time then automatically removed.
+	 *
+	 * @param {String} event
+	 * @param {Function} fn
+	 * @return {Emitter}
+	 * @api public
+	 */
+
+	Emitter.prototype.once = function(event, fn){
+	  function on() {
+	    this.off(event, on);
+	    fn.apply(this, arguments);
+	  }
+
+	  on.fn = fn;
+	  this.on(event, on);
+	  return this;
+	};
+
+	/**
+	 * Remove the given callback for `event` or all
+	 * registered callbacks.
+	 *
+	 * @param {String} event
+	 * @param {Function} fn
+	 * @return {Emitter}
+	 * @api public
+	 */
+
+	Emitter.prototype.off =
+	Emitter.prototype.removeListener =
+	Emitter.prototype.removeAllListeners =
+	Emitter.prototype.removeEventListener = function(event, fn){
+	  this._callbacks = this._callbacks || {};
+
+	  // all
+	  if (0 == arguments.length) {
+	    this._callbacks = {};
+	    return this;
+	  }
+
+	  // specific event
+	  var callbacks = this._callbacks['$' + event];
+	  if (!callbacks) return this;
+
+	  // remove all handlers
+	  if (1 == arguments.length) {
+	    delete this._callbacks['$' + event];
+	    return this;
+	  }
+
+	  // remove specific handler
+	  var cb;
+	  for (var i = 0; i < callbacks.length; i++) {
+	    cb = callbacks[i];
+	    if (cb === fn || cb.fn === fn) {
+	      callbacks.splice(i, 1);
+	      break;
+	    }
+	  }
+	  return this;
+	};
+
+	/**
+	 * Emit `event` with the given args.
+	 *
+	 * @param {String} event
+	 * @param {Mixed} ...
+	 * @return {Emitter}
+	 */
+
+	Emitter.prototype.emit = function(event){
+	  this._callbacks = this._callbacks || {};
+	  var args = [].slice.call(arguments, 1)
+	    , callbacks = this._callbacks['$' + event];
+
+	  if (callbacks) {
+	    callbacks = callbacks.slice(0);
+	    for (var i = 0, len = callbacks.length; i < len; ++i) {
+	      callbacks[i].apply(this, args);
+	    }
+	  }
+
+	  return this;
+	};
+
+	/**
+	 * Return array of callbacks for `event`.
+	 *
+	 * @param {String} event
+	 * @return {Array}
+	 * @api public
+	 */
+
+	Emitter.prototype.listeners = function(event){
+	  this._callbacks = this._callbacks || {};
+	  return this._callbacks['$' + event] || [];
+	};
+
+	/**
+	 * Check if this emitter has `event` handlers.
+	 *
+	 * @param {String} event
+	 * @return {Boolean}
+	 * @api public
+	 */
+
+	Emitter.prototype.hasListeners = function(event){
+	  return !! this.listeners(event).length;
+	};
+
+
+/***/ },
+/* 247 */
+/***/ function(module, exports) {
+
+	
+	/**
+	 * Reduce `arr` with `fn`.
+	 *
+	 * @param {Array} arr
+	 * @param {Function} fn
+	 * @param {Mixed} initial
+	 *
+	 * TODO: combatible error handling?
+	 */
+
+	module.exports = function(arr, fn, initial){  
+	  var idx = 0;
+	  var len = arr.length;
+	  var curr = arguments.length == 3
+	    ? initial
+	    : arr[idx++];
+
+	  while (idx < len) {
+	    curr = fn.call(null, curr, arr[idx], ++idx, arr);
+	  }
+	  
+	  return curr;
+	};
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Module of mixed-in functions shared between node and client code
+	 */
+	var isObject = __webpack_require__(249);
+
+	/**
+	 * Clear previous timeout.
+	 *
+	 * @return {Request} for chaining
+	 * @api public
+	 */
+
+	exports.clearTimeout = function _clearTimeout(){
+	  this._timeout = 0;
+	  clearTimeout(this._timer);
+	  return this;
+	};
+
+	/**
+	 * Force given parser
+	 *
+	 * Sets the body parser no matter type.
+	 *
+	 * @param {Function}
+	 * @api public
+	 */
+
+	exports.parse = function parse(fn){
+	  this._parser = fn;
+	  return this;
+	};
+
+	/**
+	 * Set timeout to `ms`.
+	 *
+	 * @param {Number} ms
+	 * @return {Request} for chaining
+	 * @api public
+	 */
+
+	exports.timeout = function timeout(ms){
+	  this._timeout = ms;
+	  return this;
+	};
+
+	/**
+	 * Faux promise support
+	 *
+	 * @param {Function} fulfill
+	 * @param {Function} reject
+	 * @return {Request}
+	 */
+
+	exports.then = function then(fulfill, reject) {
+	  return this.end(function(err, res) {
+	    err ? reject(err) : fulfill(res);
+	  });
+	}
+
+	/**
+	 * Allow for extension
+	 */
+
+	exports.use = function use(fn) {
+	  fn(this);
+	  return this;
+	}
+
+
+	/**
+	 * Get request header `field`.
+	 * Case-insensitive.
+	 *
+	 * @param {String} field
+	 * @return {String}
+	 * @api public
+	 */
+
+	exports.get = function(field){
+	  return this._header[field.toLowerCase()];
+	};
+
+	/**
+	 * Get case-insensitive header `field` value.
+	 * This is a deprecated internal API. Use `.get(field)` instead.
+	 *
+	 * (getHeader is no longer used internally by the superagent code base)
+	 *
+	 * @param {String} field
+	 * @return {String}
+	 * @api private
+	 * @deprecated
+	 */
+
+	exports.getHeader = exports.get;
+
+	/**
+	 * Set header `field` to `val`, or multiple fields with one object.
+	 * Case-insensitive.
+	 *
+	 * Examples:
+	 *
+	 *      req.get('/')
+	 *        .set('Accept', 'application/json')
+	 *        .set('X-API-Key', 'foobar')
+	 *        .end(callback);
+	 *
+	 *      req.get('/')
+	 *        .set({ Accept: 'application/json', 'X-API-Key': 'foobar' })
+	 *        .end(callback);
+	 *
+	 * @param {String|Object} field
+	 * @param {String} val
+	 * @return {Request} for chaining
+	 * @api public
+	 */
+
+	exports.set = function(field, val){
+	  if (isObject(field)) {
+	    for (var key in field) {
+	      this.set(key, field[key]);
+	    }
+	    return this;
+	  }
+	  this._header[field.toLowerCase()] = val;
+	  this.header[field] = val;
+	  return this;
+	};
+
+	/**
+	 * Remove header `field`.
+	 * Case-insensitive.
+	 *
+	 * Example:
+	 *
+	 *      req.get('/')
+	 *        .unset('User-Agent')
+	 *        .end(callback);
+	 *
+	 * @param {String} field
+	 */
+	exports.unset = function(field){
+	  delete this._header[field.toLowerCase()];
+	  delete this.header[field];
+	  return this;
+	};
+
+	/**
+	 * Write the field `name` and `val` for "multipart/form-data"
+	 * request bodies.
+	 *
+	 * ``` js
+	 * request.post('/upload')
+	 *   .field('foo', 'bar')
+	 *   .end(callback);
+	 * ```
+	 *
+	 * @param {String} name
+	 * @param {String|Blob|File|Buffer|fs.ReadStream} val
+	 * @return {Request} for chaining
+	 * @api public
+	 */
+	exports.field = function(name, val) {
+	  this._getFormData().append(name, val);
+	  return this;
+	};
+
+
+/***/ },
+/* 249 */
+/***/ function(module, exports) {
+
+	/**
+	 * Check if `obj` is an object.
+	 *
+	 * @param {Object} obj
+	 * @return {Boolean}
+	 * @api private
+	 */
+
+	function isObject(obj) {
+	  return null != obj && 'object' == typeof obj;
+	}
+
+	module.exports = isObject;
+
+
+/***/ },
+/* 250 */
+/***/ function(module, exports) {
+
+	// The node and browser modules expose versions of this with the
+	// appropriate constructor function bound as first argument
+	/**
+	 * Issue a request:
+	 *
+	 * Examples:
+	 *
+	 *    request('GET', '/users').end(callback)
+	 *    request('/users').end(callback)
+	 *    request('/users', callback)
+	 *
+	 * @param {String} method
+	 * @param {String|Function} url or callback
+	 * @return {Request}
+	 * @api public
+	 */
+
+	function request(RequestConstructor, method, url) {
+	  // callback
+	  if ('function' == typeof url) {
+	    return new RequestConstructor('GET', method).end(url);
+	  }
+
+	  // url first
+	  if (2 == arguments.length) {
+	    return new RequestConstructor('GET', method);
+	  }
+
+	  return new RequestConstructor(method, url);
+	}
+
+	module.exports = request;
+
+
+/***/ },
+/* 251 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 252 */,
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _reactRouter = __webpack_require__(166);
+
+	var _SurveyStore = __webpack_require__(232);
+
+	var _SurveyStore2 = _interopRequireDefault(_SurveyStore);
+
+	var _SurveyResults = __webpack_require__(254);
+
+	var _SurveyResults2 = _interopRequireDefault(_SurveyResults);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function getState() {
+	  return {
+	    results: _SurveyStore2.default.getResults()
+	  };
+	}
+
+	var Results = function (_Component) {
+	  _inherits(Results, _Component);
+
+	  function Results(props) {
+	    _classCallCheck(this, Results);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Results).call(this, props));
+
+	    _this.state = getState();
+	    return _this;
+	  }
+
+	  _createClass(Results, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      this._surveyStoreListener = function (e) {
+	        return _this2.setState(getState());
+	      };
+	      _SurveyStore2.default.addChangeListener(this._surveyStoreListener);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      _SurveyStore2.default.removeChangeListener(this._surveyStoreListener);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (!!this.state.results) {
+	        return _react2.default.createElement(_SurveyResults2.default, { results: this.state.results });
+	      } else {
+	        return _react2.default.createElement(
+	          'div',
+	          null,
+	          'No results. Please ',
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/' },
+	            'start over'
+	          ),
+	          '.'
+	        );
+	      }
+	    }
+	  }]);
+
+	  return Results;
+	}(_react.Component);
+
+	exports.default = Results;
+
+
+	Results.contextTypes = {
+	  router: _react2.default.PropTypes.object.isRequired
+	};
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(32);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _reactChartjs = __webpack_require__(255);
+
+	__webpack_require__(265);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BAR_CHART_TYPE = 'bar';
+	var RADAR_CHART_TYPE = 'radar';
+
+	function getViewportWidth() {
+	  return Math.max(document.documentElement.clientWidth, window.innerWidth || 400);
+	}
+
+	var SurveyResults = function (_Component) {
+	  _inherits(SurveyResults, _Component);
+
+	  function SurveyResults(props) {
+	    _classCallCheck(this, SurveyResults);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SurveyResults).call(this, props));
+
+	    _this.state = {
+	      chartType: RADAR_CHART_TYPE,
+	      viewportWidth: getViewportWidth()
+	    };
+	    return _this;
+	  }
+
+	  _createClass(SurveyResults, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      this._resizeListener = function (e) {
+	        return _this2.setState({ viewportWidth: getViewportWidth() });
+	      };
+	      window.addEventListener('resize', this._resizeListener);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      window.removeEventListener('resize', this._resizeListener);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'survey-results amber lighten-2 z-depth-1' },
+	        _react2.default.createElement(
+	          'h2',
+	          { className: 'white-text' },
+	          'Results'
+	        ),
+	        this.renderChart()
+	      );
+	    }
+	  }, {
+	    key: 'renderChart',
+	    value: function renderChart() {
+	      var _this3 = this;
+
+	      var width = this.state.viewportWidth * 0.6,
+	          height = width * 0.8;
+	      switch (this.state.chartType) {
+	        case BAR_CHART_TYPE:
+	          return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(_reactChartjs.Bar, { data: this.getChartData(), options: this.getChartOptions(), width: width, height: height }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'center' },
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'waves-effect waves-dark btn-flat white-text', onClick: function onClick() {
+	                    return _this3.setState({ chartType: RADAR_CHART_TYPE });
+	                  } },
+	                'Show as Radar-Chart'
+	              )
+	            )
+	          );
+	        case RADAR_CHART_TYPE:
+	          return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(_reactChartjs.Radar, { data: this.getChartData(), options: this.getChartOptions(), width: width, height: height }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'center' },
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'waves-effect waves-dark btn-flat white-text', onClick: function onClick() {
+	                    return _this3.setState({ chartType: BAR_CHART_TYPE });
+	                  } },
+	                'Show as Bar-Chart'
+	              )
+	            )
+	          );
+	      }
+	    }
+	  }, {
+	    key: 'getChartData',
+	    value: function getChartData() {
+	      var results = this.props.results;
+
+	      var labels = [],
+	          data = [];
+	      for (var role in results) {
+	        if (results.hasOwnProperty(role)) {
+	          labels.push(role);
+	          data.push(results[role] * 100);
+	        }
+	      }
+	      return {
+	        labels: labels,
+	        datasets: [{
+	          fillColor: this.state.chartType == RADAR_CHART_TYPE ? "rgba(255,255,255,0.4)" : 'rgba(255,255,255,0.6)',
+	          strokeColor: this.state.chartType == RADAR_CHART_TYPE ? "rgba(255,255,255,1.0)" : 'rgba(255,255,255,0.2)',
+	          data: data
+	        }]
+	      };
+	    }
+	  }, {
+	    key: 'getChartOptions',
+	    value: function getChartOptions() {
+	      return {
+	        scaleShowGridLines: false,
+	        scaleOverride: true,
+	        scaleSteps: 5,
+	        scaleStepWidth: 20,
+	        scaleStartValue: 0,
+	        scaleLabel: "<%=value%>%",
+	        scaleFontColor: 'rgba(255,255,255,1.0)',
+	        angleLineColor: 'rgba(255,255,255,0.6)',
+	        pointLabelFontSize: 18,
+	        pointLabelFontColor: 'rgba(255,255,255,1.0)'
+	      };
+	    }
+	  }]);
+
+	  return SurveyResults;
+	}(_react.Component);
+
+	exports.default = SurveyResults;
+
+
+	SurveyResults.propTypes = {
+	  // results...
+	};
+
+/***/ },
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	  Bar: __webpack_require__(256),
+	  Doughnut: __webpack_require__(260),
+	  Line: __webpack_require__(261),
+	  Pie: __webpack_require__(262),
+	  PolarArea: __webpack_require__(263),
+	  Radar: __webpack_require__(264),
+	  createClass: __webpack_require__(257).createClass
+	};
+
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var vars = __webpack_require__(257);
+
+	module.exports = vars.createClass('Bar', ['getBarsAtEvent']);
+
+
+/***/ },
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(32);
+
+	module.exports = {
+	  createClass: function(chartType, methodNames, dataKey) {
+	    var classData = {
+	      displayName: chartType + 'Chart',
+	      getInitialState: function() { return {}; },
+	      render: function() {
+	        var _props = {
+	          ref: 'canvass'
+	        };
+	        for (var name in this.props) {
+	          if (this.props.hasOwnProperty(name)) {
+	            if (name !== 'data' && name !== 'options') {
+	              _props[name] = this.props[name];
+	            }
+	          }
+	        }
+	        return React.createElement('canvas', _props);
+	      }
+	    };
+
+	    var extras = ['clear', 'stop', 'resize', 'toBase64Image', 'generateLegend', 'update', 'addData', 'removeData'];
+	    function extra(type) {
+	      classData[type] = function() {
+	        return this.state.chart[type].apply(this.state.chart, arguments);
+	      };
+	    }
+
+	    classData.componentDidMount = function() {
+	      this.initializeChart(this.props);
+	    };
+
+	    classData.componentWillUnmount = function() {
+	      var chart = this.state.chart;
+	      chart.destroy();
+	    };
+
+	    classData.componentWillReceiveProps = function(nextProps) {
+	      var chart = this.state.chart;
+	      if (nextProps.redraw) {
+	        chart.destroy();
+	        this.initializeChart(nextProps);
+	      } else {
+	        dataKey = dataKey || dataKeys[chart.name];
+	        updatePoints(nextProps, chart, dataKey);
+	        if (chart.scale) {
+	          chart.scale.xLabels = nextProps.data.labels;
+	          chart.scale.calculateXLabelRotation();
+	        }
+	        chart.update();
+	      }
+	    };
+
+	    classData.initializeChart = function(nextProps) {
+	      var Chart = __webpack_require__(258);
+	      var el = ReactDOM.findDOMNode(this);
+	      var ctx = el.getContext("2d");
+	      var chart = new Chart(ctx)[chartType](nextProps.data, nextProps.options || {});
+	      this.state.chart = chart;
+	    };
+
+	    // return the chartjs instance
+	    classData.getChart = function() {
+	      return this.state.chart;
+	    };
+
+	    // return the canvass element that contains the chart
+	    classData.getCanvass = function() {
+	      return this.refs.canvass;
+	    };
+
+	    classData.getCanvas = classData.getCanvass;
+
+	    var i;
+	    for (i=0; i<extras.length; i++) {
+	      extra(extras[i]);
+	    }
+	    for (i=0; i<methodNames.length; i++) {
+	      extra(methodNames[i]);
+	    }
+
+	    return React.createClass(classData);
+	  }
+	};
+
+	var dataKeys = {
+	  'Line': 'points',
+	  'Radar': 'points',
+	  'Bar': 'bars'
+	};
+
+	var updatePoints = function(nextProps, chart, dataKey) {
+	  var name = chart.name;
+
+	  if (name === 'PolarArea' || name === 'Pie' || name === 'Doughnut') {
+	    nextProps.data.forEach(function(segment, segmentIndex) {
+	      if (!chart.segments[segmentIndex]) {
+	        chart.addData(segment);
+	      } else {
+	        Object.keys(segment).forEach(function (key) {
+	          chart.segments[segmentIndex][key] = segment[key];
+	        });
+	      }
+	    });
+	  } else {
+	    while (chart.scale.xLabels.length > nextProps.data.labels.length) {
+	      chart.removeData();
+	    }
+	    nextProps.data.datasets.forEach(function(set, setIndex) {
+	      set.data.forEach(function(val, pointIndex) {
+	        if (typeof(chart.datasets[setIndex][dataKey][pointIndex]) == "undefined") {
+	          addData(nextProps, chart, setIndex, pointIndex);
+	        } else {
+	          chart.datasets[setIndex][dataKey][pointIndex].value = val;
+	        }
+	      });
+	    });
+	  }
+	};
+
+	var addData = function(nextProps, chart, setIndex, pointIndex) {
+	  var values = [];
+	  nextProps.data.datasets.forEach(function(set) {
+	    values.push(set.data[pointIndex]);
+	  });
+	  chart.addData(values, nextProps.data.labels[setIndex]);
+	};
+
+
+/***/ },
+/* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	 * Chart.js
+	 * http://chartjs.org/
+	 * Version: 1.1.1
+	 *
+	 * Copyright 2015 Nick Downie
+	 * Released under the MIT license
+	 * https://github.com/nnnick/Chart.js/blob/master/LICENSE.md
+	 */
+
+
+	(function(){
+
+		"use strict";
+
+		//Declare root variable - window in the browser, global on the server
+		var root = this,
+			previous = root.Chart;
+
+		//Occupy the global variable of Chart, and create a simple base class
+		var Chart = function(context){
+			var chart = this;
+			this.canvas = context.canvas;
+
+			this.ctx = context;
+
+			//Variables global to the chart
+			var computeDimension = function(element,dimension)
+			{
+				if (element['offset'+dimension])
+				{
+					return element['offset'+dimension];
+				}
+				else
+				{
+					return document.defaultView.getComputedStyle(element).getPropertyValue(dimension);
+				}
+			};
+
+			var width = this.width = computeDimension(context.canvas,'Width') || context.canvas.width;
+			var height = this.height = computeDimension(context.canvas,'Height') || context.canvas.height;
+
+			this.aspectRatio = this.width / this.height;
+			//High pixel density displays - multiply the size of the canvas height/width by the device pixel ratio, then scale.
+			helpers.retinaScale(this);
+
+			return this;
+		};
+		//Globally expose the defaults to allow for user updating/changing
+		Chart.defaults = {
+			global: {
+				// Boolean - Whether to animate the chart
+				animation: true,
+
+				// Number - Number of animation steps
+				animationSteps: 60,
+
+				// String - Animation easing effect
+				animationEasing: "easeOutQuart",
+
+				// Boolean - If we should show the scale at all
+				showScale: true,
+
+				// Boolean - If we want to override with a hard coded scale
+				scaleOverride: false,
+
+				// ** Required if scaleOverride is true **
+				// Number - The number of steps in a hard coded scale
+				scaleSteps: null,
+				// Number - The value jump in the hard coded scale
+				scaleStepWidth: null,
+				// Number - The scale starting value
+				scaleStartValue: null,
+
+				// String - Colour of the scale line
+				scaleLineColor: "rgba(0,0,0,.1)",
+
+				// Number - Pixel width of the scale line
+				scaleLineWidth: 1,
+
+				// Boolean - Whether to show labels on the scale
+				scaleShowLabels: true,
+
+				// Interpolated JS string - can access value
+				scaleLabel: "<%=value%>",
+
+				// Boolean - Whether the scale should stick to integers, and not show any floats even if drawing space is there
+				scaleIntegersOnly: true,
+
+				// Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+				scaleBeginAtZero: false,
+
+				// String - Scale label font declaration for the scale label
+				scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+				// Number - Scale label font size in pixels
+				scaleFontSize: 12,
+
+				// String - Scale label font weight style
+				scaleFontStyle: "normal",
+
+				// String - Scale label font colour
+				scaleFontColor: "#666",
+
+				// Boolean - whether or not the chart should be responsive and resize when the browser does.
+				responsive: false,
+
+				// Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+				maintainAspectRatio: true,
+
+				// Boolean - Determines whether to draw tooltips on the canvas or not - attaches events to touchmove & mousemove
+				showTooltips: true,
+
+				// Boolean - Determines whether to draw built-in tooltip or call custom tooltip function
+				customTooltips: false,
+
+				// Array - Array of string names to attach tooltip events
+				tooltipEvents: ["mousemove", "touchstart", "touchmove", "mouseout"],
+
+				// String - Tooltip background colour
+				tooltipFillColor: "rgba(0,0,0,0.8)",
+
+				// String - Tooltip label font declaration for the scale label
+				tooltipFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+				// Number - Tooltip label font size in pixels
+				tooltipFontSize: 14,
+
+				// String - Tooltip font weight style
+				tooltipFontStyle: "normal",
+
+				// String - Tooltip label font colour
+				tooltipFontColor: "#fff",
+
+				// String - Tooltip title font declaration for the scale label
+				tooltipTitleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+				// Number - Tooltip title font size in pixels
+				tooltipTitleFontSize: 14,
+
+				// String - Tooltip title font weight style
+				tooltipTitleFontStyle: "bold",
+
+				// String - Tooltip title font colour
+				tooltipTitleFontColor: "#fff",
+
+				// String - Tooltip title template
+				tooltipTitleTemplate: "<%= label%>",
+
+				// Number - pixel width of padding around tooltip text
+				tooltipYPadding: 6,
+
+				// Number - pixel width of padding around tooltip text
+				tooltipXPadding: 6,
+
+				// Number - Size of the caret on the tooltip
+				tooltipCaretSize: 8,
+
+				// Number - Pixel radius of the tooltip border
+				tooltipCornerRadius: 6,
+
+				// Number - Pixel offset from point x to tooltip edge
+				tooltipXOffset: 10,
+
+				// String - Template string for single tooltips
+				tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>",
+
+				// String - Template string for single tooltips
+				multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>",
+
+				// String - Colour behind the legend colour block
+				multiTooltipKeyBackground: '#fff',
+
+				// Array - A list of colors to use as the defaults
+				segmentColorDefault: ["#A6CEE3", "#1F78B4", "#B2DF8A", "#33A02C", "#FB9A99", "#E31A1C", "#FDBF6F", "#FF7F00", "#CAB2D6", "#6A3D9A", "#B4B482", "#B15928" ],
+
+				// Array - A list of highlight colors to use as the defaults
+				segmentHighlightColorDefaults: [ "#CEF6FF", "#47A0DC", "#DAFFB2", "#5BC854", "#FFC2C1", "#FF4244", "#FFE797", "#FFA728", "#F2DAFE", "#9265C2", "#DCDCAA", "#D98150" ],
+
+				// Function - Will fire on animation progression.
+				onAnimationProgress: function(){},
+
+				// Function - Will fire on animation completion.
+				onAnimationComplete: function(){}
+
+			}
+		};
+
+		//Create a dictionary of chart types, to allow for extension of existing types
+		Chart.types = {};
+
+		//Global Chart helpers object for utility methods and classes
+		var helpers = Chart.helpers = {};
+
+			//-- Basic js utility methods
+		var each = helpers.each = function(loopable,callback,self){
+				var additionalArgs = Array.prototype.slice.call(arguments, 3);
+				// Check to see if null or undefined firstly.
+				if (loopable){
+					if (loopable.length === +loopable.length){
+						var i;
+						for (i=0; i<loopable.length; i++){
+							callback.apply(self,[loopable[i], i].concat(additionalArgs));
+						}
+					}
+					else{
+						for (var item in loopable){
+							callback.apply(self,[loopable[item],item].concat(additionalArgs));
+						}
+					}
+				}
+			},
+			clone = helpers.clone = function(obj){
+				var objClone = {};
+				each(obj,function(value,key){
+					if (obj.hasOwnProperty(key)){
+						objClone[key] = value;
+					}
+				});
+				return objClone;
+			},
+			extend = helpers.extend = function(base){
+				each(Array.prototype.slice.call(arguments,1), function(extensionObject) {
+					each(extensionObject,function(value,key){
+						if (extensionObject.hasOwnProperty(key)){
+							base[key] = value;
+						}
+					});
+				});
+				return base;
+			},
+			merge = helpers.merge = function(base,master){
+				//Merge properties in left object over to a shallow clone of object right.
+				var args = Array.prototype.slice.call(arguments,0);
+				args.unshift({});
+				return extend.apply(null, args);
+			},
+			indexOf = helpers.indexOf = function(arrayToSearch, item){
+				if (Array.prototype.indexOf) {
+					return arrayToSearch.indexOf(item);
+				}
+				else{
+					for (var i = 0; i < arrayToSearch.length; i++) {
+						if (arrayToSearch[i] === item) return i;
+					}
+					return -1;
+				}
+			},
+			where = helpers.where = function(collection, filterCallback){
+				var filtered = [];
+
+				helpers.each(collection, function(item){
+					if (filterCallback(item)){
+						filtered.push(item);
+					}
+				});
+
+				return filtered;
+			},
+			findNextWhere = helpers.findNextWhere = function(arrayToSearch, filterCallback, startIndex){
+				// Default to start of the array
+				if (!startIndex){
+					startIndex = -1;
+				}
+				for (var i = startIndex + 1; i < arrayToSearch.length; i++) {
+					var currentItem = arrayToSearch[i];
+					if (filterCallback(currentItem)){
+						return currentItem;
+					}
+				}
+			},
+			findPreviousWhere = helpers.findPreviousWhere = function(arrayToSearch, filterCallback, startIndex){
+				// Default to end of the array
+				if (!startIndex){
+					startIndex = arrayToSearch.length;
+				}
+				for (var i = startIndex - 1; i >= 0; i--) {
+					var currentItem = arrayToSearch[i];
+					if (filterCallback(currentItem)){
+						return currentItem;
+					}
+				}
+			},
+			inherits = helpers.inherits = function(extensions){
+				//Basic javascript inheritance based on the model created in Backbone.js
+				var parent = this;
+				var ChartElement = (extensions && extensions.hasOwnProperty("constructor")) ? extensions.constructor : function(){ return parent.apply(this, arguments); };
+
+				var Surrogate = function(){ this.constructor = ChartElement;};
+				Surrogate.prototype = parent.prototype;
+				ChartElement.prototype = new Surrogate();
+
+				ChartElement.extend = inherits;
+
+				if (extensions) extend(ChartElement.prototype, extensions);
+
+				ChartElement.__super__ = parent.prototype;
+
+				return ChartElement;
+			},
+			noop = helpers.noop = function(){},
+			uid = helpers.uid = (function(){
+				var id=0;
+				return function(){
+					return "chart-" + id++;
+				};
+			})(),
+			warn = helpers.warn = function(str){
+				//Method for warning of errors
+				if (window.console && typeof window.console.warn === "function") console.warn(str);
+			},
+			amd = helpers.amd = ("function" === 'function' && __webpack_require__(259)),
+			//-- Math methods
+			isNumber = helpers.isNumber = function(n){
+				return !isNaN(parseFloat(n)) && isFinite(n);
+			},
+			max = helpers.max = function(array){
+				return Math.max.apply( Math, array );
+			},
+			min = helpers.min = function(array){
+				return Math.min.apply( Math, array );
+			},
+			cap = helpers.cap = function(valueToCap,maxValue,minValue){
+				if(isNumber(maxValue)) {
+					if( valueToCap > maxValue ) {
+						return maxValue;
+					}
+				}
+				else if(isNumber(minValue)){
+					if ( valueToCap < minValue ){
+						return minValue;
+					}
+				}
+				return valueToCap;
+			},
+			getDecimalPlaces = helpers.getDecimalPlaces = function(num){
+				if (num%1!==0 && isNumber(num)){
+					var s = num.toString();
+					if(s.indexOf("e-") < 0){
+						// no exponent, e.g. 0.01
+						return s.split(".")[1].length;
+					}
+					else if(s.indexOf(".") < 0) {
+						// no decimal point, e.g. 1e-9
+						return parseInt(s.split("e-")[1]);
+					}
+					else {
+						// exponent and decimal point, e.g. 1.23e-9
+						var parts = s.split(".")[1].split("e-");
+						return parts[0].length + parseInt(parts[1]);
+					}
+				}
+				else {
+					return 0;
+				}
+			},
+			toRadians = helpers.radians = function(degrees){
+				return degrees * (Math.PI/180);
+			},
+			// Gets the angle from vertical upright to the point about a centre.
+			getAngleFromPoint = helpers.getAngleFromPoint = function(centrePoint, anglePoint){
+				var distanceFromXCenter = anglePoint.x - centrePoint.x,
+					distanceFromYCenter = anglePoint.y - centrePoint.y,
+					radialDistanceFromCenter = Math.sqrt( distanceFromXCenter * distanceFromXCenter + distanceFromYCenter * distanceFromYCenter);
+
+
+				var angle = Math.PI * 2 + Math.atan2(distanceFromYCenter, distanceFromXCenter);
+
+				//If the segment is in the top left quadrant, we need to add another rotation to the angle
+				if (distanceFromXCenter < 0 && distanceFromYCenter < 0){
+					angle += Math.PI*2;
+				}
+
+				return {
+					angle: angle,
+					distance: radialDistanceFromCenter
+				};
+			},
+			aliasPixel = helpers.aliasPixel = function(pixelWidth){
+				return (pixelWidth % 2 === 0) ? 0 : 0.5;
+			},
+			splineCurve = helpers.splineCurve = function(FirstPoint,MiddlePoint,AfterPoint,t){
+				//Props to Rob Spencer at scaled innovation for his post on splining between points
+				//http://scaledinnovation.com/analytics/splines/aboutSplines.html
+				var d01=Math.sqrt(Math.pow(MiddlePoint.x-FirstPoint.x,2)+Math.pow(MiddlePoint.y-FirstPoint.y,2)),
+					d12=Math.sqrt(Math.pow(AfterPoint.x-MiddlePoint.x,2)+Math.pow(AfterPoint.y-MiddlePoint.y,2)),
+					fa=t*d01/(d01+d12),// scaling factor for triangle Ta
+					fb=t*d12/(d01+d12);
+				return {
+					inner : {
+						x : MiddlePoint.x-fa*(AfterPoint.x-FirstPoint.x),
+						y : MiddlePoint.y-fa*(AfterPoint.y-FirstPoint.y)
+					},
+					outer : {
+						x: MiddlePoint.x+fb*(AfterPoint.x-FirstPoint.x),
+						y : MiddlePoint.y+fb*(AfterPoint.y-FirstPoint.y)
+					}
+				};
+			},
+			calculateOrderOfMagnitude = helpers.calculateOrderOfMagnitude = function(val){
+				return Math.floor(Math.log(val) / Math.LN10);
+			},
+			calculateScaleRange = helpers.calculateScaleRange = function(valuesArray, drawingSize, textSize, startFromZero, integersOnly){
+
+				//Set a minimum step of two - a point at the top of the graph, and a point at the base
+				var minSteps = 2,
+					maxSteps = Math.floor(drawingSize/(textSize * 1.5)),
+					skipFitting = (minSteps >= maxSteps);
+
+				// Filter out null values since these would min() to zero
+				var values = [];
+				each(valuesArray, function( v ){
+					v == null || values.push( v );
+				});
+				var minValue = min(values),
+				    maxValue = max(values);
+
+				// We need some degree of separation here to calculate the scales if all the values are the same
+				// Adding/minusing 0.5 will give us a range of 1.
+				if (maxValue === minValue){
+					maxValue += 0.5;
+					// So we don't end up with a graph with a negative start value if we've said always start from zero
+					if (minValue >= 0.5 && !startFromZero){
+						minValue -= 0.5;
+					}
+					else{
+						// Make up a whole number above the values
+						maxValue += 0.5;
+					}
+				}
+
+				var	valueRange = Math.abs(maxValue - minValue),
+					rangeOrderOfMagnitude = calculateOrderOfMagnitude(valueRange),
+					graphMax = Math.ceil(maxValue / (1 * Math.pow(10, rangeOrderOfMagnitude))) * Math.pow(10, rangeOrderOfMagnitude),
+					graphMin = (startFromZero) ? 0 : Math.floor(minValue / (1 * Math.pow(10, rangeOrderOfMagnitude))) * Math.pow(10, rangeOrderOfMagnitude),
+					graphRange = graphMax - graphMin,
+					stepValue = Math.pow(10, rangeOrderOfMagnitude),
+					numberOfSteps = Math.round(graphRange / stepValue);
+
+				//If we have more space on the graph we'll use it to give more definition to the data
+				while((numberOfSteps > maxSteps || (numberOfSteps * 2) < maxSteps) && !skipFitting) {
+					if(numberOfSteps > maxSteps){
+						stepValue *=2;
+						numberOfSteps = Math.round(graphRange/stepValue);
+						// Don't ever deal with a decimal number of steps - cancel fitting and just use the minimum number of steps.
+						if (numberOfSteps % 1 !== 0){
+							skipFitting = true;
+						}
+					}
+					//We can fit in double the amount of scale points on the scale
+					else{
+						//If user has declared ints only, and the step value isn't a decimal
+						if (integersOnly && rangeOrderOfMagnitude >= 0){
+							//If the user has said integers only, we need to check that making the scale more granular wouldn't make it a float
+							if(stepValue/2 % 1 === 0){
+								stepValue /=2;
+								numberOfSteps = Math.round(graphRange/stepValue);
+							}
+							//If it would make it a float break out of the loop
+							else{
+								break;
+							}
+						}
+						//If the scale doesn't have to be an int, make the scale more granular anyway.
+						else{
+							stepValue /=2;
+							numberOfSteps = Math.round(graphRange/stepValue);
+						}
+
+					}
+				}
+
+				if (skipFitting){
+					numberOfSteps = minSteps;
+					stepValue = graphRange / numberOfSteps;
+				}
+
+				return {
+					steps : numberOfSteps,
+					stepValue : stepValue,
+					min : graphMin,
+					max	: graphMin + (numberOfSteps * stepValue)
+				};
+
+			},
+			/* jshint ignore:start */
+			// Blows up jshint errors based on the new Function constructor
+			//Templating methods
+			//Javascript micro templating by John Resig - source at http://ejohn.org/blog/javascript-micro-templating/
+			template = helpers.template = function(templateString, valuesObject){
+
+				// If templateString is function rather than string-template - call the function for valuesObject
+
+				if(templateString instanceof Function){
+				 	return templateString(valuesObject);
+			 	}
+
+				var cache = {};
+				function tmpl(str, data){
+					// Figure out if we're getting a template, or if we need to
+					// load the template - and be sure to cache the result.
+					var fn = !/\W/.test(str) ?
+					cache[str] = cache[str] :
+
+					// Generate a reusable function that will serve as a template
+					// generator (and which will be cached).
+					new Function("obj",
+						"var p=[],print=function(){p.push.apply(p,arguments);};" +
+
+						// Introduce the data as local variables using with(){}
+						"with(obj){p.push('" +
+
+						// Convert the template into pure JavaScript
+						str
+							.replace(/[\r\t\n]/g, " ")
+							.split("<%").join("\t")
+							.replace(/((^|%>)[^\t]*)'/g, "$1\r")
+							.replace(/\t=(.*?)%>/g, "',$1,'")
+							.split("\t").join("');")
+							.split("%>").join("p.push('")
+							.split("\r").join("\\'") +
+						"');}return p.join('');"
+					);
+
+					// Provide some basic currying to the user
+					return data ? fn( data ) : fn;
+				}
+				return tmpl(templateString,valuesObject);
+			},
+			/* jshint ignore:end */
+			generateLabels = helpers.generateLabels = function(templateString,numberOfSteps,graphMin,stepValue){
+				var labelsArray = new Array(numberOfSteps);
+				if (templateString){
+					each(labelsArray,function(val,index){
+						labelsArray[index] = template(templateString,{value: (graphMin + (stepValue*(index+1)))});
+					});
+				}
+				return labelsArray;
+			},
+			//--Animation methods
+			//Easing functions adapted from Robert Penner's easing equations
+			//http://www.robertpenner.com/easing/
+			easingEffects = helpers.easingEffects = {
+				linear: function (t) {
+					return t;
+				},
+				easeInQuad: function (t) {
+					return t * t;
+				},
+				easeOutQuad: function (t) {
+					return -1 * t * (t - 2);
+				},
+				easeInOutQuad: function (t) {
+					if ((t /= 1 / 2) < 1){
+						return 1 / 2 * t * t;
+					}
+					return -1 / 2 * ((--t) * (t - 2) - 1);
+				},
+				easeInCubic: function (t) {
+					return t * t * t;
+				},
+				easeOutCubic: function (t) {
+					return 1 * ((t = t / 1 - 1) * t * t + 1);
+				},
+				easeInOutCubic: function (t) {
+					if ((t /= 1 / 2) < 1){
+						return 1 / 2 * t * t * t;
+					}
+					return 1 / 2 * ((t -= 2) * t * t + 2);
+				},
+				easeInQuart: function (t) {
+					return t * t * t * t;
+				},
+				easeOutQuart: function (t) {
+					return -1 * ((t = t / 1 - 1) * t * t * t - 1);
+				},
+				easeInOutQuart: function (t) {
+					if ((t /= 1 / 2) < 1){
+						return 1 / 2 * t * t * t * t;
+					}
+					return -1 / 2 * ((t -= 2) * t * t * t - 2);
+				},
+				easeInQuint: function (t) {
+					return 1 * (t /= 1) * t * t * t * t;
+				},
+				easeOutQuint: function (t) {
+					return 1 * ((t = t / 1 - 1) * t * t * t * t + 1);
+				},
+				easeInOutQuint: function (t) {
+					if ((t /= 1 / 2) < 1){
+						return 1 / 2 * t * t * t * t * t;
+					}
+					return 1 / 2 * ((t -= 2) * t * t * t * t + 2);
+				},
+				easeInSine: function (t) {
+					return -1 * Math.cos(t / 1 * (Math.PI / 2)) + 1;
+				},
+				easeOutSine: function (t) {
+					return 1 * Math.sin(t / 1 * (Math.PI / 2));
+				},
+				easeInOutSine: function (t) {
+					return -1 / 2 * (Math.cos(Math.PI * t / 1) - 1);
+				},
+				easeInExpo: function (t) {
+					return (t === 0) ? 1 : 1 * Math.pow(2, 10 * (t / 1 - 1));
+				},
+				easeOutExpo: function (t) {
+					return (t === 1) ? 1 : 1 * (-Math.pow(2, -10 * t / 1) + 1);
+				},
+				easeInOutExpo: function (t) {
+					if (t === 0){
+						return 0;
+					}
+					if (t === 1){
+						return 1;
+					}
+					if ((t /= 1 / 2) < 1){
+						return 1 / 2 * Math.pow(2, 10 * (t - 1));
+					}
+					return 1 / 2 * (-Math.pow(2, -10 * --t) + 2);
+				},
+				easeInCirc: function (t) {
+					if (t >= 1){
+						return t;
+					}
+					return -1 * (Math.sqrt(1 - (t /= 1) * t) - 1);
+				},
+				easeOutCirc: function (t) {
+					return 1 * Math.sqrt(1 - (t = t / 1 - 1) * t);
+				},
+				easeInOutCirc: function (t) {
+					if ((t /= 1 / 2) < 1){
+						return -1 / 2 * (Math.sqrt(1 - t * t) - 1);
+					}
+					return 1 / 2 * (Math.sqrt(1 - (t -= 2) * t) + 1);
+				},
+				easeInElastic: function (t) {
+					var s = 1.70158;
+					var p = 0;
+					var a = 1;
+					if (t === 0){
+						return 0;
+					}
+					if ((t /= 1) == 1){
+						return 1;
+					}
+					if (!p){
+						p = 1 * 0.3;
+					}
+					if (a < Math.abs(1)) {
+						a = 1;
+						s = p / 4;
+					} else{
+						s = p / (2 * Math.PI) * Math.asin(1 / a);
+					}
+					return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * 1 - s) * (2 * Math.PI) / p));
+				},
+				easeOutElastic: function (t) {
+					var s = 1.70158;
+					var p = 0;
+					var a = 1;
+					if (t === 0){
+						return 0;
+					}
+					if ((t /= 1) == 1){
+						return 1;
+					}
+					if (!p){
+						p = 1 * 0.3;
+					}
+					if (a < Math.abs(1)) {
+						a = 1;
+						s = p / 4;
+					} else{
+						s = p / (2 * Math.PI) * Math.asin(1 / a);
+					}
+					return a * Math.pow(2, -10 * t) * Math.sin((t * 1 - s) * (2 * Math.PI) / p) + 1;
+				},
+				easeInOutElastic: function (t) {
+					var s = 1.70158;
+					var p = 0;
+					var a = 1;
+					if (t === 0){
+						return 0;
+					}
+					if ((t /= 1 / 2) == 2){
+						return 1;
+					}
+					if (!p){
+						p = 1 * (0.3 * 1.5);
+					}
+					if (a < Math.abs(1)) {
+						a = 1;
+						s = p / 4;
+					} else {
+						s = p / (2 * Math.PI) * Math.asin(1 / a);
+					}
+					if (t < 1){
+						return -0.5 * (a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * 1 - s) * (2 * Math.PI) / p));}
+					return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * 1 - s) * (2 * Math.PI) / p) * 0.5 + 1;
+				},
+				easeInBack: function (t) {
+					var s = 1.70158;
+					return 1 * (t /= 1) * t * ((s + 1) * t - s);
+				},
+				easeOutBack: function (t) {
+					var s = 1.70158;
+					return 1 * ((t = t / 1 - 1) * t * ((s + 1) * t + s) + 1);
+				},
+				easeInOutBack: function (t) {
+					var s = 1.70158;
+					if ((t /= 1 / 2) < 1){
+						return 1 / 2 * (t * t * (((s *= (1.525)) + 1) * t - s));
+					}
+					return 1 / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2);
+				},
+				easeInBounce: function (t) {
+					return 1 - easingEffects.easeOutBounce(1 - t);
+				},
+				easeOutBounce: function (t) {
+					if ((t /= 1) < (1 / 2.75)) {
+						return 1 * (7.5625 * t * t);
+					} else if (t < (2 / 2.75)) {
+						return 1 * (7.5625 * (t -= (1.5 / 2.75)) * t + 0.75);
+					} else if (t < (2.5 / 2.75)) {
+						return 1 * (7.5625 * (t -= (2.25 / 2.75)) * t + 0.9375);
+					} else {
+						return 1 * (7.5625 * (t -= (2.625 / 2.75)) * t + 0.984375);
+					}
+				},
+				easeInOutBounce: function (t) {
+					if (t < 1 / 2){
+						return easingEffects.easeInBounce(t * 2) * 0.5;
+					}
+					return easingEffects.easeOutBounce(t * 2 - 1) * 0.5 + 1 * 0.5;
+				}
+			},
+			//Request animation polyfill - http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+			requestAnimFrame = helpers.requestAnimFrame = (function(){
+				return window.requestAnimationFrame ||
+					window.webkitRequestAnimationFrame ||
+					window.mozRequestAnimationFrame ||
+					window.oRequestAnimationFrame ||
+					window.msRequestAnimationFrame ||
+					function(callback) {
+						return window.setTimeout(callback, 1000 / 60);
+					};
+			})(),
+			cancelAnimFrame = helpers.cancelAnimFrame = (function(){
+				return window.cancelAnimationFrame ||
+					window.webkitCancelAnimationFrame ||
+					window.mozCancelAnimationFrame ||
+					window.oCancelAnimationFrame ||
+					window.msCancelAnimationFrame ||
+					function(callback) {
+						return window.clearTimeout(callback, 1000 / 60);
+					};
+			})(),
+			animationLoop = helpers.animationLoop = function(callback,totalSteps,easingString,onProgress,onComplete,chartInstance){
+
+				var currentStep = 0,
+					easingFunction = easingEffects[easingString] || easingEffects.linear;
+
+				var animationFrame = function(){
+					currentStep++;
+					var stepDecimal = currentStep/totalSteps;
+					var easeDecimal = easingFunction(stepDecimal);
+
+					callback.call(chartInstance,easeDecimal,stepDecimal, currentStep);
+					onProgress.call(chartInstance,easeDecimal,stepDecimal);
+					if (currentStep < totalSteps){
+						chartInstance.animationFrame = requestAnimFrame(animationFrame);
+					} else{
+						onComplete.apply(chartInstance);
+					}
+				};
+				requestAnimFrame(animationFrame);
+			},
+			//-- DOM methods
+			getRelativePosition = helpers.getRelativePosition = function(evt){
+				var mouseX, mouseY;
+				var e = evt.originalEvent || evt,
+					canvas = evt.currentTarget || evt.srcElement,
+					boundingRect = canvas.getBoundingClientRect();
+
+				if (e.touches){
+					mouseX = e.touches[0].clientX - boundingRect.left;
+					mouseY = e.touches[0].clientY - boundingRect.top;
+
+				}
+				else{
+					mouseX = e.clientX - boundingRect.left;
+					mouseY = e.clientY - boundingRect.top;
+				}
+
+				return {
+					x : mouseX,
+					y : mouseY
+				};
+
+			},
+			addEvent = helpers.addEvent = function(node,eventType,method){
+				if (node.addEventListener){
+					node.addEventListener(eventType,method);
+				} else if (node.attachEvent){
+					node.attachEvent("on"+eventType, method);
+				} else {
+					node["on"+eventType] = method;
+				}
+			},
+			removeEvent = helpers.removeEvent = function(node, eventType, handler){
+				if (node.removeEventListener){
+					node.removeEventListener(eventType, handler, false);
+				} else if (node.detachEvent){
+					node.detachEvent("on"+eventType,handler);
+				} else{
+					node["on" + eventType] = noop;
+				}
+			},
+			bindEvents = helpers.bindEvents = function(chartInstance, arrayOfEvents, handler){
+				// Create the events object if it's not already present
+				if (!chartInstance.events) chartInstance.events = {};
+
+				each(arrayOfEvents,function(eventName){
+					chartInstance.events[eventName] = function(){
+						handler.apply(chartInstance, arguments);
+					};
+					addEvent(chartInstance.chart.canvas,eventName,chartInstance.events[eventName]);
+				});
+			},
+			unbindEvents = helpers.unbindEvents = function (chartInstance, arrayOfEvents) {
+				each(arrayOfEvents, function(handler,eventName){
+					removeEvent(chartInstance.chart.canvas, eventName, handler);
+				});
+			},
+			getMaximumWidth = helpers.getMaximumWidth = function(domNode){
+				var container = domNode.parentNode,
+				    padding = parseInt(getStyle(container, 'padding-left')) + parseInt(getStyle(container, 'padding-right'));
+				// TODO = check cross browser stuff with this.
+				return container ? container.clientWidth - padding : 0;
+			},
+			getMaximumHeight = helpers.getMaximumHeight = function(domNode){
+				var container = domNode.parentNode,
+				    padding = parseInt(getStyle(container, 'padding-bottom')) + parseInt(getStyle(container, 'padding-top'));
+				// TODO = check cross browser stuff with this.
+				return container ? container.clientHeight - padding : 0;
+			},
+			getStyle = helpers.getStyle = function (el, property) {
+				return el.currentStyle ?
+					el.currentStyle[property] :
+					document.defaultView.getComputedStyle(el, null).getPropertyValue(property);
+			},
+			getMaximumSize = helpers.getMaximumSize = helpers.getMaximumWidth, // legacy support
+			retinaScale = helpers.retinaScale = function(chart){
+				var ctx = chart.ctx,
+					width = chart.canvas.width,
+					height = chart.canvas.height;
+
+				if (window.devicePixelRatio) {
+					ctx.canvas.style.width = width + "px";
+					ctx.canvas.style.height = height + "px";
+					ctx.canvas.height = height * window.devicePixelRatio;
+					ctx.canvas.width = width * window.devicePixelRatio;
+					ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+				}
+			},
+			//-- Canvas methods
+			clear = helpers.clear = function(chart){
+				chart.ctx.clearRect(0,0,chart.width,chart.height);
+			},
+			fontString = helpers.fontString = function(pixelSize,fontStyle,fontFamily){
+				return fontStyle + " " + pixelSize+"px " + fontFamily;
+			},
+			longestText = helpers.longestText = function(ctx,font,arrayOfStrings){
+				ctx.font = font;
+				var longest = 0;
+				each(arrayOfStrings,function(string){
+					var textWidth = ctx.measureText(string).width;
+					longest = (textWidth > longest) ? textWidth : longest;
+				});
+				return longest;
+			},
+			drawRoundedRectangle = helpers.drawRoundedRectangle = function(ctx,x,y,width,height,radius){
+				ctx.beginPath();
+				ctx.moveTo(x + radius, y);
+				ctx.lineTo(x + width - radius, y);
+				ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+				ctx.lineTo(x + width, y + height - radius);
+				ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+				ctx.lineTo(x + radius, y + height);
+				ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+				ctx.lineTo(x, y + radius);
+				ctx.quadraticCurveTo(x, y, x + radius, y);
+				ctx.closePath();
+			};
+
+
+		//Store a reference to each instance - allowing us to globally resize chart instances on window resize.
+		//Destroy method on the chart will remove the instance of the chart from this reference.
+		Chart.instances = {};
+
+		Chart.Type = function(data,options,chart){
+			this.options = options;
+			this.chart = chart;
+			this.id = uid();
+			//Add the chart instance to the global namespace
+			Chart.instances[this.id] = this;
+
+			// Initialize is always called when a chart type is created
+			// By default it is a no op, but it should be extended
+			if (options.responsive){
+				this.resize();
+			}
+			this.initialize.call(this,data);
+		};
+
+		//Core methods that'll be a part of every chart type
+		extend(Chart.Type.prototype,{
+			initialize : function(){return this;},
+			clear : function(){
+				clear(this.chart);
+				return this;
+			},
+			stop : function(){
+				// Stops any current animation loop occuring
+				Chart.animationService.cancelAnimation(this);
+				return this;
+			},
+			resize : function(callback){
+				this.stop();
+				var canvas = this.chart.canvas,
+					newWidth = getMaximumWidth(this.chart.canvas),
+					newHeight = this.options.maintainAspectRatio ? newWidth / this.chart.aspectRatio : getMaximumHeight(this.chart.canvas);
+
+				canvas.width = this.chart.width = newWidth;
+				canvas.height = this.chart.height = newHeight;
+
+				retinaScale(this.chart);
+
+				if (typeof callback === "function"){
+					callback.apply(this, Array.prototype.slice.call(arguments, 1));
+				}
+				return this;
+			},
+			reflow : noop,
+			render : function(reflow){
+				if (reflow){
+					this.reflow();
+				}
+				
+				if (this.options.animation && !reflow){
+					var animation = new Chart.Animation();
+					animation.numSteps = this.options.animationSteps;
+					animation.easing = this.options.animationEasing;
+					
+					// render function
+					animation.render = function(chartInstance, animationObject) {
+						var easingFunction = helpers.easingEffects[animationObject.easing];
+						var stepDecimal = animationObject.currentStep / animationObject.numSteps;
+						var easeDecimal = easingFunction(stepDecimal);
+						
+						chartInstance.draw(easeDecimal, stepDecimal, animationObject.currentStep);
+					};
+					
+					// user events
+					animation.onAnimationProgress = this.options.onAnimationProgress;
+					animation.onAnimationComplete = this.options.onAnimationComplete;
+					
+					Chart.animationService.addAnimation(this, animation);
+				}
+				else{
+					this.draw();
+					this.options.onAnimationComplete.call(this);
+				}
+				return this;
+			},
+			generateLegend : function(){
+				return helpers.template(this.options.legendTemplate, this);
+			},
+			destroy : function(){
+				this.stop();
+				this.clear();
+				unbindEvents(this, this.events);
+				var canvas = this.chart.canvas;
+
+				// Reset canvas height/width attributes starts a fresh with the canvas context
+				canvas.width = this.chart.width;
+				canvas.height = this.chart.height;
+
+				// < IE9 doesn't support removeProperty
+				if (canvas.style.removeProperty) {
+					canvas.style.removeProperty('width');
+					canvas.style.removeProperty('height');
+				} else {
+					canvas.style.removeAttribute('width');
+					canvas.style.removeAttribute('height');
+				}
+
+				delete Chart.instances[this.id];
+			},
+			showTooltip : function(ChartElements, forceRedraw){
+				// Only redraw the chart if we've actually changed what we're hovering on.
+				if (typeof this.activeElements === 'undefined') this.activeElements = [];
+
+				var isChanged = (function(Elements){
+					var changed = false;
+
+					if (Elements.length !== this.activeElements.length){
+						changed = true;
+						return changed;
+					}
+
+					each(Elements, function(element, index){
+						if (element !== this.activeElements[index]){
+							changed = true;
+						}
+					}, this);
+					return changed;
+				}).call(this, ChartElements);
+
+				if (!isChanged && !forceRedraw){
+					return;
+				}
+				else{
+					this.activeElements = ChartElements;
+				}
+				this.draw();
+				if(this.options.customTooltips){
+					this.options.customTooltips(false);
+				}
+				if (ChartElements.length > 0){
+					// If we have multiple datasets, show a MultiTooltip for all of the data points at that index
+					if (this.datasets && this.datasets.length > 1) {
+						var dataArray,
+							dataIndex;
+
+						for (var i = this.datasets.length - 1; i >= 0; i--) {
+							dataArray = this.datasets[i].points || this.datasets[i].bars || this.datasets[i].segments;
+							dataIndex = indexOf(dataArray, ChartElements[0]);
+							if (dataIndex !== -1){
+								break;
+							}
+						}
+						var tooltipLabels = [],
+							tooltipColors = [],
+							medianPosition = (function(index) {
+
+								// Get all the points at that particular index
+								var Elements = [],
+									dataCollection,
+									xPositions = [],
+									yPositions = [],
+									xMax,
+									yMax,
+									xMin,
+									yMin;
+								helpers.each(this.datasets, function(dataset){
+									dataCollection = dataset.points || dataset.bars || dataset.segments;
+									if (dataCollection[dataIndex] && dataCollection[dataIndex].hasValue()){
+										Elements.push(dataCollection[dataIndex]);
+									}
+								});
+
+								helpers.each(Elements, function(element) {
+									xPositions.push(element.x);
+									yPositions.push(element.y);
+
+
+									//Include any colour information about the element
+									tooltipLabels.push(helpers.template(this.options.multiTooltipTemplate, element));
+									tooltipColors.push({
+										fill: element._saved.fillColor || element.fillColor,
+										stroke: element._saved.strokeColor || element.strokeColor
+									});
+
+								}, this);
+
+								yMin = min(yPositions);
+								yMax = max(yPositions);
+
+								xMin = min(xPositions);
+								xMax = max(xPositions);
+
+								return {
+									x: (xMin > this.chart.width/2) ? xMin : xMax,
+									y: (yMin + yMax)/2
+								};
+							}).call(this, dataIndex);
+
+						new Chart.MultiTooltip({
+							x: medianPosition.x,
+							y: medianPosition.y,
+							xPadding: this.options.tooltipXPadding,
+							yPadding: this.options.tooltipYPadding,
+							xOffset: this.options.tooltipXOffset,
+							fillColor: this.options.tooltipFillColor,
+							textColor: this.options.tooltipFontColor,
+							fontFamily: this.options.tooltipFontFamily,
+							fontStyle: this.options.tooltipFontStyle,
+							fontSize: this.options.tooltipFontSize,
+							titleTextColor: this.options.tooltipTitleFontColor,
+							titleFontFamily: this.options.tooltipTitleFontFamily,
+							titleFontStyle: this.options.tooltipTitleFontStyle,
+							titleFontSize: this.options.tooltipTitleFontSize,
+							cornerRadius: this.options.tooltipCornerRadius,
+							labels: tooltipLabels,
+							legendColors: tooltipColors,
+							legendColorBackground : this.options.multiTooltipKeyBackground,
+							title: template(this.options.tooltipTitleTemplate,ChartElements[0]),
+							chart: this.chart,
+							ctx: this.chart.ctx,
+							custom: this.options.customTooltips
+						}).draw();
+
+					} else {
+						each(ChartElements, function(Element) {
+							var tooltipPosition = Element.tooltipPosition();
+							new Chart.Tooltip({
+								x: Math.round(tooltipPosition.x),
+								y: Math.round(tooltipPosition.y),
+								xPadding: this.options.tooltipXPadding,
+								yPadding: this.options.tooltipYPadding,
+								fillColor: this.options.tooltipFillColor,
+								textColor: this.options.tooltipFontColor,
+								fontFamily: this.options.tooltipFontFamily,
+								fontStyle: this.options.tooltipFontStyle,
+								fontSize: this.options.tooltipFontSize,
+								caretHeight: this.options.tooltipCaretSize,
+								cornerRadius: this.options.tooltipCornerRadius,
+								text: template(this.options.tooltipTemplate, Element),
+								chart: this.chart,
+								custom: this.options.customTooltips
+							}).draw();
+						}, this);
+					}
+				}
+				return this;
+			},
+			toBase64Image : function(){
+				return this.chart.canvas.toDataURL.apply(this.chart.canvas, arguments);
+			}
+		});
+
+		Chart.Type.extend = function(extensions){
+
+			var parent = this;
+
+			var ChartType = function(){
+				return parent.apply(this,arguments);
+			};
+
+			//Copy the prototype object of the this class
+			ChartType.prototype = clone(parent.prototype);
+			//Now overwrite some of the properties in the base class with the new extensions
+			extend(ChartType.prototype, extensions);
+
+			ChartType.extend = Chart.Type.extend;
+
+			if (extensions.name || parent.prototype.name){
+
+				var chartName = extensions.name || parent.prototype.name;
+				//Assign any potential default values of the new chart type
+
+				//If none are defined, we'll use a clone of the chart type this is being extended from.
+				//I.e. if we extend a line chart, we'll use the defaults from the line chart if our new chart
+				//doesn't define some defaults of their own.
+
+				var baseDefaults = (Chart.defaults[parent.prototype.name]) ? clone(Chart.defaults[parent.prototype.name]) : {};
+
+				Chart.defaults[chartName] = extend(baseDefaults,extensions.defaults);
+
+				Chart.types[chartName] = ChartType;
+
+				//Register this new chart type in the Chart prototype
+				Chart.prototype[chartName] = function(data,options){
+					var config = merge(Chart.defaults.global, Chart.defaults[chartName], options || {});
+					return new ChartType(data,config,this);
+				};
+			} else{
+				warn("Name not provided for this chart, so it hasn't been registered");
+			}
+			return parent;
+		};
+
+		Chart.Element = function(configuration){
+			extend(this,configuration);
+			this.initialize.apply(this,arguments);
+			this.save();
+		};
+		extend(Chart.Element.prototype,{
+			initialize : function(){},
+			restore : function(props){
+				if (!props){
+					extend(this,this._saved);
+				} else {
+					each(props,function(key){
+						this[key] = this._saved[key];
+					},this);
+				}
+				return this;
+			},
+			save : function(){
+				this._saved = clone(this);
+				delete this._saved._saved;
+				return this;
+			},
+			update : function(newProps){
+				each(newProps,function(value,key){
+					this._saved[key] = this[key];
+					this[key] = value;
+				},this);
+				return this;
+			},
+			transition : function(props,ease){
+				each(props,function(value,key){
+					this[key] = ((value - this._saved[key]) * ease) + this._saved[key];
+				},this);
+				return this;
+			},
+			tooltipPosition : function(){
+				return {
+					x : this.x,
+					y : this.y
+				};
+			},
+			hasValue: function(){
+				return isNumber(this.value);
+			}
+		});
+
+		Chart.Element.extend = inherits;
+
+
+		Chart.Point = Chart.Element.extend({
+			display: true,
+			inRange: function(chartX,chartY){
+				var hitDetectionRange = this.hitDetectionRadius + this.radius;
+				return ((Math.pow(chartX-this.x, 2)+Math.pow(chartY-this.y, 2)) < Math.pow(hitDetectionRange,2));
+			},
+			draw : function(){
+				if (this.display){
+					var ctx = this.ctx;
+					ctx.beginPath();
+
+					ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+					ctx.closePath();
+
+					ctx.strokeStyle = this.strokeColor;
+					ctx.lineWidth = this.strokeWidth;
+
+					ctx.fillStyle = this.fillColor;
+
+					ctx.fill();
+					ctx.stroke();
+				}
+
+
+				//Quick debug for bezier curve splining
+				//Highlights control points and the line between them.
+				//Handy for dev - stripped in the min version.
+
+				// ctx.save();
+				// ctx.fillStyle = "black";
+				// ctx.strokeStyle = "black"
+				// ctx.beginPath();
+				// ctx.arc(this.controlPoints.inner.x,this.controlPoints.inner.y, 2, 0, Math.PI*2);
+				// ctx.fill();
+
+				// ctx.beginPath();
+				// ctx.arc(this.controlPoints.outer.x,this.controlPoints.outer.y, 2, 0, Math.PI*2);
+				// ctx.fill();
+
+				// ctx.moveTo(this.controlPoints.inner.x,this.controlPoints.inner.y);
+				// ctx.lineTo(this.x, this.y);
+				// ctx.lineTo(this.controlPoints.outer.x,this.controlPoints.outer.y);
+				// ctx.stroke();
+
+				// ctx.restore();
+
+
+
+			}
+		});
+
+		Chart.Arc = Chart.Element.extend({
+			inRange : function(chartX,chartY){
+
+				var pointRelativePosition = helpers.getAngleFromPoint(this, {
+					x: chartX,
+					y: chartY
+				});
+
+				// Normalize all angles to 0 - 2*PI (0 - 360°)
+				var pointRelativeAngle = pointRelativePosition.angle % (Math.PI * 2),
+				    startAngle = (Math.PI * 2 + this.startAngle) % (Math.PI * 2),
+				    endAngle = (Math.PI * 2 + this.endAngle) % (Math.PI * 2) || 360;
+
+				// Calculate wether the pointRelativeAngle is between the start and the end angle
+				var betweenAngles = (endAngle < startAngle) ?
+					pointRelativeAngle <= endAngle || pointRelativeAngle >= startAngle:
+					pointRelativeAngle >= startAngle && pointRelativeAngle <= endAngle;
+
+				//Check if within the range of the open/close angle
+				var withinRadius = (pointRelativePosition.distance >= this.innerRadius && pointRelativePosition.distance <= this.outerRadius);
+
+				return (betweenAngles && withinRadius);
+				//Ensure within the outside of the arc centre, but inside arc outer
+			},
+			tooltipPosition : function(){
+				var centreAngle = this.startAngle + ((this.endAngle - this.startAngle) / 2),
+					rangeFromCentre = (this.outerRadius - this.innerRadius) / 2 + this.innerRadius;
+				return {
+					x : this.x + (Math.cos(centreAngle) * rangeFromCentre),
+					y : this.y + (Math.sin(centreAngle) * rangeFromCentre)
+				};
+			},
+			draw : function(animationPercent){
+
+				var easingDecimal = animationPercent || 1;
+
+				var ctx = this.ctx;
+
+				ctx.beginPath();
+
+				ctx.arc(this.x, this.y, this.outerRadius < 0 ? 0 : this.outerRadius, this.startAngle, this.endAngle);
+
+	            ctx.arc(this.x, this.y, this.innerRadius < 0 ? 0 : this.innerRadius, this.endAngle, this.startAngle, true);
+
+				ctx.closePath();
+				ctx.strokeStyle = this.strokeColor;
+				ctx.lineWidth = this.strokeWidth;
+
+				ctx.fillStyle = this.fillColor;
+
+				ctx.fill();
+				ctx.lineJoin = 'bevel';
+
+				if (this.showStroke){
+					ctx.stroke();
+				}
+			}
+		});
+
+		Chart.Rectangle = Chart.Element.extend({
+			draw : function(){
+				var ctx = this.ctx,
+					halfWidth = this.width/2,
+					leftX = this.x - halfWidth,
+					rightX = this.x + halfWidth,
+					top = this.base - (this.base - this.y),
+					halfStroke = this.strokeWidth / 2;
+
+				// Canvas doesn't allow us to stroke inside the width so we can
+				// adjust the sizes to fit if we're setting a stroke on the line
+				if (this.showStroke){
+					leftX += halfStroke;
+					rightX -= halfStroke;
+					top += halfStroke;
+				}
+
+				ctx.beginPath();
+
+				ctx.fillStyle = this.fillColor;
+				ctx.strokeStyle = this.strokeColor;
+				ctx.lineWidth = this.strokeWidth;
+
+				// It'd be nice to keep this class totally generic to any rectangle
+				// and simply specify which border to miss out.
+				ctx.moveTo(leftX, this.base);
+				ctx.lineTo(leftX, top);
+				ctx.lineTo(rightX, top);
+				ctx.lineTo(rightX, this.base);
+				ctx.fill();
+				if (this.showStroke){
+					ctx.stroke();
+				}
+			},
+			height : function(){
+				return this.base - this.y;
+			},
+			inRange : function(chartX,chartY){
+				return (chartX >= this.x - this.width/2 && chartX <= this.x + this.width/2) && (chartY >= this.y && chartY <= this.base);
+			}
+		});
+
+		Chart.Animation = Chart.Element.extend({
+			currentStep: null, // the current animation step
+			numSteps: 60, // default number of steps
+			easing: "", // the easing to use for this animation
+			render: null, // render function used by the animation service
+			
+			onAnimationProgress: null, // user specified callback to fire on each step of the animation 
+			onAnimationComplete: null, // user specified callback to fire when the animation finishes
+		});
+		
+		Chart.Tooltip = Chart.Element.extend({
+			draw : function(){
+
+				var ctx = this.chart.ctx;
+
+				ctx.font = fontString(this.fontSize,this.fontStyle,this.fontFamily);
+
+				this.xAlign = "center";
+				this.yAlign = "above";
+
+				//Distance between the actual element.y position and the start of the tooltip caret
+				var caretPadding = this.caretPadding = 2;
+
+				var tooltipWidth = ctx.measureText(this.text).width + 2*this.xPadding,
+					tooltipRectHeight = this.fontSize + 2*this.yPadding,
+					tooltipHeight = tooltipRectHeight + this.caretHeight + caretPadding;
+
+				if (this.x + tooltipWidth/2 >this.chart.width){
+					this.xAlign = "left";
+				} else if (this.x - tooltipWidth/2 < 0){
+					this.xAlign = "right";
+				}
+
+				if (this.y - tooltipHeight < 0){
+					this.yAlign = "below";
+				}
+
+
+				var tooltipX = this.x - tooltipWidth/2,
+					tooltipY = this.y - tooltipHeight;
+
+				ctx.fillStyle = this.fillColor;
+
+				// Custom Tooltips
+				if(this.custom){
+					this.custom(this);
+				}
+				else{
+					switch(this.yAlign)
+					{
+					case "above":
+						//Draw a caret above the x/y
+						ctx.beginPath();
+						ctx.moveTo(this.x,this.y - caretPadding);
+						ctx.lineTo(this.x + this.caretHeight, this.y - (caretPadding + this.caretHeight));
+						ctx.lineTo(this.x - this.caretHeight, this.y - (caretPadding + this.caretHeight));
+						ctx.closePath();
+						ctx.fill();
+						break;
+					case "below":
+						tooltipY = this.y + caretPadding + this.caretHeight;
+						//Draw a caret below the x/y
+						ctx.beginPath();
+						ctx.moveTo(this.x, this.y + caretPadding);
+						ctx.lineTo(this.x + this.caretHeight, this.y + caretPadding + this.caretHeight);
+						ctx.lineTo(this.x - this.caretHeight, this.y + caretPadding + this.caretHeight);
+						ctx.closePath();
+						ctx.fill();
+						break;
+					}
+
+					switch(this.xAlign)
+					{
+					case "left":
+						tooltipX = this.x - tooltipWidth + (this.cornerRadius + this.caretHeight);
+						break;
+					case "right":
+						tooltipX = this.x - (this.cornerRadius + this.caretHeight);
+						break;
+					}
+
+					drawRoundedRectangle(ctx,tooltipX,tooltipY,tooltipWidth,tooltipRectHeight,this.cornerRadius);
+
+					ctx.fill();
+
+					ctx.fillStyle = this.textColor;
+					ctx.textAlign = "center";
+					ctx.textBaseline = "middle";
+					ctx.fillText(this.text, tooltipX + tooltipWidth/2, tooltipY + tooltipRectHeight/2);
+				}
+			}
+		});
+
+		Chart.MultiTooltip = Chart.Element.extend({
+			initialize : function(){
+				this.font = fontString(this.fontSize,this.fontStyle,this.fontFamily);
+
+				this.titleFont = fontString(this.titleFontSize,this.titleFontStyle,this.titleFontFamily);
+
+				this.titleHeight = this.title ? this.titleFontSize * 1.5 : 0;
+				this.height = (this.labels.length * this.fontSize) + ((this.labels.length-1) * (this.fontSize/2)) + (this.yPadding*2) + this.titleHeight;
+
+				this.ctx.font = this.titleFont;
+
+				var titleWidth = this.ctx.measureText(this.title).width,
+					//Label has a legend square as well so account for this.
+					labelWidth = longestText(this.ctx,this.font,this.labels) + this.fontSize + 3,
+					longestTextWidth = max([labelWidth,titleWidth]);
+
+				this.width = longestTextWidth + (this.xPadding*2);
+
+
+				var halfHeight = this.height/2;
+
+				//Check to ensure the height will fit on the canvas
+				if (this.y - halfHeight < 0 ){
+					this.y = halfHeight;
+				} else if (this.y + halfHeight > this.chart.height){
+					this.y = this.chart.height - halfHeight;
+				}
+
+				//Decide whether to align left or right based on position on canvas
+				if (this.x > this.chart.width/2){
+					this.x -= this.xOffset + this.width;
+				} else {
+					this.x += this.xOffset;
+				}
+
+
+			},
+			getLineHeight : function(index){
+				var baseLineHeight = this.y - (this.height/2) + this.yPadding,
+					afterTitleIndex = index-1;
+
+				//If the index is zero, we're getting the title
+				if (index === 0){
+					return baseLineHeight + this.titleHeight / 3;
+				} else{
+					return baseLineHeight + ((this.fontSize * 1.5 * afterTitleIndex) + this.fontSize / 2) + this.titleHeight;
+				}
+
+			},
+			draw : function(){
+				// Custom Tooltips
+				if(this.custom){
+					this.custom(this);
+				}
+				else{
+					drawRoundedRectangle(this.ctx,this.x,this.y - this.height/2,this.width,this.height,this.cornerRadius);
+					var ctx = this.ctx;
+					ctx.fillStyle = this.fillColor;
+					ctx.fill();
+					ctx.closePath();
+
+					ctx.textAlign = "left";
+					ctx.textBaseline = "middle";
+					ctx.fillStyle = this.titleTextColor;
+					ctx.font = this.titleFont;
+
+					ctx.fillText(this.title,this.x + this.xPadding, this.getLineHeight(0));
+
+					ctx.font = this.font;
+					helpers.each(this.labels,function(label,index){
+						ctx.fillStyle = this.textColor;
+						ctx.fillText(label,this.x + this.xPadding + this.fontSize + 3, this.getLineHeight(index + 1));
+
+						//A bit gnarly, but clearing this rectangle breaks when using explorercanvas (clears whole canvas)
+						//ctx.clearRect(this.x + this.xPadding, this.getLineHeight(index + 1) - this.fontSize/2, this.fontSize, this.fontSize);
+						//Instead we'll make a white filled block to put the legendColour palette over.
+
+						ctx.fillStyle = this.legendColorBackground;
+						ctx.fillRect(this.x + this.xPadding, this.getLineHeight(index + 1) - this.fontSize/2, this.fontSize, this.fontSize);
+
+						ctx.fillStyle = this.legendColors[index].fill;
+						ctx.fillRect(this.x + this.xPadding, this.getLineHeight(index + 1) - this.fontSize/2, this.fontSize, this.fontSize);
+
+
+					},this);
+				}
+			}
+		});
+
+		Chart.Scale = Chart.Element.extend({
+			initialize : function(){
+				this.fit();
+			},
+			buildYLabels : function(){
+				this.yLabels = [];
+
+				var stepDecimalPlaces = getDecimalPlaces(this.stepValue);
+
+				for (var i=0; i<=this.steps; i++){
+					this.yLabels.push(template(this.templateString,{value:(this.min + (i * this.stepValue)).toFixed(stepDecimalPlaces)}));
+				}
+				this.yLabelWidth = (this.display && this.showLabels) ? longestText(this.ctx,this.font,this.yLabels) + 10 : 0;
+			},
+			addXLabel : function(label){
+				this.xLabels.push(label);
+				this.valuesCount++;
+				this.fit();
+			},
+			removeXLabel : function(){
+				this.xLabels.shift();
+				this.valuesCount--;
+				this.fit();
+			},
+			// Fitting loop to rotate x Labels and figure out what fits there, and also calculate how many Y steps to use
+			fit: function(){
+				// First we need the width of the yLabels, assuming the xLabels aren't rotated
+
+				// To do that we need the base line at the top and base of the chart, assuming there is no x label rotation
+				this.startPoint = (this.display) ? this.fontSize : 0;
+				this.endPoint = (this.display) ? this.height - (this.fontSize * 1.5) - 5 : this.height; // -5 to pad labels
+
+				// Apply padding settings to the start and end point.
+				this.startPoint += this.padding;
+				this.endPoint -= this.padding;
+
+				// Cache the starting endpoint, excluding the space for x labels
+				var cachedEndPoint = this.endPoint;
+
+				// Cache the starting height, so can determine if we need to recalculate the scale yAxis
+				var cachedHeight = this.endPoint - this.startPoint,
+					cachedYLabelWidth;
+
+				// Build the current yLabels so we have an idea of what size they'll be to start
+				/*
+				 *	This sets what is returned from calculateScaleRange as static properties of this class:
+				 *
+					this.steps;
+					this.stepValue;
+					this.min;
+					this.max;
+				 *
+				 */
+				this.calculateYRange(cachedHeight);
+
+				// With these properties set we can now build the array of yLabels
+				// and also the width of the largest yLabel
+				this.buildYLabels();
+
+				this.calculateXLabelRotation();
+
+				while((cachedHeight > this.endPoint - this.startPoint)){
+					cachedHeight = this.endPoint - this.startPoint;
+					cachedYLabelWidth = this.yLabelWidth;
+
+					this.calculateYRange(cachedHeight);
+					this.buildYLabels();
+
+					// Only go through the xLabel loop again if the yLabel width has changed
+					if (cachedYLabelWidth < this.yLabelWidth){
+						this.endPoint = cachedEndPoint;
+						this.calculateXLabelRotation();
+					}
+				}
+
+			},
+			calculateXLabelRotation : function(){
+				//Get the width of each grid by calculating the difference
+				//between x offsets between 0 and 1.
+
+				this.ctx.font = this.font;
+
+				var firstWidth = this.ctx.measureText(this.xLabels[0]).width,
+					lastWidth = this.ctx.measureText(this.xLabels[this.xLabels.length - 1]).width,
+					firstRotated,
+					lastRotated;
+
+
+				this.xScalePaddingRight = lastWidth/2 + 3;
+				this.xScalePaddingLeft = (firstWidth/2 > this.yLabelWidth) ? firstWidth/2 : this.yLabelWidth;
+
+				this.xLabelRotation = 0;
+				if (this.display){
+					var originalLabelWidth = longestText(this.ctx,this.font,this.xLabels),
+						cosRotation,
+						firstRotatedWidth;
+					this.xLabelWidth = originalLabelWidth;
+					//Allow 3 pixels x2 padding either side for label readability
+					var xGridWidth = Math.floor(this.calculateX(1) - this.calculateX(0)) - 6;
+
+					//Max label rotate should be 90 - also act as a loop counter
+					while ((this.xLabelWidth > xGridWidth && this.xLabelRotation === 0) || (this.xLabelWidth > xGridWidth && this.xLabelRotation <= 90 && this.xLabelRotation > 0)){
+						cosRotation = Math.cos(toRadians(this.xLabelRotation));
+
+						firstRotated = cosRotation * firstWidth;
+						lastRotated = cosRotation * lastWidth;
+
+						// We're right aligning the text now.
+						if (firstRotated + this.fontSize / 2 > this.yLabelWidth){
+							this.xScalePaddingLeft = firstRotated + this.fontSize / 2;
+						}
+						this.xScalePaddingRight = this.fontSize/2;
+
+
+						this.xLabelRotation++;
+						this.xLabelWidth = cosRotation * originalLabelWidth;
+
+					}
+					if (this.xLabelRotation > 0){
+						this.endPoint -= Math.sin(toRadians(this.xLabelRotation))*originalLabelWidth + 3;
+					}
+				}
+				else{
+					this.xLabelWidth = 0;
+					this.xScalePaddingRight = this.padding;
+					this.xScalePaddingLeft = this.padding;
+				}
+
+			},
+			// Needs to be overidden in each Chart type
+			// Otherwise we need to pass all the data into the scale class
+			calculateYRange: noop,
+			drawingArea: function(){
+				return this.startPoint - this.endPoint;
+			},
+			calculateY : function(value){
+				var scalingFactor = this.drawingArea() / (this.min - this.max);
+				return this.endPoint - (scalingFactor * (value - this.min));
+			},
+			calculateX : function(index){
+				var isRotated = (this.xLabelRotation > 0),
+					// innerWidth = (this.offsetGridLines) ? this.width - offsetLeft - this.padding : this.width - (offsetLeft + halfLabelWidth * 2) - this.padding,
+					innerWidth = this.width - (this.xScalePaddingLeft + this.xScalePaddingRight),
+					valueWidth = innerWidth/Math.max((this.valuesCount - ((this.offsetGridLines) ? 0 : 1)), 1),
+					valueOffset = (valueWidth * index) + this.xScalePaddingLeft;
+
+				if (this.offsetGridLines){
+					valueOffset += (valueWidth/2);
+				}
+
+				return Math.round(valueOffset);
+			},
+			update : function(newProps){
+				helpers.extend(this, newProps);
+				this.fit();
+			},
+			draw : function(){
+				var ctx = this.ctx,
+					yLabelGap = (this.endPoint - this.startPoint) / this.steps,
+					xStart = Math.round(this.xScalePaddingLeft);
+				if (this.display){
+					ctx.fillStyle = this.textColor;
+					ctx.font = this.font;
+					each(this.yLabels,function(labelString,index){
+						var yLabelCenter = this.endPoint - (yLabelGap * index),
+							linePositionY = Math.round(yLabelCenter),
+							drawHorizontalLine = this.showHorizontalLines;
+
+						ctx.textAlign = "right";
+						ctx.textBaseline = "middle";
+						if (this.showLabels){
+							ctx.fillText(labelString,xStart - 10,yLabelCenter);
+						}
+
+						// This is X axis, so draw it
+						if (index === 0 && !drawHorizontalLine){
+							drawHorizontalLine = true;
+						}
+
+						if (drawHorizontalLine){
+							ctx.beginPath();
+						}
+
+						if (index > 0){
+							// This is a grid line in the centre, so drop that
+							ctx.lineWidth = this.gridLineWidth;
+							ctx.strokeStyle = this.gridLineColor;
+						} else {
+							// This is the first line on the scale
+							ctx.lineWidth = this.lineWidth;
+							ctx.strokeStyle = this.lineColor;
+						}
+
+						linePositionY += helpers.aliasPixel(ctx.lineWidth);
+
+						if(drawHorizontalLine){
+							ctx.moveTo(xStart, linePositionY);
+							ctx.lineTo(this.width, linePositionY);
+							ctx.stroke();
+							ctx.closePath();
+						}
+
+						ctx.lineWidth = this.lineWidth;
+						ctx.strokeStyle = this.lineColor;
+						ctx.beginPath();
+						ctx.moveTo(xStart - 5, linePositionY);
+						ctx.lineTo(xStart, linePositionY);
+						ctx.stroke();
+						ctx.closePath();
+
+					},this);
+
+					each(this.xLabels,function(label,index){
+						var xPos = this.calculateX(index) + aliasPixel(this.lineWidth),
+							// Check to see if line/bar here and decide where to place the line
+							linePos = this.calculateX(index - (this.offsetGridLines ? 0.5 : 0)) + aliasPixel(this.lineWidth),
+							isRotated = (this.xLabelRotation > 0),
+							drawVerticalLine = this.showVerticalLines;
+
+						// This is Y axis, so draw it
+						if (index === 0 && !drawVerticalLine){
+							drawVerticalLine = true;
+						}
+
+						if (drawVerticalLine){
+							ctx.beginPath();
+						}
+
+						if (index > 0){
+							// This is a grid line in the centre, so drop that
+							ctx.lineWidth = this.gridLineWidth;
+							ctx.strokeStyle = this.gridLineColor;
+						} else {
+							// This is the first line on the scale
+							ctx.lineWidth = this.lineWidth;
+							ctx.strokeStyle = this.lineColor;
+						}
+
+						if (drawVerticalLine){
+							ctx.moveTo(linePos,this.endPoint);
+							ctx.lineTo(linePos,this.startPoint - 3);
+							ctx.stroke();
+							ctx.closePath();
+						}
+
+
+						ctx.lineWidth = this.lineWidth;
+						ctx.strokeStyle = this.lineColor;
+
+
+						// Small lines at the bottom of the base grid line
+						ctx.beginPath();
+						ctx.moveTo(linePos,this.endPoint);
+						ctx.lineTo(linePos,this.endPoint + 5);
+						ctx.stroke();
+						ctx.closePath();
+
+						ctx.save();
+						ctx.translate(xPos,(isRotated) ? this.endPoint + 12 : this.endPoint + 8);
+						ctx.rotate(toRadians(this.xLabelRotation)*-1);
+						ctx.font = this.font;
+						ctx.textAlign = (isRotated) ? "right" : "center";
+						ctx.textBaseline = (isRotated) ? "middle" : "top";
+						ctx.fillText(label, 0, 0);
+						ctx.restore();
+					},this);
+
+				}
+			}
+
+		});
+
+		Chart.RadialScale = Chart.Element.extend({
+			initialize: function(){
+				this.size = min([this.height, this.width]);
+				this.drawingArea = (this.display) ? (this.size/2) - (this.fontSize/2 + this.backdropPaddingY) : (this.size/2);
+			},
+			calculateCenterOffset: function(value){
+				// Take into account half font size + the yPadding of the top value
+				var scalingFactor = this.drawingArea / (this.max - this.min);
+
+				return (value - this.min) * scalingFactor;
+			},
+			update : function(){
+				if (!this.lineArc){
+					this.setScaleSize();
+				} else {
+					this.drawingArea = (this.display) ? (this.size/2) - (this.fontSize/2 + this.backdropPaddingY) : (this.size/2);
+				}
+				this.buildYLabels();
+			},
+			buildYLabels: function(){
+				this.yLabels = [];
+
+				var stepDecimalPlaces = getDecimalPlaces(this.stepValue);
+
+				for (var i=0; i<=this.steps; i++){
+					this.yLabels.push(template(this.templateString,{value:(this.min + (i * this.stepValue)).toFixed(stepDecimalPlaces)}));
+				}
+			},
+			getCircumference : function(){
+				return ((Math.PI*2) / this.valuesCount);
+			},
+			setScaleSize: function(){
+				/*
+				 * Right, this is really confusing and there is a lot of maths going on here
+				 * The gist of the problem is here: https://gist.github.com/nnnick/696cc9c55f4b0beb8fe9
+				 *
+				 * Reaction: https://dl.dropboxusercontent.com/u/34601363/toomuchscience.gif
+				 *
+				 * Solution:
+				 *
+				 * We assume the radius of the polygon is half the size of the canvas at first
+				 * at each index we check if the text overlaps.
+				 *
+				 * Where it does, we store that angle and that index.
+				 *
+				 * After finding the largest index and angle we calculate how much we need to remove
+				 * from the shape radius to move the point inwards by that x.
+				 *
+				 * We average the left and right distances to get the maximum shape radius that can fit in the box
+				 * along with labels.
+				 *
+				 * Once we have that, we can find the centre point for the chart, by taking the x text protrusion
+				 * on each side, removing that from the size, halving it and adding the left x protrusion width.
+				 *
+				 * This will mean we have a shape fitted to the canvas, as large as it can be with the labels
+				 * and position it in the most space efficient manner
+				 *
+				 * https://dl.dropboxusercontent.com/u/34601363/yeahscience.gif
+				 */
+
+
+				// Get maximum radius of the polygon. Either half the height (minus the text width) or half the width.
+				// Use this to calculate the offset + change. - Make sure L/R protrusion is at least 0 to stop issues with centre points
+				var largestPossibleRadius = min([(this.height/2 - this.pointLabelFontSize - 5), this.width/2]),
+					pointPosition,
+					i,
+					textWidth,
+					halfTextWidth,
+					furthestRight = this.width,
+					furthestRightIndex,
+					furthestRightAngle,
+					furthestLeft = 0,
+					furthestLeftIndex,
+					furthestLeftAngle,
+					xProtrusionLeft,
+					xProtrusionRight,
+					radiusReductionRight,
+					radiusReductionLeft,
+					maxWidthRadius;
+				this.ctx.font = fontString(this.pointLabelFontSize,this.pointLabelFontStyle,this.pointLabelFontFamily);
+				for (i=0;i<this.valuesCount;i++){
+					// 5px to space the text slightly out - similar to what we do in the draw function.
+					pointPosition = this.getPointPosition(i, largestPossibleRadius);
+					textWidth = this.ctx.measureText(template(this.templateString, { value: this.labels[i] })).width + 5;
+					if (i === 0 || i === this.valuesCount/2){
+						// If we're at index zero, or exactly the middle, we're at exactly the top/bottom
+						// of the radar chart, so text will be aligned centrally, so we'll half it and compare
+						// w/left and right text sizes
+						halfTextWidth = textWidth/2;
+						if (pointPosition.x + halfTextWidth > furthestRight) {
+							furthestRight = pointPosition.x + halfTextWidth;
+							furthestRightIndex = i;
+						}
+						if (pointPosition.x - halfTextWidth < furthestLeft) {
+							furthestLeft = pointPosition.x - halfTextWidth;
+							furthestLeftIndex = i;
+						}
+					}
+					else if (i < this.valuesCount/2) {
+						// Less than half the values means we'll left align the text
+						if (pointPosition.x + textWidth > furthestRight) {
+							furthestRight = pointPosition.x + textWidth;
+							furthestRightIndex = i;
+						}
+					}
+					else if (i > this.valuesCount/2){
+						// More than half the values means we'll right align the text
+						if (pointPosition.x - textWidth < furthestLeft) {
+							furthestLeft = pointPosition.x - textWidth;
+							furthestLeftIndex = i;
+						}
+					}
+				}
+
+				xProtrusionLeft = furthestLeft;
+
+				xProtrusionRight = Math.ceil(furthestRight - this.width);
+
+				furthestRightAngle = this.getIndexAngle(furthestRightIndex);
+
+				furthestLeftAngle = this.getIndexAngle(furthestLeftIndex);
+
+				radiusReductionRight = xProtrusionRight / Math.sin(furthestRightAngle + Math.PI/2);
+
+				radiusReductionLeft = xProtrusionLeft / Math.sin(furthestLeftAngle + Math.PI/2);
+
+				// Ensure we actually need to reduce the size of the chart
+				radiusReductionRight = (isNumber(radiusReductionRight)) ? radiusReductionRight : 0;
+				radiusReductionLeft = (isNumber(radiusReductionLeft)) ? radiusReductionLeft : 0;
+
+				this.drawingArea = largestPossibleRadius - (radiusReductionLeft + radiusReductionRight)/2;
+
+				//this.drawingArea = min([maxWidthRadius, (this.height - (2 * (this.pointLabelFontSize + 5)))/2])
+				this.setCenterPoint(radiusReductionLeft, radiusReductionRight);
+
+			},
+			setCenterPoint: function(leftMovement, rightMovement){
+
+				var maxRight = this.width - rightMovement - this.drawingArea,
+					maxLeft = leftMovement + this.drawingArea;
+
+				this.xCenter = (maxLeft + maxRight)/2;
+				// Always vertically in the centre as the text height doesn't change
+				this.yCenter = (this.height/2);
+			},
+
+			getIndexAngle : function(index){
+				var angleMultiplier = (Math.PI * 2) / this.valuesCount;
+				// Start from the top instead of right, so remove a quarter of the circle
+
+				return index * angleMultiplier - (Math.PI/2);
+			},
+			getPointPosition : function(index, distanceFromCenter){
+				var thisAngle = this.getIndexAngle(index);
+				return {
+					x : (Math.cos(thisAngle) * distanceFromCenter) + this.xCenter,
+					y : (Math.sin(thisAngle) * distanceFromCenter) + this.yCenter
+				};
+			},
+			draw: function(){
+				if (this.display){
+					var ctx = this.ctx;
+					each(this.yLabels, function(label, index){
+						// Don't draw a centre value
+						if (index > 0){
+							var yCenterOffset = index * (this.drawingArea/this.steps),
+								yHeight = this.yCenter - yCenterOffset,
+								pointPosition;
+
+							// Draw circular lines around the scale
+							if (this.lineWidth > 0){
+								ctx.strokeStyle = this.lineColor;
+								ctx.lineWidth = this.lineWidth;
+
+								if(this.lineArc){
+									ctx.beginPath();
+									ctx.arc(this.xCenter, this.yCenter, yCenterOffset, 0, Math.PI*2);
+									ctx.closePath();
+									ctx.stroke();
+								} else{
+									ctx.beginPath();
+									for (var i=0;i<this.valuesCount;i++)
+									{
+										pointPosition = this.getPointPosition(i, this.calculateCenterOffset(this.min + (index * this.stepValue)));
+										if (i === 0){
+											ctx.moveTo(pointPosition.x, pointPosition.y);
+										} else {
+											ctx.lineTo(pointPosition.x, pointPosition.y);
+										}
+									}
+									ctx.closePath();
+									ctx.stroke();
+								}
+							}
+							if(this.showLabels){
+								ctx.font = fontString(this.fontSize,this.fontStyle,this.fontFamily);
+								if (this.showLabelBackdrop){
+									var labelWidth = ctx.measureText(label).width;
+									ctx.fillStyle = this.backdropColor;
+									ctx.fillRect(
+										this.xCenter - labelWidth/2 - this.backdropPaddingX,
+										yHeight - this.fontSize/2 - this.backdropPaddingY,
+										labelWidth + this.backdropPaddingX*2,
+										this.fontSize + this.backdropPaddingY*2
+									);
+								}
+								ctx.textAlign = 'center';
+								ctx.textBaseline = "middle";
+								ctx.fillStyle = this.fontColor;
+								ctx.fillText(label, this.xCenter, yHeight);
+							}
+						}
+					}, this);
+
+					if (!this.lineArc){
+						ctx.lineWidth = this.angleLineWidth;
+						ctx.strokeStyle = this.angleLineColor;
+						for (var i = this.valuesCount - 1; i >= 0; i--) {
+							var centerOffset = null, outerPosition = null;
+
+							if (this.angleLineWidth > 0 && (i % this.angleLineInterval === 0)){
+								centerOffset = this.calculateCenterOffset(this.max);
+								outerPosition = this.getPointPosition(i, centerOffset);
+								ctx.beginPath();
+								ctx.moveTo(this.xCenter, this.yCenter);
+								ctx.lineTo(outerPosition.x, outerPosition.y);
+								ctx.stroke();
+								ctx.closePath();
+							}
+
+							if (this.backgroundColors && this.backgroundColors.length == this.valuesCount) {
+								if (centerOffset == null)
+									centerOffset = this.calculateCenterOffset(this.max);
+
+								if (outerPosition == null)
+									outerPosition = this.getPointPosition(i, centerOffset);
+
+								var previousOuterPosition = this.getPointPosition(i === 0 ? this.valuesCount - 1 : i - 1, centerOffset);
+								var nextOuterPosition = this.getPointPosition(i === this.valuesCount - 1 ? 0 : i + 1, centerOffset);
+
+								var previousOuterHalfway = { x: (previousOuterPosition.x + outerPosition.x) / 2, y: (previousOuterPosition.y + outerPosition.y) / 2 };
+								var nextOuterHalfway = { x: (outerPosition.x + nextOuterPosition.x) / 2, y: (outerPosition.y + nextOuterPosition.y) / 2 };
+
+								ctx.beginPath();
+								ctx.moveTo(this.xCenter, this.yCenter);
+								ctx.lineTo(previousOuterHalfway.x, previousOuterHalfway.y);
+								ctx.lineTo(outerPosition.x, outerPosition.y);
+								ctx.lineTo(nextOuterHalfway.x, nextOuterHalfway.y);
+								ctx.fillStyle = this.backgroundColors[i];
+								ctx.fill();
+								ctx.closePath();
+							}
+							// Extra 3px out for some label spacing
+							var pointLabelPosition = this.getPointPosition(i, this.calculateCenterOffset(this.max) + 5);
+							ctx.font = fontString(this.pointLabelFontSize,this.pointLabelFontStyle,this.pointLabelFontFamily);
+							ctx.fillStyle = this.pointLabelFontColor;
+
+							var labelsCount = this.labels.length,
+								halfLabelsCount = this.labels.length/2,
+								quarterLabelsCount = halfLabelsCount/2,
+								upperHalf = (i < quarterLabelsCount || i > labelsCount - quarterLabelsCount),
+								exactQuarter = (i === quarterLabelsCount || i === labelsCount - quarterLabelsCount);
+							if (i === 0){
+								ctx.textAlign = 'center';
+							} else if(i === halfLabelsCount){
+								ctx.textAlign = 'center';
+							} else if (i < halfLabelsCount){
+								ctx.textAlign = 'left';
+							} else {
+								ctx.textAlign = 'right';
+							}
+
+							// Set the correct text baseline based on outer positioning
+							if (exactQuarter){
+								ctx.textBaseline = 'middle';
+							} else if (upperHalf){
+								ctx.textBaseline = 'bottom';
+							} else {
+								ctx.textBaseline = 'top';
+							}
+
+							ctx.fillText(this.labels[i], pointLabelPosition.x, pointLabelPosition.y);
+						}
+					}
+				}
+			}
+		});
+
+		Chart.animationService = {
+			frameDuration: 17,
+			animations: [],
+			dropFrames: 0,
+			addAnimation: function(chartInstance, animationObject) {
+				for (var index = 0; index < this.animations.length; ++ index){
+					if (this.animations[index].chartInstance === chartInstance){
+						// replacing an in progress animation
+						this.animations[index].animationObject = animationObject;
+						return;
+					}
+				}
+				
+				this.animations.push({
+					chartInstance: chartInstance,
+					animationObject: animationObject
+				});
+
+				// If there are no animations queued, manually kickstart a digest, for lack of a better word
+				if (this.animations.length == 1) {
+					helpers.requestAnimFrame.call(window, this.digestWrapper);
+				}
+			},
+			// Cancel the animation for a given chart instance
+			cancelAnimation: function(chartInstance) {
+				var index = helpers.findNextWhere(this.animations, function(animationWrapper) {
+					return animationWrapper.chartInstance === chartInstance;
+				});
+				
+				if (index)
+				{
+					this.animations.splice(index, 1);
+				}
+			},
+			// calls startDigest with the proper context
+			digestWrapper: function() {
+				Chart.animationService.startDigest.call(Chart.animationService);
+			},
+			startDigest: function() {
+
+				var startTime = Date.now();
+				var framesToDrop = 0;
+
+				if(this.dropFrames > 1){
+					framesToDrop = Math.floor(this.dropFrames);
+					this.dropFrames -= framesToDrop;
+				}
+
+				for (var i = 0; i < this.animations.length; i++) {
+
+					if (this.animations[i].animationObject.currentStep === null){
+						this.animations[i].animationObject.currentStep = 0;
+					}
+
+					this.animations[i].animationObject.currentStep += 1 + framesToDrop;
+					if(this.animations[i].animationObject.currentStep > this.animations[i].animationObject.numSteps){
+						this.animations[i].animationObject.currentStep = this.animations[i].animationObject.numSteps;
+					}
+					
+					this.animations[i].animationObject.render(this.animations[i].chartInstance, this.animations[i].animationObject);
+					
+					// Check if executed the last frame.
+					if (this.animations[i].animationObject.currentStep == this.animations[i].animationObject.numSteps){
+						// Call onAnimationComplete
+						this.animations[i].animationObject.onAnimationComplete.call(this.animations[i].chartInstance);
+						// Remove the animation.
+						this.animations.splice(i, 1);
+						// Keep the index in place to offset the splice
+						i--;
+					}
+				}
+
+				var endTime = Date.now();
+				var delay = endTime - startTime - this.frameDuration;
+				var frameDelay = delay / this.frameDuration;
+
+				if(frameDelay > 1){
+					this.dropFrames += frameDelay;
+				}
+
+				// Do we have more stuff to animate?
+				if (this.animations.length > 0){
+					helpers.requestAnimFrame.call(window, this.digestWrapper);
+				}
+			}
+		};
+
+		// Attach global event to resize each chart instance when the browser resizes
+		helpers.addEvent(window, "resize", (function(){
+			// Basic debounce of resize function so it doesn't hurt performance when resizing browser.
+			var timeout;
+			return function(){
+				clearTimeout(timeout);
+				timeout = setTimeout(function(){
+					each(Chart.instances,function(instance){
+						// If the responsive flag is set in the chart instance config
+						// Cascade the resize event down to the chart.
+						if (instance.options.responsive){
+							instance.resize(instance.render, true);
+						}
+					});
+				}, 50);
+			};
+		})());
+
+
+		if (amd) {
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function(){
+				return Chart;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (typeof module === 'object' && module.exports) {
+			module.exports = Chart;
+		}
+
+		root.Chart = Chart;
+
+		Chart.noConflict = function(){
+			root.Chart = previous;
+			return Chart;
+		};
+
+	}).call(this);
+
+	(function(){
+		"use strict";
+
+		var root = this,
+			Chart = root.Chart,
+			helpers = Chart.helpers;
+
+
+		var defaultConfig = {
+			//Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+			scaleBeginAtZero : true,
+
+			//Boolean - Whether grid lines are shown across the chart
+			scaleShowGridLines : true,
+
+			//String - Colour of the grid lines
+			scaleGridLineColor : "rgba(0,0,0,.05)",
+
+			//Number - Width of the grid lines
+			scaleGridLineWidth : 1,
+
+			//Boolean - Whether to show horizontal lines (except X axis)
+			scaleShowHorizontalLines: true,
+
+			//Boolean - Whether to show vertical lines (except Y axis)
+			scaleShowVerticalLines: true,
+
+			//Boolean - If there is a stroke on each bar
+			barShowStroke : true,
+
+			//Number - Pixel width of the bar stroke
+			barStrokeWidth : 2,
+
+			//Number - Spacing between each of the X value sets
+			barValueSpacing : 5,
+
+			//Number - Spacing between data sets within X values
+			barDatasetSpacing : 1,
+
+			//String - A legend template
+			legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span class=\"<%=name.toLowerCase()%>-legend-icon\" style=\"background-color:<%=datasets[i].fillColor%>\"></span><span class=\"<%=name.toLowerCase()%>-legend-text\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
+
+		};
+
+
+		Chart.Type.extend({
+			name: "Bar",
+			defaults : defaultConfig,
+			initialize:  function(data){
+
+				//Expose options as a scope variable here so we can access it in the ScaleClass
+				var options = this.options;
+
+				this.ScaleClass = Chart.Scale.extend({
+					offsetGridLines : true,
+					calculateBarX : function(datasetCount, datasetIndex, barIndex){
+						//Reusable method for calculating the xPosition of a given bar based on datasetIndex & width of the bar
+						var xWidth = this.calculateBaseWidth(),
+							xAbsolute = this.calculateX(barIndex) - (xWidth/2),
+							barWidth = this.calculateBarWidth(datasetCount);
+
+						return xAbsolute + (barWidth * datasetIndex) + (datasetIndex * options.barDatasetSpacing) + barWidth/2;
+					},
+					calculateBaseWidth : function(){
+						return (this.calculateX(1) - this.calculateX(0)) - (2*options.barValueSpacing);
+					},
+					calculateBarWidth : function(datasetCount){
+						//The padding between datasets is to the right of each bar, providing that there are more than 1 dataset
+						var baseWidth = this.calculateBaseWidth() - ((datasetCount - 1) * options.barDatasetSpacing);
+
+						return (baseWidth / datasetCount);
+					}
+				});
+
+				this.datasets = [];
+
+				//Set up tooltip events on the chart
+				if (this.options.showTooltips){
+					helpers.bindEvents(this, this.options.tooltipEvents, function(evt){
+						var activeBars = (evt.type !== 'mouseout') ? this.getBarsAtEvent(evt) : [];
+
+						this.eachBars(function(bar){
+							bar.restore(['fillColor', 'strokeColor']);
+						});
+						helpers.each(activeBars, function(activeBar){
+							if (activeBar) {
+								activeBar.fillColor = activeBar.highlightFill;
+								activeBar.strokeColor = activeBar.highlightStroke;
+							}
+						});
+						this.showTooltip(activeBars);
+					});
+				}
+
+				//Declare the extension of the default point, to cater for the options passed in to the constructor
+				this.BarClass = Chart.Rectangle.extend({
+					strokeWidth : this.options.barStrokeWidth,
+					showStroke : this.options.barShowStroke,
+					ctx : this.chart.ctx
+				});
+
+				//Iterate through each of the datasets, and build this into a property of the chart
+				helpers.each(data.datasets,function(dataset,datasetIndex){
+
+					var datasetObject = {
+						label : dataset.label || null,
+						fillColor : dataset.fillColor,
+						strokeColor : dataset.strokeColor,
+						bars : []
+					};
+
+					this.datasets.push(datasetObject);
+
+					helpers.each(dataset.data,function(dataPoint,index){
+						//Add a new point for each piece of data, passing any required data to draw.
+						datasetObject.bars.push(new this.BarClass({
+							value : dataPoint,
+							label : data.labels[index],
+							datasetLabel: dataset.label,
+							strokeColor : (typeof dataset.strokeColor == 'object') ? dataset.strokeColor[index] : dataset.strokeColor,
+							fillColor : (typeof dataset.fillColor == 'object') ? dataset.fillColor[index] : dataset.fillColor,
+							highlightFill : (dataset.highlightFill) ? (typeof dataset.highlightFill == 'object') ? dataset.highlightFill[index] : dataset.highlightFill : (typeof dataset.fillColor == 'object') ? dataset.fillColor[index] : dataset.fillColor,
+							highlightStroke : (dataset.highlightStroke) ? (typeof dataset.highlightStroke == 'object') ? dataset.highlightStroke[index] : dataset.highlightStroke : (typeof dataset.strokeColor == 'object') ? dataset.strokeColor[index] : dataset.strokeColor
+						}));
+					},this);
+
+				},this);
+
+				this.buildScale(data.labels);
+
+				this.BarClass.prototype.base = this.scale.endPoint;
+
+				this.eachBars(function(bar, index, datasetIndex){
+					helpers.extend(bar, {
+						width : this.scale.calculateBarWidth(this.datasets.length),
+						x: this.scale.calculateBarX(this.datasets.length, datasetIndex, index),
+						y: this.scale.endPoint
+					});
+					bar.save();
+				}, this);
+
+				this.render();
+			},
+			update : function(){
+				this.scale.update();
+				// Reset any highlight colours before updating.
+				helpers.each(this.activeElements, function(activeElement){
+					activeElement.restore(['fillColor', 'strokeColor']);
+				});
+
+				this.eachBars(function(bar){
+					bar.save();
+				});
+				this.render();
+			},
+			eachBars : function(callback){
+				helpers.each(this.datasets,function(dataset, datasetIndex){
+					helpers.each(dataset.bars, callback, this, datasetIndex);
+				},this);
+			},
+			getBarsAtEvent : function(e){
+				var barsArray = [],
+					eventPosition = helpers.getRelativePosition(e),
+					datasetIterator = function(dataset){
+						barsArray.push(dataset.bars[barIndex]);
+					},
+					barIndex;
+
+				for (var datasetIndex = 0; datasetIndex < this.datasets.length; datasetIndex++) {
+					for (barIndex = 0; barIndex < this.datasets[datasetIndex].bars.length; barIndex++) {
+						if (this.datasets[datasetIndex].bars[barIndex].inRange(eventPosition.x,eventPosition.y)){
+							helpers.each(this.datasets, datasetIterator);
+							return barsArray;
+						}
+					}
+				}
+
+				return barsArray;
+			},
+			buildScale : function(labels){
+				var self = this;
+
+				var dataTotal = function(){
+					var values = [];
+					self.eachBars(function(bar){
+						values.push(bar.value);
+					});
+					return values;
+				};
+
+				var scaleOptions = {
+					templateString : this.options.scaleLabel,
+					height : this.chart.height,
+					width : this.chart.width,
+					ctx : this.chart.ctx,
+					textColor : this.options.scaleFontColor,
+					fontSize : this.options.scaleFontSize,
+					fontStyle : this.options.scaleFontStyle,
+					fontFamily : this.options.scaleFontFamily,
+					valuesCount : labels.length,
+					beginAtZero : this.options.scaleBeginAtZero,
+					integersOnly : this.options.scaleIntegersOnly,
+					calculateYRange: function(currentHeight){
+						var updatedRanges = helpers.calculateScaleRange(
+							dataTotal(),
+							currentHeight,
+							this.fontSize,
+							this.beginAtZero,
+							this.integersOnly
+						);
+						helpers.extend(this, updatedRanges);
+					},
+					xLabels : labels,
+					font : helpers.fontString(this.options.scaleFontSize, this.options.scaleFontStyle, this.options.scaleFontFamily),
+					lineWidth : this.options.scaleLineWidth,
+					lineColor : this.options.scaleLineColor,
+					showHorizontalLines : this.options.scaleShowHorizontalLines,
+					showVerticalLines : this.options.scaleShowVerticalLines,
+					gridLineWidth : (this.options.scaleShowGridLines) ? this.options.scaleGridLineWidth : 0,
+					gridLineColor : (this.options.scaleShowGridLines) ? this.options.scaleGridLineColor : "rgba(0,0,0,0)",
+					padding : (this.options.showScale) ? 0 : (this.options.barShowStroke) ? this.options.barStrokeWidth : 0,
+					showLabels : this.options.scaleShowLabels,
+					display : this.options.showScale
+				};
+
+				if (this.options.scaleOverride){
+					helpers.extend(scaleOptions, {
+						calculateYRange: helpers.noop,
+						steps: this.options.scaleSteps,
+						stepValue: this.options.scaleStepWidth,
+						min: this.options.scaleStartValue,
+						max: this.options.scaleStartValue + (this.options.scaleSteps * this.options.scaleStepWidth)
+					});
+				}
+
+				this.scale = new this.ScaleClass(scaleOptions);
+			},
+			addData : function(valuesArray,label){
+				//Map the values array for each of the datasets
+				helpers.each(valuesArray,function(value,datasetIndex){
+					//Add a new point for each piece of data, passing any required data to draw.
+					this.datasets[datasetIndex].bars.push(new this.BarClass({
+						value : value,
+						label : label,
+						datasetLabel: this.datasets[datasetIndex].label,
+						x: this.scale.calculateBarX(this.datasets.length, datasetIndex, this.scale.valuesCount+1),
+						y: this.scale.endPoint,
+						width : this.scale.calculateBarWidth(this.datasets.length),
+						base : this.scale.endPoint,
+						strokeColor : this.datasets[datasetIndex].strokeColor,
+						fillColor : this.datasets[datasetIndex].fillColor
+					}));
+				},this);
+
+				this.scale.addXLabel(label);
+				//Then re-render the chart.
+				this.update();
+			},
+			removeData : function(){
+				this.scale.removeXLabel();
+				//Then re-render the chart.
+				helpers.each(this.datasets,function(dataset){
+					dataset.bars.shift();
+				},this);
+				this.update();
+			},
+			reflow : function(){
+				helpers.extend(this.BarClass.prototype,{
+					y: this.scale.endPoint,
+					base : this.scale.endPoint
+				});
+				var newScaleProps = helpers.extend({
+					height : this.chart.height,
+					width : this.chart.width
+				});
+				this.scale.update(newScaleProps);
+			},
+			draw : function(ease){
+				var easingDecimal = ease || 1;
+				this.clear();
+
+				var ctx = this.chart.ctx;
+
+				this.scale.draw(easingDecimal);
+
+				//Draw all the bars for each dataset
+				helpers.each(this.datasets,function(dataset,datasetIndex){
+					helpers.each(dataset.bars,function(bar,index){
+						if (bar.hasValue()){
+							bar.base = this.scale.endPoint;
+							//Transition then draw
+							bar.transition({
+								x : this.scale.calculateBarX(this.datasets.length, datasetIndex, index),
+								y : this.scale.calculateY(bar.value),
+								width : this.scale.calculateBarWidth(this.datasets.length)
+							}, easingDecimal).draw();
+						}
+					},this);
+
+				},this);
+			}
+		});
+
+
+	}).call(this);
+
+	(function(){
+		"use strict";
+
+		var root = this,
+			Chart = root.Chart,
+			//Cache a local reference to Chart.helpers
+			helpers = Chart.helpers;
+
+		var defaultConfig = {
+			//Boolean - Whether we should show a stroke on each segment
+			segmentShowStroke : true,
+
+			//String - The colour of each segment stroke
+			segmentStrokeColor : "#fff",
+
+			//Number - The width of each segment stroke
+			segmentStrokeWidth : 2,
+
+			//The percentage of the chart that we cut out of the middle.
+			percentageInnerCutout : 50,
+
+			//Number - Amount of animation steps
+			animationSteps : 100,
+
+			//String - Animation easing effect
+			animationEasing : "easeOutBounce",
+
+			//Boolean - Whether we animate the rotation of the Doughnut
+			animateRotate : true,
+
+			//Boolean - Whether we animate scaling the Doughnut from the centre
+			animateScale : false,
+
+			//String - A legend template
+			legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span class=\"<%=name.toLowerCase()%>-legend-icon\" style=\"background-color:<%=segments[i].fillColor%>\"></span><span class=\"<%=name.toLowerCase()%>-legend-text\"><%if(segments[i].label){%><%=segments[i].label%><%}%></span></li><%}%></ul>"
+
+		};
+
+		Chart.Type.extend({
+			//Passing in a name registers this chart in the Chart namespace
+			name: "Doughnut",
+			//Providing a defaults will also register the defaults in the chart namespace
+			defaults : defaultConfig,
+			//Initialize is fired when the chart is initialized - Data is passed in as a parameter
+			//Config is automatically merged by the core of Chart.js, and is available at this.options
+			initialize:  function(data){
+
+				//Declare segments as a static property to prevent inheriting across the Chart type prototype
+				this.segments = [];
+				this.outerRadius = (helpers.min([this.chart.width,this.chart.height]) -	this.options.segmentStrokeWidth/2)/2;
+
+				this.SegmentArc = Chart.Arc.extend({
+					ctx : this.chart.ctx,
+					x : this.chart.width/2,
+					y : this.chart.height/2
+				});
+
+				//Set up tooltip events on the chart
+				if (this.options.showTooltips){
+					helpers.bindEvents(this, this.options.tooltipEvents, function(evt){
+						var activeSegments = (evt.type !== 'mouseout') ? this.getSegmentsAtEvent(evt) : [];
+
+						helpers.each(this.segments,function(segment){
+							segment.restore(["fillColor"]);
+						});
+						helpers.each(activeSegments,function(activeSegment){
+							activeSegment.fillColor = activeSegment.highlightColor;
+						});
+						this.showTooltip(activeSegments);
+					});
+				}
+				this.calculateTotal(data);
+
+				helpers.each(data,function(datapoint, index){
+					if (!datapoint.color) {
+						datapoint.color = 'hsl(' + (360 * index / data.length) + ', 100%, 50%)';
+					}
+					this.addData(datapoint, index, true);
+				},this);
+
+				this.render();
+			},
+			getSegmentsAtEvent : function(e){
+				var segmentsArray = [];
+
+				var location = helpers.getRelativePosition(e);
+
+				helpers.each(this.segments,function(segment){
+					if (segment.inRange(location.x,location.y)) segmentsArray.push(segment);
+				},this);
+				return segmentsArray;
+			},
+			addData : function(segment, atIndex, silent){
+				var index = atIndex !== undefined ? atIndex : this.segments.length;
+				if ( typeof(segment.color) === "undefined" ) {
+					segment.color = Chart.defaults.global.segmentColorDefault[index % Chart.defaults.global.segmentColorDefault.length];
+					segment.highlight = Chart.defaults.global.segmentHighlightColorDefaults[index % Chart.defaults.global.segmentHighlightColorDefaults.length];				
+				}
+				this.segments.splice(index, 0, new this.SegmentArc({
+					value : segment.value,
+					outerRadius : (this.options.animateScale) ? 0 : this.outerRadius,
+					innerRadius : (this.options.animateScale) ? 0 : (this.outerRadius/100) * this.options.percentageInnerCutout,
+					fillColor : segment.color,
+					highlightColor : segment.highlight || segment.color,
+					showStroke : this.options.segmentShowStroke,
+					strokeWidth : this.options.segmentStrokeWidth,
+					strokeColor : this.options.segmentStrokeColor,
+					startAngle : Math.PI * 1.5,
+					circumference : (this.options.animateRotate) ? 0 : this.calculateCircumference(segment.value),
+					label : segment.label
+				}));
+				if (!silent){
+					this.reflow();
+					this.update();
+				}
+			},
+			calculateCircumference : function(value) {
+				if ( this.total > 0 ) {
+					return (Math.PI*2)*(value / this.total);
+				} else {
+					return 0;
+				}
+			},
+			calculateTotal : function(data){
+				this.total = 0;
+				helpers.each(data,function(segment){
+					this.total += Math.abs(segment.value);
+				},this);
+			},
+			update : function(){
+				this.calculateTotal(this.segments);
+
+				// Reset any highlight colours before updating.
+				helpers.each(this.activeElements, function(activeElement){
+					activeElement.restore(['fillColor']);
+				});
+
+				helpers.each(this.segments,function(segment){
+					segment.save();
+				});
+				this.render();
+			},
+
+			removeData: function(atIndex){
+				var indexToDelete = (helpers.isNumber(atIndex)) ? atIndex : this.segments.length-1;
+				this.segments.splice(indexToDelete, 1);
+				this.reflow();
+				this.update();
+			},
+
+			reflow : function(){
+				helpers.extend(this.SegmentArc.prototype,{
+					x : this.chart.width/2,
+					y : this.chart.height/2
+				});
+				this.outerRadius = (helpers.min([this.chart.width,this.chart.height]) -	this.options.segmentStrokeWidth/2)/2;
+				helpers.each(this.segments, function(segment){
+					segment.update({
+						outerRadius : this.outerRadius,
+						innerRadius : (this.outerRadius/100) * this.options.percentageInnerCutout
+					});
+				}, this);
+			},
+			draw : function(easeDecimal){
+				var animDecimal = (easeDecimal) ? easeDecimal : 1;
+				this.clear();
+				helpers.each(this.segments,function(segment,index){
+					segment.transition({
+						circumference : this.calculateCircumference(segment.value),
+						outerRadius : this.outerRadius,
+						innerRadius : (this.outerRadius/100) * this.options.percentageInnerCutout
+					},animDecimal);
+
+					segment.endAngle = segment.startAngle + segment.circumference;
+
+					segment.draw();
+					if (index === 0){
+						segment.startAngle = Math.PI * 1.5;
+					}
+					//Check to see if it's the last segment, if not get the next and update the start angle
+					if (index < this.segments.length-1){
+						this.segments[index+1].startAngle = segment.endAngle;
+					}
+				},this);
+
+			}
+		});
+
+		Chart.types.Doughnut.extend({
+			name : "Pie",
+			defaults : helpers.merge(defaultConfig,{percentageInnerCutout : 0})
+		});
+
+	}).call(this);
+
+	(function(){
+		"use strict";
+
+		var root = this,
+			Chart = root.Chart,
+			helpers = Chart.helpers;
+
+		var defaultConfig = {
+
+			///Boolean - Whether grid lines are shown across the chart
+			scaleShowGridLines : true,
+
+			//String - Colour of the grid lines
+			scaleGridLineColor : "rgba(0,0,0,.05)",
+
+			//Number - Width of the grid lines
+			scaleGridLineWidth : 1,
+
+			//Boolean - Whether to show horizontal lines (except X axis)
+			scaleShowHorizontalLines: true,
+
+			//Boolean - Whether to show vertical lines (except Y axis)
+			scaleShowVerticalLines: true,
+
+			//Boolean - Whether the line is curved between points
+			bezierCurve : true,
+
+			//Number - Tension of the bezier curve between points
+			bezierCurveTension : 0.4,
+
+			//Boolean - Whether to show a dot for each point
+			pointDot : true,
+
+			//Number - Radius of each point dot in pixels
+			pointDotRadius : 4,
+
+			//Number - Pixel width of point dot stroke
+			pointDotStrokeWidth : 1,
+
+			//Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+			pointHitDetectionRadius : 20,
+
+			//Boolean - Whether to show a stroke for datasets
+			datasetStroke : true,
+
+			//Number - Pixel width of dataset stroke
+			datasetStrokeWidth : 2,
+
+			//Boolean - Whether to fill the dataset with a colour
+			datasetFill : true,
+
+			//String - A legend template
+			legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span class=\"<%=name.toLowerCase()%>-legend-icon\" style=\"background-color:<%=datasets[i].strokeColor%>\"></span><span class=\"<%=name.toLowerCase()%>-legend-text\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>",
+
+			//Boolean - Whether to horizontally center the label and point dot inside the grid
+			offsetGridLines : false
+
+		};
+
+
+		Chart.Type.extend({
+			name: "Line",
+			defaults : defaultConfig,
+			initialize:  function(data){
+				//Declare the extension of the default point, to cater for the options passed in to the constructor
+				this.PointClass = Chart.Point.extend({
+					offsetGridLines : this.options.offsetGridLines,
+					strokeWidth : this.options.pointDotStrokeWidth,
+					radius : this.options.pointDotRadius,
+					display: this.options.pointDot,
+					hitDetectionRadius : this.options.pointHitDetectionRadius,
+					ctx : this.chart.ctx,
+					inRange : function(mouseX){
+						return (Math.pow(mouseX-this.x, 2) < Math.pow(this.radius + this.hitDetectionRadius,2));
+					}
+				});
+
+				this.datasets = [];
+
+				//Set up tooltip events on the chart
+				if (this.options.showTooltips){
+					helpers.bindEvents(this, this.options.tooltipEvents, function(evt){
+						var activePoints = (evt.type !== 'mouseout') ? this.getPointsAtEvent(evt) : [];
+						this.eachPoints(function(point){
+							point.restore(['fillColor', 'strokeColor']);
+						});
+						helpers.each(activePoints, function(activePoint){
+							activePoint.fillColor = activePoint.highlightFill;
+							activePoint.strokeColor = activePoint.highlightStroke;
+						});
+						this.showTooltip(activePoints);
+					});
+				}
+
+				//Iterate through each of the datasets, and build this into a property of the chart
+				helpers.each(data.datasets,function(dataset){
+
+					var datasetObject = {
+						label : dataset.label || null,
+						fillColor : dataset.fillColor,
+						strokeColor : dataset.strokeColor,
+						pointColor : dataset.pointColor,
+						pointStrokeColor : dataset.pointStrokeColor,
+						points : []
+					};
+
+					this.datasets.push(datasetObject);
+
+
+					helpers.each(dataset.data,function(dataPoint,index){
+						//Add a new point for each piece of data, passing any required data to draw.
+						datasetObject.points.push(new this.PointClass({
+							value : dataPoint,
+							label : data.labels[index],
+							datasetLabel: dataset.label,
+							strokeColor : dataset.pointStrokeColor,
+							fillColor : dataset.pointColor,
+							highlightFill : dataset.pointHighlightFill || dataset.pointColor,
+							highlightStroke : dataset.pointHighlightStroke || dataset.pointStrokeColor
+						}));
+					},this);
+
+					this.buildScale(data.labels);
+
+
+					this.eachPoints(function(point, index){
+						helpers.extend(point, {
+							x: this.scale.calculateX(index),
+							y: this.scale.endPoint
+						});
+						point.save();
+					}, this);
+
+				},this);
+
+
+				this.render();
+			},
+			update : function(){
+				this.scale.update();
+				// Reset any highlight colours before updating.
+				helpers.each(this.activeElements, function(activeElement){
+					activeElement.restore(['fillColor', 'strokeColor']);
+				});
+				this.eachPoints(function(point){
+					point.save();
+				});
+				this.render();
+			},
+			eachPoints : function(callback){
+				helpers.each(this.datasets,function(dataset){
+					helpers.each(dataset.points,callback,this);
+				},this);
+			},
+			getPointsAtEvent : function(e){
+				var pointsArray = [],
+					eventPosition = helpers.getRelativePosition(e);
+				helpers.each(this.datasets,function(dataset){
+					helpers.each(dataset.points,function(point){
+						if (point.inRange(eventPosition.x,eventPosition.y)) pointsArray.push(point);
+					});
+				},this);
+				return pointsArray;
+			},
+			buildScale : function(labels){
+				var self = this;
+
+				var dataTotal = function(){
+					var values = [];
+					self.eachPoints(function(point){
+						values.push(point.value);
+					});
+
+					return values;
+				};
+
+				var scaleOptions = {
+					templateString : this.options.scaleLabel,
+					height : this.chart.height,
+					width : this.chart.width,
+					ctx : this.chart.ctx,
+					textColor : this.options.scaleFontColor,
+					offsetGridLines : this.options.offsetGridLines,
+					fontSize : this.options.scaleFontSize,
+					fontStyle : this.options.scaleFontStyle,
+					fontFamily : this.options.scaleFontFamily,
+					valuesCount : labels.length,
+					beginAtZero : this.options.scaleBeginAtZero,
+					integersOnly : this.options.scaleIntegersOnly,
+					calculateYRange : function(currentHeight){
+						var updatedRanges = helpers.calculateScaleRange(
+							dataTotal(),
+							currentHeight,
+							this.fontSize,
+							this.beginAtZero,
+							this.integersOnly
+						);
+						helpers.extend(this, updatedRanges);
+					},
+					xLabels : labels,
+					font : helpers.fontString(this.options.scaleFontSize, this.options.scaleFontStyle, this.options.scaleFontFamily),
+					lineWidth : this.options.scaleLineWidth,
+					lineColor : this.options.scaleLineColor,
+					showHorizontalLines : this.options.scaleShowHorizontalLines,
+					showVerticalLines : this.options.scaleShowVerticalLines,
+					gridLineWidth : (this.options.scaleShowGridLines) ? this.options.scaleGridLineWidth : 0,
+					gridLineColor : (this.options.scaleShowGridLines) ? this.options.scaleGridLineColor : "rgba(0,0,0,0)",
+					padding: (this.options.showScale) ? 0 : this.options.pointDotRadius + this.options.pointDotStrokeWidth,
+					showLabels : this.options.scaleShowLabels,
+					display : this.options.showScale
+				};
+
+				if (this.options.scaleOverride){
+					helpers.extend(scaleOptions, {
+						calculateYRange: helpers.noop,
+						steps: this.options.scaleSteps,
+						stepValue: this.options.scaleStepWidth,
+						min: this.options.scaleStartValue,
+						max: this.options.scaleStartValue + (this.options.scaleSteps * this.options.scaleStepWidth)
+					});
+				}
+
+
+				this.scale = new Chart.Scale(scaleOptions);
+			},
+			addData : function(valuesArray,label){
+				//Map the values array for each of the datasets
+
+				helpers.each(valuesArray,function(value,datasetIndex){
+					//Add a new point for each piece of data, passing any required data to draw.
+					this.datasets[datasetIndex].points.push(new this.PointClass({
+						value : value,
+						label : label,
+						datasetLabel: this.datasets[datasetIndex].label,
+						x: this.scale.calculateX(this.scale.valuesCount+1),
+						y: this.scale.endPoint,
+						strokeColor : this.datasets[datasetIndex].pointStrokeColor,
+						fillColor : this.datasets[datasetIndex].pointColor
+					}));
+				},this);
+
+				this.scale.addXLabel(label);
+				//Then re-render the chart.
+				this.update();
+			},
+			removeData : function(){
+				this.scale.removeXLabel();
+				//Then re-render the chart.
+				helpers.each(this.datasets,function(dataset){
+					dataset.points.shift();
+				},this);
+				this.update();
+			},
+			reflow : function(){
+				var newScaleProps = helpers.extend({
+					height : this.chart.height,
+					width : this.chart.width
+				});
+				this.scale.update(newScaleProps);
+			},
+			draw : function(ease){
+				var easingDecimal = ease || 1;
+				this.clear();
+
+				var ctx = this.chart.ctx;
+
+				// Some helper methods for getting the next/prev points
+				var hasValue = function(item){
+					return item.value !== null;
+				},
+				nextPoint = function(point, collection, index){
+					return helpers.findNextWhere(collection, hasValue, index) || point;
+				},
+				previousPoint = function(point, collection, index){
+					return helpers.findPreviousWhere(collection, hasValue, index) || point;
+				};
+
+				if (!this.scale) return;
+				this.scale.draw(easingDecimal);
+
+
+				helpers.each(this.datasets,function(dataset){
+					var pointsWithValues = helpers.where(dataset.points, hasValue);
+
+					//Transition each point first so that the line and point drawing isn't out of sync
+					//We can use this extra loop to calculate the control points of this dataset also in this loop
+
+					helpers.each(dataset.points, function(point, index){
+						if (point.hasValue()){
+							point.transition({
+								y : this.scale.calculateY(point.value),
+								x : this.scale.calculateX(index)
+							}, easingDecimal);
+						}
+					},this);
+
+
+					// Control points need to be calculated in a separate loop, because we need to know the current x/y of the point
+					// This would cause issues when there is no animation, because the y of the next point would be 0, so beziers would be skewed
+					if (this.options.bezierCurve){
+						helpers.each(pointsWithValues, function(point, index){
+							var tension = (index > 0 && index < pointsWithValues.length - 1) ? this.options.bezierCurveTension : 0;
+							point.controlPoints = helpers.splineCurve(
+								previousPoint(point, pointsWithValues, index),
+								point,
+								nextPoint(point, pointsWithValues, index),
+								tension
+							);
+
+							// Prevent the bezier going outside of the bounds of the graph
+
+							// Cap puter bezier handles to the upper/lower scale bounds
+							if (point.controlPoints.outer.y > this.scale.endPoint){
+								point.controlPoints.outer.y = this.scale.endPoint;
+							}
+							else if (point.controlPoints.outer.y < this.scale.startPoint){
+								point.controlPoints.outer.y = this.scale.startPoint;
+							}
+
+							// Cap inner bezier handles to the upper/lower scale bounds
+							if (point.controlPoints.inner.y > this.scale.endPoint){
+								point.controlPoints.inner.y = this.scale.endPoint;
+							}
+							else if (point.controlPoints.inner.y < this.scale.startPoint){
+								point.controlPoints.inner.y = this.scale.startPoint;
+							}
+						},this);
+					}
+
+
+					//Draw the line between all the points
+					ctx.lineWidth = this.options.datasetStrokeWidth;
+					ctx.strokeStyle = dataset.strokeColor;
+					ctx.beginPath();
+
+					helpers.each(pointsWithValues, function(point, index){
+						if (index === 0){
+							ctx.moveTo(point.x, point.y);
+						}
+						else{
+							if(this.options.bezierCurve){
+								var previous = previousPoint(point, pointsWithValues, index);
+
+								ctx.bezierCurveTo(
+									previous.controlPoints.outer.x,
+									previous.controlPoints.outer.y,
+									point.controlPoints.inner.x,
+									point.controlPoints.inner.y,
+									point.x,
+									point.y
+								);
+							}
+							else{
+								ctx.lineTo(point.x,point.y);
+							}
+						}
+					}, this);
+
+					if (this.options.datasetStroke) {
+						ctx.stroke();
+					}
+
+					if (this.options.datasetFill && pointsWithValues.length > 0){
+						//Round off the line by going to the base of the chart, back to the start, then fill.
+						ctx.lineTo(pointsWithValues[pointsWithValues.length - 1].x, this.scale.endPoint);
+						ctx.lineTo(pointsWithValues[0].x, this.scale.endPoint);
+						ctx.fillStyle = dataset.fillColor;
+						ctx.closePath();
+						ctx.fill();
+					}
+
+					//Now draw the points over the line
+					//A little inefficient double looping, but better than the line
+					//lagging behind the point positions
+					helpers.each(pointsWithValues,function(point){
+						point.draw();
+					});
+				},this);
+			}
+		});
+
+
+	}).call(this);
+
+	(function(){
+		"use strict";
+
+		var root = this,
+			Chart = root.Chart,
+			//Cache a local reference to Chart.helpers
+			helpers = Chart.helpers;
+
+		var defaultConfig = {
+			//Boolean - Show a backdrop to the scale label
+			scaleShowLabelBackdrop : true,
+
+			//String - The colour of the label backdrop
+			scaleBackdropColor : "rgba(255,255,255,0.75)",
+
+			// Boolean - Whether the scale should begin at zero
+			scaleBeginAtZero : true,
+
+			//Number - The backdrop padding above & below the label in pixels
+			scaleBackdropPaddingY : 2,
+
+			//Number - The backdrop padding to the side of the label in pixels
+			scaleBackdropPaddingX : 2,
+
+			//Boolean - Show line for each value in the scale
+			scaleShowLine : true,
+
+			//Boolean - Stroke a line around each segment in the chart
+			segmentShowStroke : true,
+
+			//String - The colour of the stroke on each segment.
+			segmentStrokeColor : "#fff",
+
+			//Number - The width of the stroke value in pixels
+			segmentStrokeWidth : 2,
+
+			//Number - Amount of animation steps
+			animationSteps : 100,
+
+			//String - Animation easing effect.
+			animationEasing : "easeOutBounce",
+
+			//Boolean - Whether to animate the rotation of the chart
+			animateRotate : true,
+
+			//Boolean - Whether to animate scaling the chart from the centre
+			animateScale : false,
+
+			//String - A legend template
+			legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span class=\"<%=name.toLowerCase()%>-legend-icon\" style=\"background-color:<%=segments[i].fillColor%>\"></span><span class=\"<%=name.toLowerCase()%>-legend-text\"><%if(segments[i].label){%><%=segments[i].label%><%}%></span></li><%}%></ul>"
+		};
+
+
+		Chart.Type.extend({
+			//Passing in a name registers this chart in the Chart namespace
+			name: "PolarArea",
+			//Providing a defaults will also register the defaults in the chart namespace
+			defaults : defaultConfig,
+			//Initialize is fired when the chart is initialized - Data is passed in as a parameter
+			//Config is automatically merged by the core of Chart.js, and is available at this.options
+			initialize:  function(data){
+				this.segments = [];
+				//Declare segment class as a chart instance specific class, so it can share props for this instance
+				this.SegmentArc = Chart.Arc.extend({
+					showStroke : this.options.segmentShowStroke,
+					strokeWidth : this.options.segmentStrokeWidth,
+					strokeColor : this.options.segmentStrokeColor,
+					ctx : this.chart.ctx,
+					innerRadius : 0,
+					x : this.chart.width/2,
+					y : this.chart.height/2
+				});
+				this.scale = new Chart.RadialScale({
+					display: this.options.showScale,
+					fontStyle: this.options.scaleFontStyle,
+					fontSize: this.options.scaleFontSize,
+					fontFamily: this.options.scaleFontFamily,
+					fontColor: this.options.scaleFontColor,
+					showLabels: this.options.scaleShowLabels,
+					showLabelBackdrop: this.options.scaleShowLabelBackdrop,
+					backdropColor: this.options.scaleBackdropColor,
+					backdropPaddingY : this.options.scaleBackdropPaddingY,
+					backdropPaddingX: this.options.scaleBackdropPaddingX,
+					lineWidth: (this.options.scaleShowLine) ? this.options.scaleLineWidth : 0,
+					lineColor: this.options.scaleLineColor,
+					lineArc: true,
+					width: this.chart.width,
+					height: this.chart.height,
+					xCenter: this.chart.width/2,
+					yCenter: this.chart.height/2,
+					ctx : this.chart.ctx,
+					templateString: this.options.scaleLabel,
+					valuesCount: data.length
+				});
+
+				this.updateScaleRange(data);
+
+				this.scale.update();
+
+				helpers.each(data,function(segment,index){
+					this.addData(segment,index,true);
+				},this);
+
+				//Set up tooltip events on the chart
+				if (this.options.showTooltips){
+					helpers.bindEvents(this, this.options.tooltipEvents, function(evt){
+						var activeSegments = (evt.type !== 'mouseout') ? this.getSegmentsAtEvent(evt) : [];
+						helpers.each(this.segments,function(segment){
+							segment.restore(["fillColor"]);
+						});
+						helpers.each(activeSegments,function(activeSegment){
+							activeSegment.fillColor = activeSegment.highlightColor;
+						});
+						this.showTooltip(activeSegments);
+					});
+				}
+
+				this.render();
+			},
+			getSegmentsAtEvent : function(e){
+				var segmentsArray = [];
+
+				var location = helpers.getRelativePosition(e);
+
+				helpers.each(this.segments,function(segment){
+					if (segment.inRange(location.x,location.y)) segmentsArray.push(segment);
+				},this);
+				return segmentsArray;
+			},
+			addData : function(segment, atIndex, silent){
+				var index = atIndex || this.segments.length;
+
+				this.segments.splice(index, 0, new this.SegmentArc({
+					fillColor: segment.color,
+					highlightColor: segment.highlight || segment.color,
+					label: segment.label,
+					value: segment.value,
+					outerRadius: (this.options.animateScale) ? 0 : this.scale.calculateCenterOffset(segment.value),
+					circumference: (this.options.animateRotate) ? 0 : this.scale.getCircumference(),
+					startAngle: Math.PI * 1.5
+				}));
+				if (!silent){
+					this.reflow();
+					this.update();
+				}
+			},
+			removeData: function(atIndex){
+				var indexToDelete = (helpers.isNumber(atIndex)) ? atIndex : this.segments.length-1;
+				this.segments.splice(indexToDelete, 1);
+				this.reflow();
+				this.update();
+			},
+			calculateTotal: function(data){
+				this.total = 0;
+				helpers.each(data,function(segment){
+					this.total += segment.value;
+				},this);
+				this.scale.valuesCount = this.segments.length;
+			},
+			updateScaleRange: function(datapoints){
+				var valuesArray = [];
+				helpers.each(datapoints,function(segment){
+					valuesArray.push(segment.value);
+				});
+
+				var scaleSizes = (this.options.scaleOverride) ?
+					{
+						steps: this.options.scaleSteps,
+						stepValue: this.options.scaleStepWidth,
+						min: this.options.scaleStartValue,
+						max: this.options.scaleStartValue + (this.options.scaleSteps * this.options.scaleStepWidth)
+					} :
+					helpers.calculateScaleRange(
+						valuesArray,
+						helpers.min([this.chart.width, this.chart.height])/2,
+						this.options.scaleFontSize,
+						this.options.scaleBeginAtZero,
+						this.options.scaleIntegersOnly
+					);
+
+				helpers.extend(
+					this.scale,
+					scaleSizes,
+					{
+						size: helpers.min([this.chart.width, this.chart.height]),
+						xCenter: this.chart.width/2,
+						yCenter: this.chart.height/2
+					}
+				);
+
+			},
+			update : function(){
+				this.calculateTotal(this.segments);
+
+				helpers.each(this.segments,function(segment){
+					segment.save();
+				});
+				
+				this.reflow();
+				this.render();
+			},
+			reflow : function(){
+				helpers.extend(this.SegmentArc.prototype,{
+					x : this.chart.width/2,
+					y : this.chart.height/2
+				});
+				this.updateScaleRange(this.segments);
+				this.scale.update();
+
+				helpers.extend(this.scale,{
+					xCenter: this.chart.width/2,
+					yCenter: this.chart.height/2
+				});
+
+				helpers.each(this.segments, function(segment){
+					segment.update({
+						outerRadius : this.scale.calculateCenterOffset(segment.value)
+					});
+				}, this);
+
+			},
+			draw : function(ease){
+				var easingDecimal = ease || 1;
+				//Clear & draw the canvas
+				this.clear();
+				helpers.each(this.segments,function(segment, index){
+					segment.transition({
+						circumference : this.scale.getCircumference(),
+						outerRadius : this.scale.calculateCenterOffset(segment.value)
+					},easingDecimal);
+
+					segment.endAngle = segment.startAngle + segment.circumference;
+
+					// If we've removed the first segment we need to set the first one to
+					// start at the top.
+					if (index === 0){
+						segment.startAngle = Math.PI * 1.5;
+					}
+
+					//Check to see if it's the last segment, if not get the next and update the start angle
+					if (index < this.segments.length - 1){
+						this.segments[index+1].startAngle = segment.endAngle;
+					}
+					segment.draw();
+				}, this);
+				this.scale.draw();
+			}
+		});
+
+	}).call(this);
+
+	(function(){
+		"use strict";
+
+		var root = this,
+			Chart = root.Chart,
+			helpers = Chart.helpers;
+
+
+
+		Chart.Type.extend({
+			name: "Radar",
+			defaults:{
+				//Boolean - Whether to show lines for each scale point
+				scaleShowLine : true,
+
+				//Boolean - Whether we show the angle lines out of the radar
+				angleShowLineOut : true,
+
+				//Boolean - Whether to show labels on the scale
+				scaleShowLabels : false,
+
+				// Boolean - Whether the scale should begin at zero
+				scaleBeginAtZero : true,
+
+				//String - Colour of the angle line
+				angleLineColor : "rgba(0,0,0,.1)",
+
+				//Number - Pixel width of the angle line
+				angleLineWidth : 1,
+
+				//Number - Interval at which to draw angle lines ("every Nth point")
+				angleLineInterval: 1,
+
+				//String - Point label font declaration
+				pointLabelFontFamily : "'Arial'",
+
+				//String - Point label font weight
+				pointLabelFontStyle : "normal",
+
+				//Number - Point label font size in pixels
+				pointLabelFontSize : 10,
+
+				//String - Point label font colour
+				pointLabelFontColor : "#666",
+
+				//Boolean - Whether to show a dot for each point
+				pointDot : true,
+
+				//Number - Radius of each point dot in pixels
+				pointDotRadius : 3,
+
+				//Number - Pixel width of point dot stroke
+				pointDotStrokeWidth : 1,
+
+				//Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+				pointHitDetectionRadius : 20,
+
+				//Boolean - Whether to show a stroke for datasets
+				datasetStroke : true,
+
+				//Number - Pixel width of dataset stroke
+				datasetStrokeWidth : 2,
+
+				//Boolean - Whether to fill the dataset with a colour
+				datasetFill : true,
+
+				//String - A legend template
+				legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span class=\"<%=name.toLowerCase()%>-legend-icon\" style=\"background-color:<%=datasets[i].strokeColor%>\"></span><span class=\"<%=name.toLowerCase()%>-legend-text\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>"
+
+			},
+
+			initialize: function(data){
+				this.PointClass = Chart.Point.extend({
+					strokeWidth : this.options.pointDotStrokeWidth,
+					radius : this.options.pointDotRadius,
+					display: this.options.pointDot,
+					hitDetectionRadius : this.options.pointHitDetectionRadius,
+					ctx : this.chart.ctx
+				});
+
+				this.datasets = [];
+
+				this.buildScale(data);
+
+				//Set up tooltip events on the chart
+				if (this.options.showTooltips){
+					helpers.bindEvents(this, this.options.tooltipEvents, function(evt){
+						var activePointsCollection = (evt.type !== 'mouseout') ? this.getPointsAtEvent(evt) : [];
+
+						this.eachPoints(function(point){
+							point.restore(['fillColor', 'strokeColor']);
+						});
+						helpers.each(activePointsCollection, function(activePoint){
+							activePoint.fillColor = activePoint.highlightFill;
+							activePoint.strokeColor = activePoint.highlightStroke;
+						});
+
+						this.showTooltip(activePointsCollection);
+					});
+				}
+
+				//Iterate through each of the datasets, and build this into a property of the chart
+				helpers.each(data.datasets,function(dataset){
+
+					var datasetObject = {
+						label: dataset.label || null,
+						fillColor : dataset.fillColor,
+						strokeColor : dataset.strokeColor,
+						pointColor : dataset.pointColor,
+						pointStrokeColor : dataset.pointStrokeColor,
+						points : []
+					};
+
+					this.datasets.push(datasetObject);
+
+					helpers.each(dataset.data,function(dataPoint,index){
+						//Add a new point for each piece of data, passing any required data to draw.
+						var pointPosition;
+						if (!this.scale.animation){
+							pointPosition = this.scale.getPointPosition(index, this.scale.calculateCenterOffset(dataPoint));
+						}
+						datasetObject.points.push(new this.PointClass({
+							value : dataPoint,
+							label : data.labels[index],
+							datasetLabel: dataset.label,
+							x: (this.options.animation) ? this.scale.xCenter : pointPosition.x,
+							y: (this.options.animation) ? this.scale.yCenter : pointPosition.y,
+							strokeColor : dataset.pointStrokeColor,
+							fillColor : dataset.pointColor,
+							highlightFill : dataset.pointHighlightFill || dataset.pointColor,
+							highlightStroke : dataset.pointHighlightStroke || dataset.pointStrokeColor
+						}));
+					},this);
+
+				},this);
+
+				this.render();
+			},
+			eachPoints : function(callback){
+				helpers.each(this.datasets,function(dataset){
+					helpers.each(dataset.points,callback,this);
+				},this);
+			},
+
+			getPointsAtEvent : function(evt){
+				var mousePosition = helpers.getRelativePosition(evt),
+					fromCenter = helpers.getAngleFromPoint({
+						x: this.scale.xCenter,
+						y: this.scale.yCenter
+					}, mousePosition);
+
+				var anglePerIndex = (Math.PI * 2) /this.scale.valuesCount,
+					pointIndex = Math.round((fromCenter.angle - Math.PI * 1.5) / anglePerIndex),
+					activePointsCollection = [];
+
+				// If we're at the top, make the pointIndex 0 to get the first of the array.
+				if (pointIndex >= this.scale.valuesCount || pointIndex < 0){
+					pointIndex = 0;
+				}
+
+				if (fromCenter.distance <= this.scale.drawingArea){
+					helpers.each(this.datasets, function(dataset){
+						activePointsCollection.push(dataset.points[pointIndex]);
+					});
+				}
+
+				return activePointsCollection;
+			},
+
+			buildScale : function(data){
+				this.scale = new Chart.RadialScale({
+					display: this.options.showScale,
+					fontStyle: this.options.scaleFontStyle,
+					fontSize: this.options.scaleFontSize,
+					fontFamily: this.options.scaleFontFamily,
+					fontColor: this.options.scaleFontColor,
+					showLabels: this.options.scaleShowLabels,
+					showLabelBackdrop: this.options.scaleShowLabelBackdrop,
+					backdropColor: this.options.scaleBackdropColor,
+					backgroundColors: this.options.scaleBackgroundColors,
+					backdropPaddingY : this.options.scaleBackdropPaddingY,
+					backdropPaddingX: this.options.scaleBackdropPaddingX,
+					lineWidth: (this.options.scaleShowLine) ? this.options.scaleLineWidth : 0,
+					lineColor: this.options.scaleLineColor,
+					angleLineColor : this.options.angleLineColor,
+					angleLineWidth : (this.options.angleShowLineOut) ? this.options.angleLineWidth : 0,
+	        angleLineInterval: (this.options.angleLineInterval) ? this.options.angleLineInterval : 1,
+					// Point labels at the edge of each line
+					pointLabelFontColor : this.options.pointLabelFontColor,
+					pointLabelFontSize : this.options.pointLabelFontSize,
+					pointLabelFontFamily : this.options.pointLabelFontFamily,
+					pointLabelFontStyle : this.options.pointLabelFontStyle,
+					height : this.chart.height,
+					width: this.chart.width,
+					xCenter: this.chart.width/2,
+					yCenter: this.chart.height/2,
+					ctx : this.chart.ctx,
+					templateString: this.options.scaleLabel,
+					labels: data.labels,
+					valuesCount: data.datasets[0].data.length
+				});
+
+				this.scale.setScaleSize();
+				this.updateScaleRange(data.datasets);
+				this.scale.buildYLabels();
+			},
+			updateScaleRange: function(datasets){
+				var valuesArray = (function(){
+					var totalDataArray = [];
+					helpers.each(datasets,function(dataset){
+						if (dataset.data){
+							totalDataArray = totalDataArray.concat(dataset.data);
+						}
+						else {
+							helpers.each(dataset.points, function(point){
+								totalDataArray.push(point.value);
+							});
+						}
+					});
+					return totalDataArray;
+				})();
+
+
+				var scaleSizes = (this.options.scaleOverride) ?
+					{
+						steps: this.options.scaleSteps,
+						stepValue: this.options.scaleStepWidth,
+						min: this.options.scaleStartValue,
+						max: this.options.scaleStartValue + (this.options.scaleSteps * this.options.scaleStepWidth)
+					} :
+					helpers.calculateScaleRange(
+						valuesArray,
+						helpers.min([this.chart.width, this.chart.height])/2,
+						this.options.scaleFontSize,
+						this.options.scaleBeginAtZero,
+						this.options.scaleIntegersOnly
+					);
+
+				helpers.extend(
+					this.scale,
+					scaleSizes
+				);
+
+			},
+			addData : function(valuesArray,label){
+				//Map the values array for each of the datasets
+				this.scale.valuesCount++;
+				helpers.each(valuesArray,function(value,datasetIndex){
+					var pointPosition = this.scale.getPointPosition(this.scale.valuesCount, this.scale.calculateCenterOffset(value));
+					this.datasets[datasetIndex].points.push(new this.PointClass({
+						value : value,
+						label : label,
+						datasetLabel: this.datasets[datasetIndex].label,
+						x: pointPosition.x,
+						y: pointPosition.y,
+						strokeColor : this.datasets[datasetIndex].pointStrokeColor,
+						fillColor : this.datasets[datasetIndex].pointColor
+					}));
+				},this);
+
+				this.scale.labels.push(label);
+
+				this.reflow();
+
+				this.update();
+			},
+			removeData : function(){
+				this.scale.valuesCount--;
+				this.scale.labels.shift();
+				helpers.each(this.datasets,function(dataset){
+					dataset.points.shift();
+				},this);
+				this.reflow();
+				this.update();
+			},
+			update : function(){
+				this.eachPoints(function(point){
+					point.save();
+				});
+				this.reflow();
+				this.render();
+			},
+			reflow: function(){
+				helpers.extend(this.scale, {
+					width : this.chart.width,
+					height: this.chart.height,
+					size : helpers.min([this.chart.width, this.chart.height]),
+					xCenter: this.chart.width/2,
+					yCenter: this.chart.height/2
+				});
+				this.updateScaleRange(this.datasets);
+				this.scale.setScaleSize();
+				this.scale.buildYLabels();
+			},
+			draw : function(ease){
+				var easeDecimal = ease || 1,
+					ctx = this.chart.ctx;
+				this.clear();
+				this.scale.draw();
+
+				helpers.each(this.datasets,function(dataset){
+
+					//Transition each point first so that the line and point drawing isn't out of sync
+					helpers.each(dataset.points,function(point,index){
+						if (point.hasValue()){
+							point.transition(this.scale.getPointPosition(index, this.scale.calculateCenterOffset(point.value)), easeDecimal);
+						}
+					},this);
+
+
+
+					//Draw the line between all the points
+					ctx.lineWidth = this.options.datasetStrokeWidth;
+					ctx.strokeStyle = dataset.strokeColor;
+					ctx.beginPath();
+					helpers.each(dataset.points,function(point,index){
+						if (index === 0){
+							ctx.moveTo(point.x,point.y);
+						}
+						else{
+							ctx.lineTo(point.x,point.y);
+						}
+					},this);
+					ctx.closePath();
+					ctx.stroke();
+
+					ctx.fillStyle = dataset.fillColor;
+					if(this.options.datasetFill){
+						ctx.fill();
+					}
+					//Now draw the points over the line
+					//A little inefficient double looping, but better than the line
+					//lagging behind the point positions
+					helpers.each(dataset.points,function(point){
+						if (point.hasValue()){
+							point.draw();
+						}
+					});
+
+				},this);
+
+			}
+
+		});
+
+
+
+
+
+	}).call(this);
+
+
+/***/ },
+/* 259 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, {}))
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var vars = __webpack_require__(257);
+
+	module.exports = vars.createClass('Doughnut', ['getSegmentsAtEvent']);
+
+
+/***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var vars = __webpack_require__(257);
+
+	module.exports = vars.createClass('Line', ['getPointsAtEvent']);
+
+
+/***/ },
+/* 262 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var vars = __webpack_require__(257);
+
+	module.exports = vars.createClass('Pie', ['getSegmentsAtEvent']);
+
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var vars = __webpack_require__(257);
+
+	module.exports = vars.createClass('PolarArea', ['getSegmentsAtEvent']);
+
+
+/***/ },
+/* 264 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var vars = __webpack_require__(257);
+
+	module.exports = vars.createClass('Radar', ['getPointsAtEvent']);
+
+
+/***/ },
+/* 265 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 266 */,
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21086,31 +32593,31 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _SurveyResults = __webpack_require__(254);
+
+	var _SurveyResults2 = _interopRequireDefault(_SurveyResults);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Card = function Card(props) {
-	  var titleElement = !!props.title ? _react2.default.createElement(
-	    'div',
-	    { className: 'card-title' },
-	    props.title
-	  ) : null;
+	var results = { 'Sales': 0.19, 'Tester': 0.43, 'Algorithms': 0.52, 'Developer': 0.87, 'Architect': 0.55 };
+
+	var Demo = function Demo(props) {
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'card' },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'card-content' },
-	      titleElement,
-	      props.children
-	    )
+	    null,
+	    _react2.default.createElement(_SurveyResults2.default, { results: results })
 	  );
 	};
 
-	Card.propTypes = {
-	  title: _react.PropTypes.string
-	};
+	Demo.propTypes = {};
 
-	module.exports = Card;
+	module.exports = Demo;
+
+/***/ },
+/* 268 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);

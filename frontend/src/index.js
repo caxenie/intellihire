@@ -1,58 +1,36 @@
-import React, {
-  Component
-} from 'react'
-import ReactDOM from 'react-dom'
-import SurveyStore from './stores/SurveyStore'
-import Landing from './components/Landing'
-import Demo from './components/Demo'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
+import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
+import Home from './components/Home'
 import Questionnaire from './components/Questionnaire'
+import Question from './components/Question'
+import Submission from './components/Submission'
+import Results from './components/Results'
+import Demo from './components/Demo'
+
+import './styles/main'
 
 
-class Hello extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      didCompleteIntroduction: false,
-      isViewingDemo: false,
-      surveyStatus: SurveyStore.getStatus()
-    }
-  }
-  componentDidMount() {
-    this._hndl = SurveyStore.addChangeListener(this.onChange.bind(this))
-  }
-  componentWillUnmount() {
-    console.log(this._hndl)
-    //this._hndl()
-  }
-  render() {
-  if (!!this.state.isViewingDemo) {
+class App extends Component {
+  render(){
     return (
-      <Demo />
+      <div>
+        {this.props.children}
+      </div>
     )
-  } else if (!this.state.didCompleteIntroduction){
-      return (
-        <Landing
-          onStart={() => this.setState({ didCompleteIntroduction: true }) }
-          onDemo={() => this.setState({ isViewingDemo: true }) } />
-      )
-    } else {
-      switch (this.state.surveyStatus){
-        case 0: return (
-          <Questionnaire onSubmit={() =>
-            this.setState({ step: COMPUTING_STEP })
-          } />
-        )
-        case 1: return (
-          <div>Loading...</div>
-        )
-      }
-    }
-  }
-  onChange() {
-    this.setState({
-      surveyStatus: SurveyStore.getStatus()
-    })
   }
 }
 
-ReactDOM.render(<Hello/>, document.getElementById('content'))
+render((
+  <Router history={hashHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={Home} />
+      <Route path="questions" component={Questionnaire}>
+        <Route path="submit" component={Submission}/>
+        <Route path=":questionId" component={Question}/>
+      </Route>
+      <Route path="results" component={Results} />
+      <Route path="demo" component={Demo} />
+    </Route>
+  </Router>
+), document.getElementById('content'))

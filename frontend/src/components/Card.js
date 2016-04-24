@@ -9,7 +9,7 @@ const Card = (props) => {
     <div className="card-title">{props.title}</div>
   ) : null
   return (
-    <div className="card">
+    <div className="card elevation-0">
       <div className="card-content">
         {titleElement}
         {props.children}
