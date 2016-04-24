@@ -25709,7 +25709,7 @@
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { className: linkClassName, to: 'questions/submit' },
-	          'Submit'
+	          'Results'
 	        )
 	      );
 	    }
@@ -26140,7 +26140,7 @@
 	"use strict";
 
 	module.exports = [{ id: 1, text: "I spend\ntime reflecting on things." }, { id: 2, text: "I pay\nattention to details." }, { id: 3, text: "I don't mind being\nthe center of attention." }, { id: 4, text: "I take\ntime out for others." }, { id: 5, text: "I get\nstressed out easily." }].map(function (q) {
-	  q.answers = [{ id: 1, text: "Nope" }, { id: 2, text: "Kinda" }, { id: 3, text: "Yep" }];
+	  q.answers = [{ id: 1, text: "Disagree" }, { id: 2, text: "Neutral" }, { id: 3, text: "Agree" }];
 	  return q;
 	});
 
@@ -26712,7 +26712,7 @@
 	          'a',
 	          { className: 'btn-floating btn-large waves-effect waves-light amber lighten-2 white-text',
 	            onClick: this.submit.bind(this) },
-	          'GO'
+	          'Compute'
 	        );
 	      }
 	    }
@@ -26771,18 +26771,43 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function getBody(answerIds) {
+	  answerIds.push("0");
+	  return {
+	    "Inputs": {
+	      "input1": {
+	        "ColumnNames": ["a1", "a2", "a3", "a4", "a5", "ide"],
+	        "Values": [answerIds]
+	      }
+	    },
+	    "GlobalParameters": {}
+	  };
+	}
+
 	module.exports = function () {
 	  return new Promise(function (resolve, reject) {
-	    var answers = _SurveyStore2.default.getAnswers().map(function (a) {
+	    var answerIds = _SurveyStore2.default.getAnswers().map(function (a) {
 	      return a.id;
 	    });
-	    console.log('Sending...', answers);
-	    _superagent2.default.post('http://intellihireapp.azurewebsites.net/api/v1/compute/fake').send({ input: answers }).set('Accept', 'application/json').end(function (error, result) {
+	    console.log('Sending...', answerIds);
+	    _superagent2.default.post('https://ussouthcentral.services.azureml.net/workspaces/4f5cd4796bcc49fc919ebb6fde724e0a/services/c9747cdea43a474cb77c27c129788263/execute?api-version=2.0&details=true').send(getBody(answerIds)).set('Content-Type', 'application/json').set('Accept', 'application/json').set('Authorization', 'Bearer GFywvyXm+xfF//kvB5qkXVTJevXpBWaM8Xj3WnxzZTGBpETuIR+3q5nyUjSIGA1VHIzbnaLI0/yzRBD97E5ekw==').end(function (error, result) {
 	      if (!error && !!result) {
 	        try {
+	          var json = JSON.parse(result.text);
+	          var values = json.Results.output1.value.Values[0].slice(2, 7).map(function (v) {
+	            return 1 - parseFloat(v);
+	          });
+	          var results = {
+	            Tester: values[0],
+	            Sales: values[1],
+	            Architect: values[2],
+	            Algorithms: values[3],
+	            Developer: values[4]
+	          };
+	          console.log(results);
 	          _Dispatcher2.default.dispatch({
 	            type: 'RETRIEVE_RESULTS',
-	            results: JSON.parse(result.text)
+	            results: results
 	          });
 	          resolve();
 	        } catch (error) {
@@ -28351,8 +28376,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	//import '../styles/results.styl'
 
 	function getState() {
 	  return {

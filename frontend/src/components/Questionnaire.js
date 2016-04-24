@@ -49,7 +49,7 @@ export default class Questionnaire extends Component {
     }
     return (
       <li className={liClassName}>
-        <Link className={linkClassName} to="questions/submit">Submit</Link>
+        <Link className={linkClassName} to="questions/submit">Results</Link>
       </li>
     )
   }

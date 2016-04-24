@@ -35,7 +35,7 @@ export default class Submission extends Component {
       return (
         <a className="btn-floating btn-large waves-effect waves-light amber lighten-2 white-text"
             onClick={this.submit.bind(this)}>
-          GO
+          Compute
         </a>
       )
     }

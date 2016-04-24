@@ -6,9 +6,9 @@ module.exports = [
   {id: 5, text: "I get\nstressed out easily."}
 ].map(function(q){
   q.answers = [
-    {id: 1, text: "Nope"},
-    {id: 2, text: "Kinda"},
-    {id: 3, text: "Yep"}
+    {id: 1, text: "Disagree"},
+    {id: 2, text: "Neutral"},
+    {id: 3, text: "Agree"}
   ]
   return q
 })

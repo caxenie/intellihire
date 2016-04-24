@@ -6,8 +6,6 @@ import { Link } from 'react-router'
 import SurveyStore from '../stores/SurveyStore'
 import SurveyResults from './SurveyResults'
 
-//import '../styles/results.styl'
-
 
 function getState(){
   return {

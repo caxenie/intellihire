@@ -85,6 +85,12 @@
       -ms-flex-pack: center;
           justify-content: center;
 }
+.submission .btn-large {
+  width: 20vw !important;
+  height: 20vw !important;
+  font-size: 26px;
+  line-height: 20vw;
+}
 .survey-results {
   width: 80vh;
   height: 100vh;
