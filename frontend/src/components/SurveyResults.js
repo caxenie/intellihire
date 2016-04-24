@@ -6,25 +6,39 @@ import { Radar as RadarChart } from 'react-chartjs'
 const BAR_CHART_TYPE = 'bar'
 const RADAR_CHART_TYPE = 'radar'
 
+import '../styles/survey-results'
+
 
 export default class SurveyResults extends Component {
   constructor(props){
     super(props)
     this.state = { chartType: RADAR_CHART_TYPE }
   }
-  render() {
-    let width = window.innerWidth * 0.9, height = width * 0.8
+  render() {
+    return (
+      <div className="survey-results amber lighten-2 z-depth-1">
+        <h2 className="white-text">Results</h2>
+        {this.renderChart()}
+      </div>
+    )
+  }
+  renderChart() {
+    let width = window.innerWidth * 0.6, height = width * 0.8
     switch(this.state.chartType){
       case BAR_CHART_TYPE: return (
         <div>
           <BarChart data={this.getChartData()} options={this.getChartOptions()} width={width} height={height} />
-          <a className="waves-effect waves-light btn-flat" onClick={() => this.setState({ chartType: RADAR_CHART_TYPE }) }>Radar</a>
+          <div className="center">
+            <a className="waves-effect waves-dark btn-flat white-text" onClick={() => this.setState({ chartType: RADAR_CHART_TYPE }) }>Show as Radar-Chart</a>
+          </div>
         </div>
       )
       case RADAR_CHART_TYPE: return (
         <div>
         <RadarChart data={this.getChartData()} options={this.getChartOptions()} width={width} height={height} />
-          <a className="waves-effect waves-light btn-flat" onClick={() => this.setState({ chartType: BAR_CHART_TYPE }) }>Bar</a>
+          <div className="center">
+            <a className="waves-effect waves-dark btn-flat white-text" onClick={() => this.setState({ chartType: BAR_CHART_TYPE }) }>Show as Bar-Chart</a>
+          </div>
         </div>
       )
     }
@@ -41,10 +55,8 @@ export default class SurveyResults extends Component {
     return {
       labels: labels,
       datasets: [{
-        fillColor: "rgba(151,187,205,0.5)",
-        strokeColor: "rgba(151,187,205,0.8)",
-        highlightFill: "rgba(151,187,205,0.75)",
-        highlightStroke: "rgba(151,187,205,1)",
+        fillColor: (this.state.chartType == RADAR_CHART_TYPE) ? "rgba(255,255,255,0.4)" : 'rgba(255,255,255,0.6)',
+        strokeColor: (this.state.chartType == RADAR_CHART_TYPE) ? "rgba(255,255,255,1.0)" : 'rgba(255,255,255,0.2)',
         data: data
       }]
     }
@@ -56,7 +68,9 @@ export default class SurveyResults extends Component {
       scaleSteps: 5,
       scaleStepWidth: 20,
       scaleStartValue: 0,
-      scaleLabel: "<%=value%>%"
+      scaleLabel: "<%=value%>%",
+      scaleFontColor: 'rgba(255,255,255,1.0)',
+      angleLineColor : 'rgba(255,255,255,0.6)'
     }
   }
 }

@@ -1,8 +1,6 @@
 import Dispatcher from '../Dispatcher'
-//import AppConstants = from '../constants/AppConstants'
 const EventEmitter = require('events').EventEmitter
 import questions from './questions'
-import sendSurvey from '../utils/sendSurvey'
 
 const SurveyStore = module.exports = {}
 
@@ -20,7 +18,11 @@ SurveyStore.getQuestions = function(){
 }
 
 SurveyStore.getAnswers = function(){
-  return questions.map((question) => question.answer )
+  return questions.map(q => q.answer).filter(a => !!a)
+}
+
+SurveyStore.isFilledOut = function(){
+  return SurveyStore.getAnswers().length == questions.length
 }
 
 SurveyStore.getResults = function(){
@@ -28,7 +30,7 @@ SurveyStore.getResults = function(){
 }
 
 SurveyStore.isFinalQuestion = function(id){
-  return questions[questions.lenght - 1].id == id
+  return questions[questions.length - 1].id == id
 }
 
 
@@ -60,13 +62,10 @@ Dispatcher.register(function(action){
           question.answer = question.answers.find((answer) => answer.id == action.answerId)
         }
       })
-      /*if (!SurveyStore.getCurrentQuestion()){
-        let answers = SurveyStore.getAnswers().map(a => a.id)
-        sendSurvey(answers).then(function(response){
-          results = response
-          emitChangeEvent()
-        })
-      }*/
+      emitChangeEvent()
+      break
+    case 'RETRIEVE_RESULTS':
+      results = action.results
       emitChangeEvent()
       break
     default:

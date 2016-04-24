@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import Home from './components/Home'
-import Demo from './components/Demo'
 import Questionnaire from './components/Questionnaire'
 import Question from './components/Question'
 import Submission from './components/Submission'
+import Results from './components/Results'
+import Demo from './components/Demo'
 
 import './styles/main'
 
@@ -28,6 +29,7 @@ render((
         <Route path="submit" component={Submission}/>
         <Route path=":questionId" component={Question}/>
       </Route>
+      <Route path="results" component={Results} />
       <Route path="demo" component={Demo} />
     </Route>
   </Router>

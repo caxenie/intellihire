@@ -5,10 +5,10 @@ import ReactDOM from 'react-dom'
 import SurveyStore from '../stores/SurveyStore'
 import { Link } from 'react-router'
 
-import '../styles/questionnaire.styl'
+import '../styles/questionnaire'
 
 
-export default class Hello extends Component {
+export default class Questionnaire extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -19,11 +19,11 @@ export default class Hello extends Component {
     let { question, pagination } = this.state
     return (
       <div className="questionnaire">
+        {this.props.children}
         <ul className="pagination center">
           {this.state.questions.map(this.renderPage, this)}
           {this.renderSubmitPage()}
         </ul>
-        {this.props.children}
       </div>
     )
   }
@@ -42,14 +42,14 @@ export default class Hello extends Component {
   }
   renderSubmitPage() {
     var liClassName = "waves-effect", linkClassName = ""
-    /*if (question.id == this.props.params.questionId){
+    if (this.props.location.pathname == '/questions/submit'){
       liClassName = "active"
-    } else if (!question.answer) {
+    } else {
       linkClassName = "grey-text text-lighten-1"
-    }*/
+    }
     return (
       <li className={liClassName}>
-        <Link className={linkClassName} to="questions/submit">S</Link>
+        <Link className={linkClassName} to="questions/submit">Submit</Link>
       </li>
     )
   }

@@ -9,7 +9,6 @@ let results = {'Sales': 0.19, 'Tester': 0.43, 'Algorithms': 0.52, 'Developer': 0
 const Demo = (props) => {
   return (
     <div>
-      <div>Blablabla</div>
       <SurveyResults results={results} />
     </div>
   )

@@ -9,7 +9,7 @@ import '../styles/questionnaire.styl'
 function getState(props){
   return {
     question: SurveyStore.getQuestion(props.params.questionId),
-    isFinalQuestion: SurveyStore.getQuestion(props.params.questionId)
+    isFinalQuestion: SurveyStore.isFinalQuestion(props.params.questionId)
   }
 }
 
@@ -31,8 +31,15 @@ export default class Question extends Component {
   render() {
     let { question } = this.state
     return (
-      <div className="question">
-        <h2>{question.text}</h2>
+      <div className="question amber lighten-2 z-depth-1">
+        <h2 className="white-text">
+        {question.text.split('\n').map( substring =>
+            <span>
+              {substring}
+              <br/>
+            </span>
+        )}
+        </h2>
         <div className="answers">
           {question.answers.map(this.renderAnswer, this)}
         </div>
@@ -41,13 +48,13 @@ export default class Question extends Component {
   }
   renderAnswer(answer){
     let { question } = this.state
-    var className = 'waves-effect waves-light btn btn-large'
+    var className = 'waves-effect waves-dark btn btn-large white black-text'
     if (question.answer && answer.id == question.answer.id){
       className += ' red'
     }
     return (
       <div key={answer.id} className="answer">
-        <a className={className} onClick={this.answerQuestion.bind(this)}>
+        <a className={className} onClick={() => this.answerQuestion(answer)}>
           {answer.text}
         </a>
       </div>
